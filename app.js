@@ -37,3 +37,42 @@ app.get('/',(req,res)=>{
 app.listen(PORT,()=>{
     console.log("Server is running on",PORT)
 })
+app.get('/getAdministrator', (req, res)=> {
+    Administrator.find({Flights:"Number", Flights:"Departure", Flights:"Arrival", Flights:"Dates", Flights:"Airport_Terminals"}).then(result =>
+        res.send(result));
+
+});
+function App() {
+    const[Flights, setFlights]= useState([]);
+    useEffect(()=>{
+      axios.get('http://localhost:8000/users/getFlight').then(res=>{
+        setPeople(res.data);
+  
+      })
+    },[]);
+  
+    return (
+      <div className="">
+        <div className="content">
+            <h1>Flight Details </h1>
+  
+            <br/>
+            
+              
+          {people.map((flight)=>
+          
+            <div className="row" key={._id}>
+              <p className="left-txt"> <b>Number:</b> {flight.Number} </p>
+              <p className="left-txt"> <b>DepTime:</b>{flight.Departure}: </p>
+              <p className="left-txt"> <b>ArrivalTime:</b>{person.Arrival} </p>
+              <p className="left-txt"> <b>Dates:</b>{person.Dates} </p>
+              <p className="left-txt"> <b>Terminals:</b>{person.Terminals} </p>
+            </div>
+              )}
+  
+            
+        </div>
+      </div>
+  
+    );
+  }
