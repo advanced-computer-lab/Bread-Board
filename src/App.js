@@ -7,7 +7,7 @@ import UpdateFlight from './Components/updateFlight';
 
 function App() {
   return (
-    <UpdateFlight />
+    <searchFlight />
   );
 }
 

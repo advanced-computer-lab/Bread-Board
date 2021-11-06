@@ -31,6 +31,8 @@ function SearchFlight() {
                 <p className="left-txt"> <b>Airport: {item.airport}</b> </p>
             </div>
             ))}
+            {/* <button type="button">Update</button>
+            <button type="button">Delete</button> */}
 
               
   

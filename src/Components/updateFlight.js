@@ -87,78 +87,100 @@ class updateFlight extends Component {
           <div className="col-md-8 m-auto">
           <form noValidate onSubmit={this.onSubmit}>
             <div className='form-group'>
-              <label htmlFor="title">Flight Number</label>
+              <label htmlFor="flightNumber">Flight Number</label>
               <input
-                type='text'
-                placeholder='Title of the Book'
-                name='title'
+                type='Number'
+                placeholder='Flight Number<'
+                name='flightNumber'
                 className='form-control'
-                value={this.state.title}
+                value={this.state.flightNumber}
                 onChange={this.onChange}
               />
             </div>
             <br />
 
             <div className='form-group'>
-            <label htmlFor="isbn">ISBN</label>
+            <label htmlFor="departureTime">departureTime</label>
               <input
-                type='text'
-                placeholder='ISBN'
-                name='isbn'
+                type='time'
+                placeholder='departureTime'
+                name='departureTime'
                 className='form-control'
-                value={this.state.isbn}
+                value={this.state.departureTime}
                 onChange={this.onChange}
               />
             </div>
 
             <div className='form-group'>
-            <label htmlFor="author">Author</label>
+            <label htmlFor="arrivalTime">arrivalTime</label>
               <input
-                type='text'
-                placeholder='Author'
-                name='author'
+                type='time'
+                placeholder='arrivalTime'
+                name='arrivalTime'
                 className='form-control'
-                value={this.state.author}
+                value={this.state.arrivalTime}
                 onChange={this.onChange}
               />
             </div>
 
             <div className='form-group'>
-            <label htmlFor="description">Description</label>
+            <label htmlFor="numberofEconomySeats">numberofEconomySeats</label>
               <input
-                type='text'
-                placeholder='Describe this book'
-                name='description'
+                type='Number'
+                placeholder='numberofEconomySeats'
+                name='numberofEconomySeats'
                 className='form-control'
-                value={this.state.description}
+                value={this.state.numberofEconomySeats}
                 onChange={this.onChange}
               />
             </div>
 
             <div className='form-group'>
-            <label htmlFor="published_date">Published Date</label>
+            <label htmlFor="arrivalDate">arrivalDate</label>
               <input
                 type='date'
-                placeholder='published_date'
-                name='published_date'
+                placeholder='arrivalDate'
+                name='arrivalDate'
                 className='form-control'
-                value={this.state.published_date}
+                value={this.state.arrivalDate}
                 onChange={this.onChange}
               />
             </div>
             <div className='form-group'>
-            <label htmlFor="publisher">Publisher</label>
+            <label htmlFor="departureDate">departureDate</label>
+              <input
+                type='date'
+                placeholder='departureDate'
+                name='departureDate'
+                className='form-control'
+                value={this.state.departureDate}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className='form-group'>
+            <label htmlFor="numberofBusinessSeats">numberofBusinessSeats</label>
+              <input
+                type='number'
+                placeholder='numberofBusinessSeats'
+                name='numberofBusinessSeats'
+                className='form-control'
+                value={this.state.numberofBusinessSeats}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className='form-group'>
+            <label htmlFor="airport">airport</label>
               <input
                 type='text'
-                placeholder='Publisher of this Book'
-                name='publisher'
+                placeholder='airport'
+                name='airport'
                 className='form-control'
-                value={this.state.publisher}
+                value={this.state.airport}
                 onChange={this.onChange}
               />
             </div>
 
-            <button type="submit" className="btn btn-outline-info btn-lg btn-block">Update Book</button>
+            <button type="submit" className="btn btn-outline-info btn-lg btn-block">Update Flight</button>
             </form>
           </div>
 
