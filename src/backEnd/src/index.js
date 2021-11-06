@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 //const { getMaxListeners } = require("./models/User");
 // THIS IS WRONG NEVER DO THAT !! Only for the task we put the DB Link here!! NEVER DO THAAAT AGAIN !!
 //const MongoURI = 'mongodb+srv://alaa:1234@cluster0.6ulyk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' ;
-const flightRouter = require("./routes/FlightRoutes");
 const userRouter = require("./routes/UserRoutes");
 const cors = require("cors");
 
