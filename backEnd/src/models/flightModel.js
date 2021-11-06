@@ -37,5 +37,5 @@ const flightsSchema = new Schema({
 
 })
 
-const flights = mongoose.model('flights', flightsSchema)
+const flights = mongoose.model('Flights', flightsSchema)
 module.exports = flights 
