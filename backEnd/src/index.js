@@ -52,7 +52,7 @@ app.post('/login',(req,res)=>{
         else {
             if (result.password == password) {
                 if (result.admin == true) {
-                    res.redirect('/users');
+                    res.redirect(303, '/users');
                 }
                 else {
                     res.send("You are not an admin");
