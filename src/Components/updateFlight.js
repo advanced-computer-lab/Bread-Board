@@ -78,58 +78,66 @@ function UpdateFlight() {
       </div>
       <div className="App">
         <div className="inputs">
-          <input
-            type="number"
-            placeholder="Flight Number"
-            onChange={(event) => {
-              setFlightNumber(event.target.value);
-            }}
-          />
-          <input
-            type="time"
-            onChange={(event) => {
-              setDepartureTime(event.target.value);
-            }}
-          />
-          <input
-            type="time"
-            onChange={(event) => {
-              setArrivalTime(event.target.value);
-            }}
-          />
-          <input
-            type="number"
-            placeholder="Economy Seats"
-            onChange={(event) => {
-              setEconomySeats(event.target.value);
-            }}
-          />
-          <input
-            type="date"
-            onChange={(event) => {
-              setArrivalDate(event.target.value);
-            }}
-          />
-          <input
-            type="date"
-            onChange={(event) => {
-              setDepartureDate(event.target.value);
-            }}
-          />
-          <input
-            type="number"
-            placeholder="Business Seats"
-            onChange={(event) => {
-              setBusinessSeats(event.target.value);
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Airport"
-            onChange={(event) => {
-              setAirport(event.target.value);
-            }}
-          />
+          <div>
+            <input
+              type="number"
+              placeholder="Flight Number"
+              onChange={(event) => {
+                setFlightNumber(event.target.value);
+              }}
+            />
+            Arrival Time
+            <input
+              type="time"
+              onChange={(event) => {
+                setArrivalTime(event.target.value);
+              }}
+            />
+            Departure Time
+            <input
+              type="time"
+              onChange={(event) => {
+                setDepartureTime(event.target.value);
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Airport"
+              onChange={(event) => {
+                setAirport(event.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <input
+              type="number"
+              placeholder="Economy Seats"
+              onChange={(event) => {
+                setEconomySeats(event.target.value);
+              }}
+            />
+            <input
+              type="number"
+              placeholder="Business Seats"
+              onChange={(event) => {
+                setBusinessSeats(event.target.value);
+              }}
+            />
+            Arrival Date
+            <input
+              type="date"
+              onChange={(event) => {
+                setArrivalDate(event.target.value);
+              }}
+            />
+            Departure Date
+            <input
+              type="date"
+              onChange={(event) => {
+                setDepartureDate(event.target.value);
+              }}
+            />
+          </div>
         </div>
       </div>
       <div className="listOfFlights">
