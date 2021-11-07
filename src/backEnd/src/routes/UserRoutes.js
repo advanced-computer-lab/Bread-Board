@@ -9,7 +9,7 @@ userRouter.get("/", userController.home);
 
 userRouter.post("/createFlight", flightController.createFlight);
 
-userRouter.get("/searchFlight", flightController.searchFlight);
+userRouter.post("/searchFlight", flightController.searchFlight);
 
 userRouter.put("/updateFlight", flightController.updateFlight);
 

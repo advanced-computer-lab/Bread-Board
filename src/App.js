@@ -7,7 +7,7 @@ import DeleteFlight from "./Components/DeleteFlight";
 import UpdateFlight from "./Components/UpdateFlight";
 
 function App() {
-  return <CreateFlight />;
+  return <SearchFlight />;
 }
 
 export default App;

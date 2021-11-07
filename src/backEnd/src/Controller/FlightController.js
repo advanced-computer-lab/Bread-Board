@@ -16,9 +16,12 @@ const createFlight = async (req, res) => {
 };
 
 const searchFlight = (req, res) => {
-  Flight.find().then((result) => {
-    res.header("Content-Type", "application/json");
-    res.send(JSON.stringify(result, null, 4));
+  Flight.find(req.body, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
   });
 };
 
