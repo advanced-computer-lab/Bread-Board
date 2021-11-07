@@ -1,8 +1,6 @@
 const Flight = require("../models/flightModel");
 
-const createFlight = (req, res) => {
-  console.log("request came");
-  console.log(req.body);
+const createFlight = async (req, res) => {
   const flight = new Flight({
     flightNumber: req.body.flightNumber,
     departureTime: req.body.departureTime,
@@ -13,15 +11,8 @@ const createFlight = (req, res) => {
     numberofBusinessSeats: req.body.numberofBusinessSeats,
     airport: req.body.airport,
   });
-  flight
-    .save()
-    .then((result) => {
-      res.header("Content-Type", "application/json");
-      res.send(JSON.stringify(result, null, 4));
-    })
-    .catch((err) => {
-      res.status(400).send("Address is needed");
-    });
+  await flight.save();
+  res.send("Inserted Data");
 };
 
 const searchFlight = (req, res) => {

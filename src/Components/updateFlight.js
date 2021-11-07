@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../App.css";
-import { deleteFlight } from "../backEnd/src/Controller/FlightController";
 
 function UpdateFlight() {
   const [flightNumber, setFlightNumber] = useState(null);
@@ -86,18 +85,18 @@ function UpdateFlight() {
                 setFlightNumber(event.target.value);
               }}
             />
-            Arrival Time
-            <input
-              type="time"
-              onChange={(event) => {
-                setArrivalTime(event.target.value);
-              }}
-            />
             Departure Time
             <input
               type="time"
               onChange={(event) => {
                 setDepartureTime(event.target.value);
+              }}
+            />
+            Arrival Time
+            <input
+              type="time"
+              onChange={(event) => {
+                setArrivalTime(event.target.value);
               }}
             />
             <input
@@ -123,18 +122,18 @@ function UpdateFlight() {
                 setBusinessSeats(event.target.value);
               }}
             />
-            Arrival Date
-            <input
-              type="date"
-              onChange={(event) => {
-                setArrivalDate(event.target.value);
-              }}
-            />
             Departure Date
             <input
               type="date"
               onChange={(event) => {
                 setDepartureDate(event.target.value);
+              }}
+            />
+            Arrival Date
+            <input
+              type="date"
+              onChange={(event) => {
+                setArrivalDate(event.target.value);
               }}
             />
           </div>
