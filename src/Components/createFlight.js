@@ -15,33 +15,46 @@ function CreateFlight() {
   const [listOfFlights, setListOfFlights] = useState([]);
 
   const creFlight = () => {
-    axios
-      .post("http://localhost:8000/admin/createFlight", {
-        flightNumber: flightNumber,
-        departureTime: departureTime,
-        arrivalTime: arrivalTime,
-        numberofEconomySeats: economySeats,
-        arrivalDate: arrivalDate,
-        departureDate: departureDate,
-        numberofBusinessSeats: businessSeats,
-        airport: airport,
-      })
-      .then(() => {
-        setListOfFlights([
-          ...listOfFlights,
-          {
-            flightNumber: flightNumber,
-            departureTime: departureTime,
-            arrivalTime: arrivalTime,
-            numberofEconomySeats: economySeats,
-            arrivalDate: arrivalDate,
-            departureDate: departureDate,
-            numberofBusinessSeats: businessSeats,
-            airport: airport,
-          },
-        ]);
-      })
-      .catch((err) => {});
+    if (
+      flightNumber == null ||
+      departureTime == null ||
+      arrivalTime == null ||
+      departureDate == null ||
+      arrivalDate == null ||
+      economySeats == null ||
+      businessSeats == null ||
+      airport == null
+    ) {
+      alert("Please fill all fields!!!");
+    } else {
+      axios
+        .post("http://localhost:8000/admin/createFlight", {
+          flightNumber: flightNumber,
+          departureTime: departureTime,
+          arrivalTime: arrivalTime,
+          numberofEconomySeats: economySeats,
+          arrivalDate: arrivalDate,
+          departureDate: departureDate,
+          numberofBusinessSeats: businessSeats,
+          airport: airport,
+        })
+        .then(() => {
+          setListOfFlights([
+            ...listOfFlights,
+            {
+              flightNumber: flightNumber,
+              departureTime: departureTime,
+              arrivalTime: arrivalTime,
+              numberofEconomySeats: economySeats,
+              arrivalDate: arrivalDate,
+              departureDate: departureDate,
+              numberofBusinessSeats: businessSeats,
+              airport: airport,
+            },
+          ]);
+        })
+        .catch((err) => {});
+    }
   };
 
   useEffect(() => {
