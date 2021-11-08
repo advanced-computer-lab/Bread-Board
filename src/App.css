@@ -1,0 +1,360 @@
+.App {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.Creinputs {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(207, 207, 207);
+}
+
+.Creinputs input {
+  width: 200px;
+  height: 25px;
+  font-size: 15px;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+.Creinputs button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin-top: 25px;
+}
+
+.LoginInputs {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(207, 207, 207);
+}
+
+.LoginInputs input {
+  width: 200px;
+  height: 25px;
+  font-size: 15px;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+.LoginInputs button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin: 25px;
+}
+
+.RegisterInputs {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(207, 207, 207);
+}
+
+.RegisterInputs input {
+  width: 200px;
+  height: 25px;
+  font-size: 15px;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+.RegisterInputs button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin-top: 25px;
+}
+
+.HomeButtons {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(207, 207, 207);
+}
+
+.HomeButtons button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.Searchinputs {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(207, 207, 207);
+}
+
+.Searchinputs input {
+  width: 200px;
+  height: 25px;
+  font-size: 15px;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+.Searchinputs button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin-top: 25px;
+}
+
+.inputs {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(207, 207, 207);
+}
+
+.inputs input {
+  width: 200px;
+  height: 25px;
+  font-size: 15px;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+.DelFlight {
+  display: flex;
+  justify-content: center;
+  margin-left: 414px;
+  margin-top: 30px;
+}
+
+.UpdFlight {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 406px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.CreFlight {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 412px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.Login {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.Register {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 455px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.Home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-left: 427px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.Home h2 {
+  margin-top: 15px;
+}
+
+.SearchFlight {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 410px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.listOfFlights {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.flight {
+  width: 1230px;
+  height: 60px;
+  background-color: rgb(158, 151, 151);
+  font-size: small;
+  font-family: "Courier New", Courier, monospace;
+  display: flex;
+  margin: 10px;
+  align-items: center;
+}
+
+.flight h3 {
+  margin-left: 15px;
+  color: white;
+}
+
+.flightContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+}
+
+.flightContainer button {
+  width: 80px;
+  height: 60px;
+  border: 2px solid black;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  border-radius: 10px;
+  font-size: medium;
+}
+
+.HeaderContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.HeaderButton {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.HeaderButton button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+}
+
+.DelHeaderButton {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.DelHeaderButton button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin-top: 25px;
+}
+
+.checkBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 190px;
+}
+
+button:hover {
+  cursor: pointer;
+}
