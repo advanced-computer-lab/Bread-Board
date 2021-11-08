@@ -281,11 +281,16 @@ body {
   display: flex;
   margin: 10px;
   align-items: center;
+  justify-content: center;
 }
 
 .flight h3 {
-  margin-left: 15px;
+  margin-left: 40px;
   color: white;
+}
+
+#fliNumber {
+  margin-left: 0px;
 }
 
 .flightContainer {

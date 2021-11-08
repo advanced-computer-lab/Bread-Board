@@ -70,6 +70,10 @@ function CreateFlight() {
         event.preventDefault();
         create();
       }
+      if (event.code === "Escape") {
+        event.preventDefault();
+        home();
+      }
     };
     document.addEventListener("keydown", listener);
     return () => {
@@ -169,15 +173,38 @@ function CreateFlight() {
         {listOfFlights.map((val) => {
           return (
             <div className="flight">
-              {" "}
-              <h3>Flight Number: {val.flightNumber}</h3>
-              <h3>Departure Time: {val.departureTime}</h3>{" "}
-              <h3>Arrival Time: {val.arrivalTime}</h3>
-              <h3>Economy Seats: {val.numberofEconomySeats}</h3>{" "}
-              <h3>Arrival Date: {val.arrivalDate}</h3>
-              <h3>Departure Date: {val.departureDate}</h3>
-              <h3>Business Seats: {val.numberofBusinessSeats}</h3>{" "}
-              <h3>Airport: {val.airport}</h3>
+              <h3 id="fliNumber">
+                Flight Number: <br />
+                {val.flightNumber}
+              </h3>
+              <h3>
+                Departure Time: <br />
+                {val.departureTime}
+              </h3>
+              <h3>
+                Departure Date: <br />
+                {val.departureDate}
+              </h3>
+              <h3>
+                Arrival Time: <br />
+                {val.arrivalTime}
+              </h3>
+              <h3>
+                Arrival Date: <br />
+                {val.arrivalDate}
+              </h3>
+              <h3>
+                Economy Seats: <br />
+                {val.numberofEconomySeats}
+              </h3>
+              <h3>
+                Business Seats: <br />
+                {val.numberofBusinessSeats}
+              </h3>
+              <h3>
+                Airport: <br />
+                {val.airport}
+              </h3>
             </div>
           );
         })}
