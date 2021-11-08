@@ -68,6 +68,58 @@ body {
   margin-top: 25px;
 }
 
+.LoginInputs {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(207, 207, 207);
+}
+
+.LoginInputs input {
+  width: 200px;
+  height: 25px;
+  font-size: 15px;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+.LoginInputs button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin-top: 25px;
+}
+
+.HomeButtons {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(207, 207, 207);
+}
+
+.HomeButtons button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin: 20px;
+}
+
 .Searchinputs {
   height: 250px;
   width: 100%;
@@ -119,6 +171,7 @@ body {
 .DelFlight {
   display: flex;
   justify-content: center;
+  margin-left: 414px;
   margin-top: 30px;
 }
 
@@ -126,6 +179,7 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  margin-left: 406px;
   margin-bottom: 30px;
   color: white;
 }
@@ -134,14 +188,39 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  margin-left: 412px;
   margin-bottom: 30px;
   color: white;
+}
+
+.Login {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.Home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-left: 427px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.Home h2 {
+  margin-top: 15px;
 }
 
 .SearchFlight {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  margin-left: 410px;
   margin-bottom: 30px;
   color: white;
 }
@@ -186,6 +265,48 @@ body {
   font-family: "Courier New", Courier, monospace;
   border-radius: 10px;
   font-size: medium;
+}
+
+.HeaderContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.HeaderButton {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.HeaderButton button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+}
+
+.DelHeaderButton {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.DelHeaderButton button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin-top: 25px;
 }
 
 button:hover {

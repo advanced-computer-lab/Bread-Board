@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import axios from "axios";
 import "../App.css";
 
 function CreateFlight() {
+  const navigate = useNavigate();
+
   const [flightNumber, setFlightNumber] = useState(null);
   const [departureTime, setDepartureTime] = useState(null);
   const [arrivalTime, setArrivalTime] = useState(null);
@@ -14,7 +17,11 @@ function CreateFlight() {
 
   const [listOfFlights, setListOfFlights] = useState([]);
 
-  const creFlight = () => {
+  const home = () => {
+    navigate(-1);
+  };
+
+  const create = () => {
     if (
       flightNumber == null ||
       departureTime == null ||
@@ -58,6 +65,19 @@ function CreateFlight() {
   };
 
   useEffect(() => {
+    const listener = (event) => {
+      if (event.code === "Enter") {
+        event.preventDefault();
+        create();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  });
+
+  useEffect(() => {
     axios
       .get("http://localhost:8000/admin/showFlight")
       .then((result) => {
@@ -70,8 +90,13 @@ function CreateFlight() {
 
   return (
     <div>
-      <div className="CreFlight">
-        <h1>Create Flights</h1>
+      <div className="HeaderContainer">
+        <div className="HeaderButton">
+          <button onClick={home}>Home</button>
+        </div>
+        <div className="CreFlight">
+          <h1>Create Flights</h1>
+        </div>
       </div>
       <div className="App">
         <div className="Creinputs">
@@ -137,7 +162,7 @@ function CreateFlight() {
               />
             </div>
           </div>
-          <button onClick={creFlight}>Create</button>
+          <button onClick={create}>Create</button>
         </div>
       </div>
       <div className="listOfFlights">

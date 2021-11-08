@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import axios from "axios";
 import "../App.css";
 
 function SearchFlight() {
+  const navigate = useNavigate();
+
   const [flightNumber, setFlightNumber] = useState(null);
   const [departureTime, setDepartureTime] = useState(null);
   const [arrivalTime, setArrivalTime] = useState(null);
@@ -13,6 +16,10 @@ function SearchFlight() {
   const [airport, setAirport] = useState(null);
 
   const [listOfFlights, setListOfFlights] = useState([]);
+
+  const home = () => {
+    navigate(-1);
+  };
 
   const searchFlight = () => {
     var val = {
@@ -38,10 +45,28 @@ function SearchFlight() {
       });
   };
 
+  useEffect(() => {
+    const listener = (event) => {
+      if (event.code === "Enter") {
+        event.preventDefault();
+        searchFlight();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  });
+
   return (
     <div>
-      <div className="SearchFlight">
-        <h1>Search Flights</h1>
+      <div className="HeaderContainer">
+        <div className="HeaderButton">
+          <button onClick={home}>Home</button>
+        </div>
+        <div className="SearchFlight">
+          <h1>Search Flights</h1>
+        </div>
       </div>
       <div className="App">
         <div className="Searchinputs">

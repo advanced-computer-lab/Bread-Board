@@ -1,19 +1,29 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import axios from "axios";
 import "../App.css";
-import { deleteFlight } from "../backEnd/src/Controller/FlightController";
 
 function DeleteFlight() {
+  const navigate = useNavigate();
+
   const [listOfFlights, setListOfFlights] = useState([]);
 
+  const home = () => {
+    navigate(-1);
+  };
+
   const delFlight = (id) => {
-    axios.delete(`http://localhost:8000/admin/deleteFlight/${id}`).then(() => {
-      setListOfFlights(
-        listOfFlights.filter((val) => {
-          return val._id != id;
-        })
-      );
-    });
+    if (window.confirm("Are you sure to delete this Flight?")) {
+      axios
+        .delete(`http://localhost:8000/admin/deleteFlight/${id}`)
+        .then(() => {
+          setListOfFlights(
+            listOfFlights.filter((val) => {
+              return val._id != id;
+            })
+          );
+        });
+    }
   };
 
   useEffect(() => {
@@ -29,8 +39,13 @@ function DeleteFlight() {
 
   return (
     <div>
-      <div className="DelFlight">
-        <h1>Delete Flights</h1>
+      <div className="HeaderContainer">
+        <div className="DelHeaderButton">
+          <button onClick={home}>Home</button>
+        </div>
+        <div className="DelFlight">
+          <h1>Delete Flights</h1>
+        </div>
       </div>
       <div className="listOfFlights">
         {listOfFlights.map((val) => {

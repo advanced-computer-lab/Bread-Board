@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import axios from "axios";
 import "../App.css";
 
 function UpdateFlight() {
+  const navigate = useNavigate();
+
   const [flightNumber, setFlightNumber] = useState(null);
   const [departureTime, setDepartureTime] = useState(null);
   const [arrivalTime, setArrivalTime] = useState(null);
@@ -14,49 +17,55 @@ function UpdateFlight() {
 
   const [listOfFlights, setListOfFlights] = useState([]);
 
+  const home = () => {
+    navigate(-1);
+  };
+
   const updFlight = (id) => {
-    axios
-      .put("http://localhost:8000/admin/updateFlight", {
-        id: id,
-        newFlightNumber: flightNumber,
-        newDepartureTime: departureTime,
-        newArrivalTime: arrivalTime,
-        newEconomySeats: economySeats,
-        newArrivalDate: arrivalDate,
-        newDepartureDate: departureDate,
-        newBusinessSeats: businessSeats,
-        newAirport: airport,
-      })
-      .then(() => {
-        setListOfFlights(
-          listOfFlights.map((val) => {
-            return val._id == id
-              ? {
-                  _id: id,
-                  flightNumber:
-                    flightNumber == null ? val.flightNumber : flightNumber,
-                  departureTime:
-                    departureTime == null ? val.departureTime : departureTime,
-                  arrivalTime:
-                    arrivalTime == null ? val.arrivalTime : arrivalTime,
-                  numberofEconomySeats:
-                    economySeats == null
-                      ? val.numberofEconomySeats
-                      : economySeats,
-                  arrivalDate:
-                    arrivalDate == null ? val.arrivalDate : arrivalDate,
-                  departureDate:
-                    departureDate == null ? val.departureDate : departureDate,
-                  numberofBusinessSeats:
-                    businessSeats == null
-                      ? val.numberofBusinessSeats
-                      : businessSeats,
-                  airport: airport == null ? val.airport : airport,
-                }
-              : val;
-          })
-        );
-      });
+    if (window.confirm("Are you sure to update this Flight?")) {
+      axios
+        .put("http://localhost:8000/admin/updateFlight", {
+          id: id,
+          newFlightNumber: flightNumber,
+          newDepartureTime: departureTime,
+          newArrivalTime: arrivalTime,
+          newEconomySeats: economySeats,
+          newArrivalDate: arrivalDate,
+          newDepartureDate: departureDate,
+          newBusinessSeats: businessSeats,
+          newAirport: airport,
+        })
+        .then(() => {
+          setListOfFlights(
+            listOfFlights.map((val) => {
+              return val._id == id
+                ? {
+                    _id: id,
+                    flightNumber:
+                      flightNumber == null ? val.flightNumber : flightNumber,
+                    departureTime:
+                      departureTime == null ? val.departureTime : departureTime,
+                    arrivalTime:
+                      arrivalTime == null ? val.arrivalTime : arrivalTime,
+                    numberofEconomySeats:
+                      economySeats == null
+                        ? val.numberofEconomySeats
+                        : economySeats,
+                    arrivalDate:
+                      arrivalDate == null ? val.arrivalDate : arrivalDate,
+                    departureDate:
+                      departureDate == null ? val.departureDate : departureDate,
+                    numberofBusinessSeats:
+                      businessSeats == null
+                        ? val.numberofBusinessSeats
+                        : businessSeats,
+                    airport: airport == null ? val.airport : airport,
+                  }
+                : val;
+            })
+          );
+        });
+    }
   };
 
   useEffect(() => {
@@ -72,8 +81,13 @@ function UpdateFlight() {
 
   return (
     <div>
-      <div className="UpdFlight">
-        <h1>Update Flights</h1>
+      <div className="HeaderContainer">
+        <div className="HeaderButton">
+          <button onClick={home}>Home</button>
+        </div>
+        <div className="UpdFlight">
+          <h1>Update Flights</h1>
+        </div>
       </div>
       <div className="App">
         <div className="inputs">

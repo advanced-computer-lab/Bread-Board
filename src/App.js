@@ -1,13 +1,31 @@
 import "./App.css";
-import { Component, useState, useEffect } from "react";
-import axios from "axios";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import Home from "./Components/Home";
+import Login from "./Components/Login";
 import CreateFlight from "./Components/CreateFlight";
 import SearchFlight from "./Components/SearchFlight";
 import DeleteFlight from "./Components/DeleteFlight";
 import UpdateFlight from "./Components/UpdateFlight";
 
 function App() {
-  return <SearchFlight />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/create" element={<CreateFlight />} />
+        <Route path="/search" element={<SearchFlight />} />
+        <Route path="/update" element={<UpdateFlight />} />
+        <Route path="/delete" element={<DeleteFlight />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
