@@ -10,18 +10,26 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const login = () => {
-    axios
-      .post("http://localhost:8000/login", {
-        email: email,
-        password: password,
-      })
-      .then((result) => {
-        if (result.data == "Success") {
-          navigate("/home");
-        } else {
-          alert(result.data);
-        }
-      });
+    if (email == "" || password == "") {
+      alert("Please fill all fields!!!");
+    } else {
+      axios
+        .post("http://localhost:8000/login", {
+          email: email,
+          password: password,
+        })
+        .then((result) => {
+          if (result.data == "Success") {
+            navigate("/home");
+          } else {
+            alert(result.data);
+          }
+        });
+    }
+  };
+
+  const register = () => {
+    navigate("/register");
   };
 
   useEffect(() => {
@@ -58,7 +66,10 @@ function Login() {
               setPassword(event.target.value);
             }}
           />
-          <button onClick={login}>Login</button>
+          <div>
+            <button onClick={login}>Login</button>
+            <button onClick={register}>Register</button>
+          </div>
         </div>
       </div>
     </div>

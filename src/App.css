@@ -95,6 +95,36 @@ body {
   border-radius: 10px;
   font-size: 20px;
   border: 1px solid black;
+  margin: 25px;
+}
+
+.RegisterInputs {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(207, 207, 207);
+}
+
+.RegisterInputs input {
+  width: 200px;
+  height: 25px;
+  font-size: 15px;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+.RegisterInputs button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
   margin-top: 25px;
 }
 
@@ -197,6 +227,15 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.Register {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 455px;
   margin-bottom: 30px;
   color: white;
 }
@@ -307,6 +346,13 @@ body {
   font-size: 20px;
   border: 1px solid black;
   margin-top: 25px;
+}
+
+.checkBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 190px;
 }
 
 button:hover {

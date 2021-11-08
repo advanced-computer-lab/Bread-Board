@@ -39,9 +39,6 @@ app.get("/Home", (req, res) => {
 
 app.post("/login", (req, res) => {
   var { email, password } = req.body;
-  if (!email || !password) {
-    return res.send("Please fill all fields!!!");
-  }
   User.findOne({ email: email })
     .then((result) => {
       if (result == null) {
@@ -63,14 +60,22 @@ app.post("/login", (req, res) => {
     });
 });
 
-app.use("/admin", userRouter);
+app.post("/register", (req, res) => {
+  var { name, email, password, admin } = req.body;
+  const user = new User({
+    name: name,
+    email: email,
+    password: password,
+    admin: admin,
+  });
+  user
+    .save()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
 
-// app.post('/try',(req,res) => {
-//     var em = new User({
-//         name: req.body.name,
-//         email: req.body.email,
-//         password: req.body.password,
-//         admin: req.body.admin
-//     })
-//     em.save().then(result => res.send(result));
-// })
+app.use("/admin", userRouter);
