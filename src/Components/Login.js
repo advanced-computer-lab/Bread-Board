@@ -52,20 +52,26 @@ function Login() {
       </div>
       <div className="App">
         <div className="LoginInputs">
-          <input
-            type="text"
-            placeholder="Email..."
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-          />
-          <input
-            type="password"
-            placeholder="Password..."
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-          />
+          <div>
+            Email:
+            <input
+              type="text"
+              placeholder="Email..."
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+            />
+          </div>
+          <div>
+            Password:
+            <input
+              type="password"
+              placeholder="Password..."
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+            />
+          </div>
           <div>
             <button onClick={login}>Login</button>
             <button onClick={register}>Register</button>
