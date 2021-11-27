@@ -129,12 +129,12 @@ body {
 }
 
 .HomeButtons {
-  height: 250px;
+  height: 100px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   background-color: rgb(207, 207, 207);
 }
 
@@ -147,7 +147,6 @@ body {
   border-radius: 10px;
   font-size: 20px;
   border: 1px solid black;
-  margin: 20px;
 }
 
 .Searchinputs {
@@ -269,7 +268,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .flight {
@@ -279,7 +278,7 @@ body {
   font-size: small;
   font-family: "Courier New", Courier, monospace;
   display: flex;
-  margin: 10px;
+  margin-right: 10px;
   align-items: center;
   justify-content: center;
 }
@@ -411,6 +410,31 @@ body {
   font-size: 20px;
   border: 1px solid black;
   margin-top: 25px;
+}
+
+.flightCRUD {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  background-color: rgb(207, 207, 207);
+}
+
+.flightCRUD button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin-left: 26px;
+}
+
+#createB {
+  margin-left: 1085px;
 }
 
 button:hover {

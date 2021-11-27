@@ -34,7 +34,7 @@ function CreateFlight() {
 
   const [upID, setUpID] = useState(null);
 
-  const home = () => {
+  const logout = () => {
     navigate(-1);
   };
 
@@ -190,7 +190,7 @@ function CreateFlight() {
       }
       if (event.code === "Escape") {
         event.preventDefault();
-        home();
+        logout();
       }
     };
     document.addEventListener("keydown", listener);
@@ -214,82 +214,19 @@ function CreateFlight() {
     <div>
       <div className="HeaderContainer">
         <div className="HeaderButton">
-          <button onClick={home}>Home</button>
+          <button onClick={logout}>Logout</button>
         </div>
-        <div className="CreFlight">
-          <h1>Flights</h1>
+        <div className="Home">
+          <h1>Welcome Admin</h1>
+          <h2>Manage Flights</h2>
         </div>
       </div>
       <div className="App">
-        <div className="Creinputs">
-          <div>
-            <div>
-              <input
-                type="number"
-                placeholder="Flight Number"
-                onChange={(event) => {
-                  setFlightNumber(event.target.value);
-                }}
-              />
-              Departure Time
-              <input
-                type="time"
-                onChange={(event) => {
-                  setDepartureTime(event.target.value);
-                }}
-              />
-              Arrival Time
-              <input
-                type="time"
-                onChange={(event) => {
-                  setArrivalTime(event.target.value);
-                }}
-              />
-              <input
-                type="text"
-                placeholder="Airport"
-                onChange={(event) => {
-                  setAirport(event.target.value);
-                }}
-              />
-            </div>
-            <div>
-              <input
-                type="number"
-                placeholder="Economy Seats"
-                onChange={(event) => {
-                  setEconomySeats(event.target.value);
-                }}
-              />
-              <input
-                type="number"
-                placeholder="Business Seats"
-                onChange={(event) => {
-                  setBusinessSeats(event.target.value);
-                }}
-              />
-              Departure Date
-              <input
-                type="date"
-                onChange={(event) => {
-                  setDepartureDate(event.target.value);
-                }}
-              />
-              Arrival Date
-              <input
-                type="date"
-                onChange={(event) => {
-                  setArrivalDate(event.target.value);
-                }}
-              />
-            </div>
-          </div>
-          <div>
-            <button onClick={() => setOpenPopupCreate(true)}>
-              + Add Flight
-            </button>
-            <button onClick={searchFlight}>Search Flights</button>
-          </div>
+        <div className="flightCRUD">
+          <button onClick={searchFlight}>Search Flights</button>
+          <button id="createB" onClick={() => setOpenPopupCreate(true)}>
+            + Add Flight
+          </button>
         </div>
       </div>
       <div className="listOfFlights">
