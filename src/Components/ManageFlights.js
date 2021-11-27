@@ -91,70 +91,105 @@ function CreateFlight() {
 
   const updFlight = (id) => {
     if (window.confirm("Are you sure to update this Flight?")) {
-      var val = {
-        _id: id,
-        flightNumber: flightNumberU,
-        departureTime: departureTimeU,
-        arrivalTime: arrivalTimeU,
-        numberofEconomySeats: economySeatsU,
-        arrivalDate: arrivalDateU,
-        departureDate: departureDateU,
-        numberofBusinessSeats: businessSeatsU,
-        airport: airportU,
-      };
-      Object.keys(val).forEach(
-        (k) => !val[k] && val[k] !== undefined && delete val[k]
-      );
       axios
-        .put("http://localhost:8000/admin/updateFlight", val)
+        .post("http://localhost:8000/admin/searchFlightOne", { _id: id })
         .then((result) => {
-          if (result.data == "Error") {
-            alert("Flight number already exists!!!");
-          } else {
-            setOpenPopupUpdate(false);
-            setListOfFlights(
-              listOfFlights.map((val) => {
-                return val._id == id
-                  ? {
-                      _id: id,
-                      flightNumber:
-                        flightNumberU == null
-                          ? val.flightNumber
-                          : flightNumberU,
-                      departureTime:
-                        departureTimeU == null
-                          ? val.departureTime
-                          : departureTimeU,
-                      arrivalTime:
-                        arrivalTimeU == null ? val.arrivalTime : arrivalTimeU,
-                      numberofEconomySeats:
-                        economySeatsU == null
-                          ? val.numberofEconomySeats
-                          : economySeatsU,
-                      arrivalDate:
-                        arrivalDateU == null ? val.arrivalDate : arrivalDateU,
-                      departureDate:
-                        departureDateU == null
-                          ? val.departureDate
-                          : departureDateU,
-                      numberofBusinessSeats:
-                        businessSeatsU == null
-                          ? val.numberofBusinessSeats
-                          : businessSeatsU,
-                      airport: airportU == null ? val.airport : airportU,
-                    }
-                  : val;
-              })
+          var val = {
+            _id: id,
+            flightNumber: flightNumberU,
+            departureTime: departureTimeU,
+            arrivalTime: arrivalTimeU,
+            numberofEconomySeats: economySeatsU,
+            arrivalDate: arrivalDateU,
+            departureDate: departureDateU,
+            numberofBusinessSeats: businessSeatsU,
+            airport: airportU,
+          };
+          Object.keys(val).forEach(
+            (k) => !val[k] && val[k] !== undefined && delete val[k]
+          );
+          if (flightNumberU != null && flightNumberU <= 0) {
+            alert("Flight number must be positive!!!");
+          } else if (
+            (departureDateU != null
+              ? departureDateU
+              : result.data.departureDate) >
+            (arrivalDateU != null ? arrivalDateU : result.data.arrivalDate)
+          ) {
+            alert("Departure date can't be after Arrival date!!!");
+          } else if (
+            (departureDateU != null
+              ? departureDateU
+              : result.data.departureDate) ==
+              (arrivalDateU != null ? arrivalDateU : result.data.arrivalDate) &&
+            (departureTimeU != null
+              ? departureTimeU
+              : result.data.departureTime) >=
+              (arrivalTimeU != null ? arrivalTimeU : result.data.arrivalTime)
+          ) {
+            alert(
+              "Departure time must be before Arrival time if on the same day!!!"
             );
-            setFlightNumberU(null);
-            setDepartureTimeU(null);
-            setArrivalTimeU(null);
-            setDepartureDateU(null);
-            setArrivalDateU(null);
-            setEconomySeatsU(null);
-            setBusinessSeatsU(null);
-            setAirportU(null);
+          } else {
+            axios
+              .put("http://localhost:8000/admin/updateFlight", val)
+              .then((result) => {
+                if (result.data == "Error") {
+                  alert("Flight number already exists!!!");
+                } else {
+                  setOpenPopupUpdate(false);
+                  setListOfFlights(
+                    listOfFlights.map((val) => {
+                      return val._id == id
+                        ? {
+                            _id: id,
+                            flightNumber:
+                              flightNumberU == null
+                                ? val.flightNumber
+                                : flightNumberU,
+                            departureTime:
+                              departureTimeU == null
+                                ? val.departureTime
+                                : departureTimeU,
+                            arrivalTime:
+                              arrivalTimeU == null
+                                ? val.arrivalTime
+                                : arrivalTimeU,
+                            numberofEconomySeats:
+                              economySeatsU == null
+                                ? val.numberofEconomySeats
+                                : economySeatsU,
+                            arrivalDate:
+                              arrivalDateU == null
+                                ? val.arrivalDate
+                                : arrivalDateU,
+                            departureDate:
+                              departureDateU == null
+                                ? val.departureDate
+                                : departureDateU,
+                            numberofBusinessSeats:
+                              businessSeatsU == null
+                                ? val.numberofBusinessSeats
+                                : businessSeatsU,
+                            airport: airportU == null ? val.airport : airportU,
+                          }
+                        : val;
+                    })
+                  );
+                  setFlightNumberU(null);
+                  setDepartureTimeU(null);
+                  setArrivalTimeU(null);
+                  setDepartureDateU(null);
+                  setArrivalDateU(null);
+                  setEconomySeatsU(null);
+                  setBusinessSeatsU(null);
+                  setAirportU(null);
+                }
+              });
           }
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
   };

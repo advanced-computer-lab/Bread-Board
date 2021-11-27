@@ -11,6 +11,8 @@ userRouter.post("/createFlight", flightController.createFlight);
 
 userRouter.post("/searchFlight", flightController.searchFlight);
 
+userRouter.post("/searchFlightOne", flightController.searchFlightOne);
+
 userRouter.put("/updateFlight", flightController.updateFlight);
 
 userRouter.delete("/deleteFlight/:id", flightController.deleteFlight);

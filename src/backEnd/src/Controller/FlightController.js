@@ -31,6 +31,16 @@ const searchFlight = (req, res) => {
   });
 };
 
+const searchFlightOne = (req, res) => {
+  Flight.findOne(req.body, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+};
+
 const showFlight = async (req, res) => {
   Flight.find({}, (err, result) => {
     if (err) {
@@ -63,4 +73,5 @@ module.exports = {
   updateFlight,
   deleteFlight,
   showFlight,
+  searchFlightOne,
 };
