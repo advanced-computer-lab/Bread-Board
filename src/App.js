@@ -7,18 +7,19 @@ import CreateFlight from "./Components/CreateFlight";
 import SearchFlight from "./Components/SearchFlight";
 import DeleteFlight from "./Components/DeleteFlight";
 import UpdateFlight from "./Components/UpdateFlight";
+import New from "./Components/New";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/create" element={<CreateFlight />} />
-        <Route path="/search" element={<SearchFlight />} />
-        <Route path="/update" element={<UpdateFlight />} />
-        <Route path="/delete" element={<DeleteFlight />} />
+        <Route path="/admin" element={<Home />} />
+        <Route path="/admin/create" element={<New />} />
+        <Route path="/admin/search" element={<SearchFlight />} />
+        <Route path="/admin/update" element={<UpdateFlight />} />
+        <Route path="/admin/delete" element={<DeleteFlight />} />
       </Routes>
     </Router>
   );

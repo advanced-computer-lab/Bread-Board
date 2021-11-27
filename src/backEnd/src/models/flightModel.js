@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const uniqueValidator = require("mongoose-unique-validator");
 const flightsSchema = new Schema({
   flightNumber: {
     type: Number,
     required: true,
+    unique: true,
   },
   departureTime: {
     type: String,
@@ -37,5 +39,8 @@ const flightsSchema = new Schema({
   },
 });
 
+flightsSchema.plugin(uniqueValidator, {
+  message: "Flight number already exists",
+});
 const flights = mongoose.model("flights", flightsSchema);
 module.exports = flights;

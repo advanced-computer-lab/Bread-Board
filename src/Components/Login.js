@@ -20,7 +20,7 @@ function Login() {
         })
         .then((result) => {
           if (result.data == "Success") {
-            navigate("/home");
+            navigate("/admin");
           } else {
             alert(result.data);
           }

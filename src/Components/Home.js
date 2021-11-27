@@ -5,19 +5,19 @@ function Home() {
   const navigate = useNavigate();
 
   const createFlight = () => {
-    navigate("/create");
+    navigate("/admin/create");
   };
 
   const searchFlight = () => {
-    navigate("/search");
+    navigate("/admin/search");
   };
 
   const updateFlight = () => {
-    navigate("/update");
+    navigate("/admin/update");
   };
 
   const deleteFlight = () => {
-    navigate("/delete");
+    navigate("/admin/delete");
   };
 
   const logout = () => {
