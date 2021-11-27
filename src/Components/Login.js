@@ -52,7 +52,7 @@ function Login() {
       </div>
       <div className="App">
         <div className="LoginInputs">
-          <div>
+          <div id="loginEmail">
             Email:
             <input
               type="text"

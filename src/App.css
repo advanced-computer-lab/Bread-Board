@@ -437,6 +437,10 @@ body {
   margin-left: 1085px;
 }
 
+#loginEmail {
+  margin-left: 30px;
+}
+
 button:hover {
   cursor: pointer;
 }

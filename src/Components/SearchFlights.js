@@ -76,6 +76,7 @@ function SearchFlights() {
         <div className="Searchinputs">
           <div>
             <div>
+              Flight Number
               <input
                 type="number"
                 placeholder="Flight Number"
@@ -97,6 +98,7 @@ function SearchFlights() {
                   setArrivalTime(event.target.value);
                 }}
               />
+              Airport
               <input
                 type="text"
                 placeholder="Airport"
@@ -106,6 +108,7 @@ function SearchFlights() {
               />
             </div>
             <div>
+              Economy Seats
               <input
                 type="number"
                 placeholder="Economy Seats"
@@ -113,6 +116,7 @@ function SearchFlights() {
                   setEconomySeats(event.target.value);
                 }}
               />
+              Business Seats
               <input
                 type="number"
                 placeholder="Business Seats"

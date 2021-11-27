@@ -30,6 +30,7 @@ function Register() {
           if (result.data.name == "ValidationError") {
             alert("Email already exists!!!");
           } else {
+            alert("Registered Succefully");
             navigate(-1);
           }
         });
