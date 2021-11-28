@@ -19,4 +19,6 @@ userRouter.delete("/deleteFlight/:id", flightController.deleteFlight);
 
 userRouter.get("/showFlight", flightController.showFlight);
 
+userRouter.post("/searchForFlights", flightController.searchForFlights);
+
 module.exports = userRouter;

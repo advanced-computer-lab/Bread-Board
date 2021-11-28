@@ -67,6 +67,24 @@ const deleteFlight = async (req, res) => {
   res.send("item deleted");
 };
 
+const searchForFlights = (req, res) => {
+  Flight.find(
+    {
+      departureDate: req.body.departureDate,
+      arrivalDate: req.body.arrivalDate,
+    },
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    }
+  )
+    .where(req.body.cabin)
+    .gt(Number(req.body.children) + Number(req.body.adults) - 1);
+};
+
 module.exports = {
   createFlight,
   searchFlight,
@@ -74,4 +92,5 @@ module.exports = {
   deleteFlight,
   showFlight,
   searchFlightOne,
+  searchForFlights,
 };
