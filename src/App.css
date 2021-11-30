@@ -149,6 +149,10 @@ body {
   border: 1px solid black;
 }
 
+.flightSearch {
+  margin-top: 10px;
+}
+
 .Searchinputs {
   height: 250px;
   width: 100%;
@@ -177,6 +181,13 @@ body {
   font-size: 20px;
   border: 1px solid black;
   margin-top: 25px;
+}
+
+.SearchinputsSub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .inputs {
@@ -273,7 +284,7 @@ body {
 
 .flight {
   width: 1230px;
-  height: 60px;
+  height: 50px;
   background-color: rgb(158, 151, 151);
   font-size: small;
   font-family: "Courier New", Courier, monospace;
@@ -301,7 +312,7 @@ body {
 
 .flightContainer button {
   width: 80px;
-  height: 60px;
+  height: 100px;
   border: 2px solid black;
   background-color: rgb(158, 151, 151);
   color: white;
@@ -383,7 +394,7 @@ body {
 }
 
 .Popupinputs {
-  height: 300px;
+  height: 400px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -410,6 +421,13 @@ body {
   font-size: 20px;
   border: 1px solid black;
   margin-top: 25px;
+}
+
+.PopupinputsSub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .flightCRUD {
@@ -461,6 +479,13 @@ body {
   font-size: 20px;
   border: 1px solid black;
   margin-top: 25px;
+}
+
+.NewinputsSub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 #createB {

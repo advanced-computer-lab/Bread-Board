@@ -9,7 +9,10 @@ const createFlight = async (req, res) => {
     arrivalDate: req.body.arrivalDate,
     departureDate: req.body.departureDate,
     numberofBusinessSeats: req.body.numberofBusinessSeats,
-    airport: req.body.airport,
+    departureAirport: req.body.departureAirport,
+    arrivalAirport: req.body.arrivalAirport,
+    baggage: req.body.baggage,
+    tripDuration: req.body.tripDuration,
   });
   await flight
     .save()

@@ -16,7 +16,10 @@ function CreateFlight() {
   const [arrivalDate, setArrivalDate] = useState(null);
   const [departureDate, setDepartureDate] = useState(null);
   const [businessSeats, setBusinessSeats] = useState(null);
-  const [airport, setAirport] = useState(null);
+  const [departureAirport, setDepartureAirport] = useState(null);
+  const [arrivalAirport, setArrivalAirport] = useState(null);
+  const [baggage, setBaggage] = useState(null);
+  const [tripDuration, setTripDuration] = useState(null);
 
   const [flightNumberU, setFlightNumberU] = useState(null);
   const [departureTimeU, setDepartureTimeU] = useState(null);
@@ -25,7 +28,10 @@ function CreateFlight() {
   const [arrivalDateU, setArrivalDateU] = useState(null);
   const [departureDateU, setDepartureDateU] = useState(null);
   const [businessSeatsU, setBusinessSeatsU] = useState(null);
-  const [airportU, setAirportU] = useState(null);
+  const [departureAirportU, setDepartureAirportU] = useState(null);
+  const [arrivalAirportU, setArrivalAirportU] = useState(null);
+  const [baggageU, setBaggageU] = useState(null);
+  const [tripDurationU, setTripDurationU] = useState(null);
 
   const [listOfFlights, setListOfFlights] = useState([]);
 
@@ -47,7 +53,10 @@ function CreateFlight() {
       arrivalDate == null ||
       economySeats == null ||
       businessSeats == null ||
-      airport == null
+      departureAirport == null ||
+      arrivalAirport == null ||
+      baggage == null ||
+      tripDuration == null
     ) {
       alert("Please fill all fields!!!");
     } else if (flightNumber <= 0) {
@@ -66,13 +75,15 @@ function CreateFlight() {
           arrivalDate: arrivalDate,
           departureDate: departureDate,
           numberofBusinessSeats: businessSeats,
-          airport: airport,
+          departureAirport: departureAirport,
+          arrivalAirport: arrivalAirport,
+          baggage: baggage,
+          tripDuration: tripDuration,
         })
         .then((result) => {
           if (result.data.name == "ValidationError") {
             alert("Flight number already exists!!!");
           } else {
-            console.log(result);
             setOpenPopupCreate(false);
             setListOfFlights([...listOfFlights, result.data]);
             setFlightNumber(null);
@@ -82,7 +93,10 @@ function CreateFlight() {
             setArrivalDate(null);
             setEconomySeats(null);
             setBusinessSeats(null);
-            setAirport(null);
+            setDepartureAirport(null);
+            setArrivalAirport(null);
+            setBaggage(null);
+            setTripDuration(null);
           }
         })
         .catch((err) => {});
@@ -103,7 +117,10 @@ function CreateFlight() {
             arrivalDate: arrivalDateU,
             departureDate: departureDateU,
             numberofBusinessSeats: businessSeatsU,
-            airport: airportU,
+            departureAirport: departureAirportU,
+            arrivalAirport: arrivalAirportU,
+            baggage: baggageU,
+            tripDuration: tripDurationU,
           };
           Object.keys(val).forEach(
             (k) => !val[k] && val[k] !== undefined && delete val[k]
@@ -171,7 +188,19 @@ function CreateFlight() {
                               businessSeatsU == null
                                 ? val.numberofBusinessSeats
                                 : businessSeatsU,
-                            airport: airportU == null ? val.airport : airportU,
+                            departureAirport:
+                              departureAirportU == null
+                                ? val.departureAirport
+                                : departureAirportU,
+                            arrivalAirport:
+                              arrivalAirportU == null
+                                ? val.arrivalAirport
+                                : arrivalAirportU,
+                            baggage: baggageU == null ? val.baggage : baggageU,
+                            tripDuration:
+                              tripDurationU == null
+                                ? val.tripDuration
+                                : tripDurationU,
                           }
                         : val;
                     })
@@ -183,7 +212,10 @@ function CreateFlight() {
                   setArrivalDateU(null);
                   setEconomySeatsU(null);
                   setBusinessSeatsU(null);
-                  setAirportU(null);
+                  setDepartureAirportU(null);
+                  setArrivalAirportU(null);
+                  setBaggageU(null);
+                  setTripDurationU(null);
                 }
               });
           }
@@ -268,39 +300,55 @@ function CreateFlight() {
         {listOfFlights.map((val) => {
           return (
             <div className="flightContainer">
-              <div className="flight">
-                <h3 id="fliNumber">
-                  Flight Number: <br />
-                  {val.flightNumber}
-                </h3>
-                <h3>
-                  Departure Time: <br />
-                  {val.departureTime}
-                </h3>
-                <h3>
-                  Departure Date: <br />
-                  {val.departureDate}
-                </h3>
-                <h3>
-                  Arrival Time: <br />
-                  {val.arrivalTime}
-                </h3>
-                <h3>
-                  Arrival Date: <br />
-                  {val.arrivalDate}
-                </h3>
-                <h3>
-                  Economy Seats: <br />
-                  {val.numberofEconomySeats}
-                </h3>
-                <h3>
-                  Business Seats: <br />
-                  {val.numberofBusinessSeats}
-                </h3>
-                <h3>
-                  Airport: <br />
-                  {val.airport}
-                </h3>
+              <div>
+                <div className="flight">
+                  <h3 id="fliNumber">
+                    Flight Number: <br />
+                    {val.flightNumber}
+                  </h3>
+                  <h3>
+                    Departure Time: <br />
+                    {val.departureTime}
+                  </h3>
+                  <h3>
+                    Departure Date: <br />
+                    {val.departureDate}
+                  </h3>
+                  <h3>
+                    Arrival Time: <br />
+                    {val.arrivalTime}
+                  </h3>
+                  <h3>
+                    Arrival Date: <br />
+                    {val.arrivalDate}
+                  </h3>
+                  <h3>
+                    Trip Duration: <br />
+                    {val.tripDuration + " Hours"}
+                  </h3>
+                </div>
+                <div className="flight">
+                  <h3 id="fliNumber">
+                    Economy Seats: <br />
+                    {val.numberofEconomySeats}
+                  </h3>
+                  <h3>
+                    Business Seats: <br />
+                    {val.numberofBusinessSeats}
+                  </h3>
+                  <h3>
+                    Departure Airport: <br />
+                    {val.departureAirport}
+                  </h3>
+                  <h3>
+                    Arrival Airport: <br />
+                    {val.arrivalAirport}
+                  </h3>
+                  <h3>
+                    Baggage Allowance: <br />
+                    {val.baggage + " Bags"}
+                  </h3>
+                </div>
               </div>
               <button
                 onClick={() => {
@@ -331,7 +379,7 @@ function CreateFlight() {
         </DialogTitle>
         <DialogContent dividers>
           <div className="Popupinputs">
-            <div>
+            <div className="PopupinputsSub">
               <div>
                 Flight Number
                 <input
@@ -341,12 +389,22 @@ function CreateFlight() {
                     setFlightNumber(event.target.value);
                   }}
                 />
-                Airport
+              </div>
+              <div>
+                Departure Airport
                 <input
                   type="text"
-                  placeholder="Airport"
+                  placeholder="Departure Airport"
                   onChange={(event) => {
-                    setAirport(event.target.value);
+                    setDepartureAirport(event.target.value);
+                  }}
+                />
+                Arrival Airport
+                <input
+                  type="text"
+                  placeholder="Arrival Airport"
+                  onChange={(event) => {
+                    setArrivalAirport(event.target.value);
                   }}
                 />
               </div>
@@ -400,6 +458,24 @@ function CreateFlight() {
                   }}
                 />
               </div>
+              <div>
+                Baggage
+                <input
+                  type="number"
+                  placeholder="Baggage"
+                  onChange={(event) => {
+                    setBaggage(event.target.value);
+                  }}
+                />
+                Trip Duration
+                <input
+                  type="number"
+                  placeholder="Trip Duration"
+                  onChange={(event) => {
+                    setTripDuration(event.target.value);
+                  }}
+                />
+              </div>
             </div>
             <button onClick={create}>Create</button>
           </div>
@@ -414,7 +490,7 @@ function CreateFlight() {
         </DialogTitle>
         <DialogContent dividers>
           <div className="Popupinputs">
-            <div>
+            <div className="PopupinputsSub">
               <div>
                 Flight Number
                 <input
@@ -424,12 +500,22 @@ function CreateFlight() {
                     setFlightNumberU(event.target.value);
                   }}
                 />
-                Airport
+              </div>
+              <div>
+                Departure Airport
                 <input
                   type="text"
-                  placeholder="Airport"
+                  placeholder="Departure Airport"
                   onChange={(event) => {
-                    setAirportU(event.target.value);
+                    setDepartureAirportU(event.target.value);
+                  }}
+                />
+                Arrival Airport
+                <input
+                  type="text"
+                  placeholder="Arrival Airport"
+                  onChange={(event) => {
+                    setArrivalAirportU(event.target.value);
                   }}
                 />
               </div>
@@ -480,6 +566,24 @@ function CreateFlight() {
                   placeholder="Business Seats"
                   onChange={(event) => {
                     setBusinessSeatsU(event.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                Baggage
+                <input
+                  type="number"
+                  placeholder="Baggage"
+                  onChange={(event) => {
+                    setBaggageU(event.target.value);
+                  }}
+                />
+                Trip Duration
+                <input
+                  type="number"
+                  placeholder="Trip Duration"
+                  onChange={(event) => {
+                    setTripDurationU(event.target.value);
                   }}
                 />
               </div>

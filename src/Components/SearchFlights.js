@@ -13,7 +13,10 @@ function SearchFlights() {
   const [arrivalDate, setArrivalDate] = useState(null);
   const [departureDate, setDepartureDate] = useState(null);
   const [businessSeats, setBusinessSeats] = useState(null);
-  const [airport, setAirport] = useState(null);
+  const [departureAirport, setDepartureAirport] = useState(null);
+  const [arrivalAirport, setArrivalAirport] = useState(null);
+  const [baggage, setBaggage] = useState(null);
+  const [tripDuration, setTripDuration] = useState(null);
 
   const [listOfFlights, setListOfFlights] = useState([]);
 
@@ -30,7 +33,10 @@ function SearchFlights() {
       arrivalDate: arrivalDate,
       departureDate: departureDate,
       numberofBusinessSeats: businessSeats,
-      airport: airport,
+      departureAirport: departureAirport,
+      arrivalAirport: arrivalAirport,
+      baggage: baggage,
+      tripDuration: tripDuration,
     };
     Object.keys(val).forEach(
       (k) => !val[k] && val[k] !== undefined && delete val[k]
@@ -74,7 +80,7 @@ function SearchFlights() {
       </div>
       <div className="App">
         <div className="Searchinputs">
-          <div>
+          <div className="SearchinputsSub">
             <div>
               Flight Number
               <input
@@ -98,12 +104,12 @@ function SearchFlights() {
                   setArrivalTime(event.target.value);
                 }}
               />
-              Airport
+              Trip Duration
               <input
-                type="text"
-                placeholder="Airport"
+                type="number"
+                placeholder="Trip Duration"
                 onChange={(event) => {
-                  setAirport(event.target.value);
+                  setTripDuration(event.target.value);
                 }}
               />
             </div>
@@ -139,6 +145,32 @@ function SearchFlights() {
                 }}
               />
             </div>
+            <div>
+              Baggage
+              <input
+                type="number"
+                placeholder="Baggage"
+                onChange={(event) => {
+                  setBaggage(event.target.value);
+                }}
+              />
+              Departure Airport
+              <input
+                type="text"
+                placeholder="Departure Airport"
+                onChange={(event) => {
+                  setDepartureAirport(event.target.value);
+                }}
+              />
+              Arrival Airport
+              <input
+                type="text"
+                placeholder="Arrival Airport"
+                onChange={(event) => {
+                  setArrivalAirport(event.target.value);
+                }}
+              />
+            </div>
           </div>
           <button onClick={searchFlight}>Submit</button>
         </div>
@@ -146,39 +178,55 @@ function SearchFlights() {
       <div className="listOfFlights">
         {listOfFlights.map((val) => {
           return (
-            <div className="flight">
-              <h3 id="fliNumber">
-                Flight Number: <br />
-                {val.flightNumber}
-              </h3>
-              <h3>
-                Departure Time: <br />
-                {val.departureTime}
-              </h3>
-              <h3>
-                Departure Date: <br />
-                {val.departureDate}
-              </h3>
-              <h3>
-                Arrival Time: <br />
-                {val.arrivalTime}
-              </h3>
-              <h3>
-                Arrival Date: <br />
-                {val.arrivalDate}
-              </h3>
-              <h3>
-                Economy Seats: <br />
-                {val.numberofEconomySeats}
-              </h3>
-              <h3>
-                Business Seats: <br />
-                {val.numberofBusinessSeats}
-              </h3>
-              <h3>
-                Airport: <br />
-                {val.airport}
-              </h3>
+            <div className="flightSearch">
+              <div className="flight">
+                <h3 id="fliNumber">
+                  Flight Number: <br />
+                  {val.flightNumber}
+                </h3>
+                <h3>
+                  Departure Time: <br />
+                  {val.departureTime}
+                </h3>
+                <h3>
+                  Departure Date: <br />
+                  {val.departureDate}
+                </h3>
+                <h3>
+                  Arrival Time: <br />
+                  {val.arrivalTime}
+                </h3>
+                <h3>
+                  Arrival Date: <br />
+                  {val.arrivalDate}
+                </h3>
+                <h3>
+                  Trip Duration: <br />
+                  {val.tripDuration + " Hours"}
+                </h3>
+              </div>
+              <div className="flight">
+                <h3 id="fliNumber">
+                  Economy Seats: <br />
+                  {val.numberofEconomySeats}
+                </h3>
+                <h3>
+                  Business Seats: <br />
+                  {val.numberofBusinessSeats}
+                </h3>
+                <h3>
+                  Departure Airport: <br />
+                  {val.departureAirport}
+                </h3>
+                <h3>
+                  Arrival Airport: <br />
+                  {val.arrivalAirport}
+                </h3>
+                <h3>
+                  Baggage Allowance: <br />
+                  {val.baggage + " Bags"}
+                </h3>
+              </div>
             </div>
           );
         })}

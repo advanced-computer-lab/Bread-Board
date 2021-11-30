@@ -6,10 +6,10 @@ import "../App.css";
 function SearchFlights() {
   const navigate = useNavigate();
 
-  const [children, setChildren] = useState(null);
   const [adults, setAdults] = useState(null);
-  const [arrivalDate, setArrivalDate] = useState(null);
+  const [children, setChildren] = useState(null);
   const [departureDate, setDepartureDate] = useState(null);
+  const [arrivalDate, setArrivalDate] = useState(null);
   const [cabin, setCabin] = useState(null);
 
   const [listOfFlights, setListOfFlights] = useState([]);
@@ -20,11 +20,11 @@ function SearchFlights() {
 
   const searchFlight = () => {
     var val = {
-      children: children,
       adults: adults,
-      cabin: cabin,
-      arrivalDate: arrivalDate,
+      children: children,
       departureDate: departureDate,
+      arrivalDate: arrivalDate,
+      cabin: cabin,
     };
     Object.keys(val).forEach(
       (k) => !val[k] && val[k] !== undefined && delete val[k]
@@ -68,7 +68,7 @@ function SearchFlights() {
       </div>
       <div className="App">
         <div className="Newinputs">
-          <div>
+          <div className="NewinputsSub">
             <div>
               Number Of Children
               <input

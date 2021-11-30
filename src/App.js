@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/admin" element={<New />} />
+        <Route path="/admin" element={<ManageFlights />} />
         <Route path="/admin/search" element={<SearchFlights />} />
       </Routes>
     </Router>

@@ -33,8 +33,20 @@ const flightsSchema = new Schema({
     type: Number,
     required: true,
   },
-  airport: {
+  departureAirport: {
     type: String,
+    required: true,
+  },
+  arrivalAirport: {
+    type: String,
+    required: true,
+  },
+  baggage: {
+    type: Number,
+    required: true,
+  },
+  tripDuration: {
+    type: Number,
     required: true,
   },
 });
