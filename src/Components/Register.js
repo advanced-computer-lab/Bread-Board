@@ -24,12 +24,13 @@ function Register() {
           name: name,
           email: email,
           password: password,
-          admin: admin,
+          admin: false,
         })
         .then((result) => {
           if (result.data.name == "ValidationError") {
             alert("Email already exists!!!");
           } else {
+            alert("Registered Succefully");
             navigate(-1);
           }
         });
@@ -62,6 +63,7 @@ function Register() {
       <div className="App">
         <div className="RegisterInputs">
           <div>
+            Name:
             <input
               type="text"
               placeholder="Name..."
@@ -69,6 +71,7 @@ function Register() {
                 setName(event.target.value);
               }}
             />
+            Email:
             <input
               type="text"
               placeholder="Email..."
@@ -76,20 +79,12 @@ function Register() {
                 setEmail(event.target.value);
               }}
             />
+            Password:
             <input
               type="password"
               placeholder="Password..."
               onChange={(event) => {
                 setPassword(event.target.value);
-              }}
-            />
-          </div>
-          <div className="checkBox">
-            Admin:
-            <input
-              type="checkbox"
-              onChange={(event) => {
-                setAdmin(event.target.checked);
               }}
             />
           </div>

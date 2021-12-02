@@ -11,10 +11,14 @@ userRouter.post("/createFlight", flightController.createFlight);
 
 userRouter.post("/searchFlight", flightController.searchFlight);
 
+userRouter.post("/searchFlightOne", flightController.searchFlightOne);
+
 userRouter.put("/updateFlight", flightController.updateFlight);
 
 userRouter.delete("/deleteFlight/:id", flightController.deleteFlight);
 
 userRouter.get("/showFlight", flightController.showFlight);
+
+userRouter.post("/searchForFlights", flightController.searchForFlights);
 
 module.exports = userRouter;

@@ -9,14 +9,33 @@ const createFlight = async (req, res) => {
     arrivalDate: req.body.arrivalDate,
     departureDate: req.body.departureDate,
     numberofBusinessSeats: req.body.numberofBusinessSeats,
-    airport: req.body.airport,
+    departureAirport: req.body.departureAirport,
+    arrivalAirport: req.body.arrivalAirport,
+    baggage: req.body.baggage,
+    tripDuration: req.body.tripDuration,
   });
-  await flight.save();
-  res.send("Inserted Data");
+  await flight
+    .save()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 };
 
 const searchFlight = (req, res) => {
   Flight.find(req.body, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+};
+
+const searchFlightOne = (req, res) => {
+  Flight.findOne(req.body, (err, result) => {
     if (err) {
       res.send(err);
     } else {
@@ -36,49 +55,13 @@ const showFlight = async (req, res) => {
 };
 
 const updateFlight = (req, res) => {
-  const id = req.body.id;
-  const newFlightNumber = req.body.newFlightNumber;
-  const newDepartureTime = req.body.newDepartureTime;
-  const newArrivalTime = req.body.newArrivalTime;
-  const newEconomySeats = req.body.newEconomySeats;
-  const newArrivalDate = req.body.newArrivalDate;
-  const newDepartureDate = req.body.newDepartureDate;
-  const newBusinessSeats = req.body.newBusinessSeats;
-  const newAirport = req.body.newAirport;
-  try {
-    Flight.findById(id, (error, flightToUpdate) => {
-      flightToUpdate.flightNumber =
-        newFlightNumber == null
-          ? flightToUpdate.flightNumber
-          : Number(newFlightNumber);
-      flightToUpdate.departureTime =
-        newDepartureTime == null
-          ? flightToUpdate.departureTime
-          : newDepartureTime;
-      flightToUpdate.arrivalTime =
-        newArrivalTime == null ? flightToUpdate.arrivalTime : newArrivalTime;
-      flightToUpdate.numberofEconomySeats =
-        newEconomySeats == null
-          ? flightToUpdate.numberofEconomySeats
-          : Number(newEconomySeats);
-      flightToUpdate.arrivalDate =
-        newArrivalDate == null ? flightToUpdate.arrivalDate : newArrivalDate;
-      flightToUpdate.departureDate =
-        newDepartureDate == null
-          ? flightToUpdate.departureDate
-          : newDepartureDate;
-      flightToUpdate.numberofBusinessSeats =
-        newBusinessSeats == null
-          ? flightToUpdate.numberofBusinessSeats
-          : Number(newBusinessSeats);
-      flightToUpdate.airport =
-        newAirport == null ? flightToUpdate.airport : newAirport;
-      flightToUpdate.save();
+  Flight.updateOne({ _id: req.body._id }, req.body)
+    .then((result) => {
+      res.send("Success");
+    })
+    .catch((err) => {
+      res.send("Error");
     });
-  } catch (err) {
-    console.log(err);
-  }
-  res.send("updated");
 };
 
 const deleteFlight = async (req, res) => {
@@ -87,10 +70,30 @@ const deleteFlight = async (req, res) => {
   res.send("item deleted");
 };
 
+const searchForFlights = (req, res) => {
+  Flight.find(
+    {
+      departureDate: req.body.departureDate,
+      arrivalDate: req.body.arrivalDate,
+    },
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    }
+  )
+    .where(req.body.cabin)
+    .gt(Number(req.body.children) + Number(req.body.adults) - 1);
+};
+
 module.exports = {
   createFlight,
   searchFlight,
   updateFlight,
   deleteFlight,
   showFlight,
+  searchFlightOne,
+  searchForFlights,
 };
