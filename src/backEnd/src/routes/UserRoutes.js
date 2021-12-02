@@ -19,6 +19,7 @@ userRouter.delete("/deleteFlight/:id", flightController.deleteFlight);
 
 userRouter.get("/showFlight", flightController.showFlight);
 
-userRouter.post("/searchForFlights", flightController.searchForFlights);
+userRouter.post("/departureFlights", flightController.departureFlights);
+userRouter.post("/returnFlights", flightController.returnFlights);
 
 module.exports = userRouter;

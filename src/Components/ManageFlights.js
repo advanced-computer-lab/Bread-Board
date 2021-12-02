@@ -20,6 +20,7 @@ function CreateFlight() {
   const [arrivalAirport, setArrivalAirport] = useState(null);
   const [baggage, setBaggage] = useState(null);
   const [tripDuration, setTripDuration] = useState(null);
+  const [price, setPrice] = useState(null);
 
   const [flightNumberU, setFlightNumberU] = useState(null);
   const [departureTimeU, setDepartureTimeU] = useState(null);
@@ -32,6 +33,7 @@ function CreateFlight() {
   const [arrivalAirportU, setArrivalAirportU] = useState(null);
   const [baggageU, setBaggageU] = useState(null);
   const [tripDurationU, setTripDurationU] = useState(null);
+  const [priceU, setPriceU] = useState(null);
 
   const [listOfFlights, setListOfFlights] = useState([]);
 
@@ -56,11 +58,16 @@ function CreateFlight() {
       departureAirport == null ||
       arrivalAirport == null ||
       baggage == null ||
-      tripDuration == null
+      tripDuration == null ||
+      price == null
     ) {
       alert("Please fill all fields!!!");
     } else if (flightNumber <= 0) {
       alert("Flight number must be positive!!!");
+    } else if (price <= 0) {
+      alert("Price number must be positive!!!");
+    } else if (baggage <= 0) {
+      alert("Baggage number must be positive!!!");
     } else if (departureDate > arrivalDate) {
       alert("Departure date can't be after Arrival date!!!");
     } else if (departureDate == arrivalDate && departureTime >= arrivalTime) {
@@ -79,6 +86,7 @@ function CreateFlight() {
           arrivalAirport: arrivalAirport,
           baggage: baggage,
           tripDuration: tripDuration,
+          price: price,
         })
         .then((result) => {
           if (result.data.name == "ValidationError") {
@@ -97,6 +105,7 @@ function CreateFlight() {
             setArrivalAirport(null);
             setBaggage(null);
             setTripDuration(null);
+            setPrice(null);
           }
         })
         .catch((err) => {});
@@ -121,12 +130,17 @@ function CreateFlight() {
             arrivalAirport: arrivalAirportU,
             baggage: baggageU,
             tripDuration: tripDurationU,
+            price: priceU,
           };
           Object.keys(val).forEach(
             (k) => !val[k] && val[k] !== undefined && delete val[k]
           );
           if (flightNumberU != null && flightNumberU <= 0) {
             alert("Flight number must be positive!!!");
+          } else if (priceU != null && priceU <= 0) {
+            alert("Price number must be positive!!!");
+          } else if (baggageU != null && baggageU <= 0) {
+            alert("Baggage number must be positive!!!");
           } else if (
             (departureDateU != null
               ? departureDateU
@@ -201,6 +215,7 @@ function CreateFlight() {
                               tripDurationU == null
                                 ? val.tripDuration
                                 : tripDurationU,
+                            price: priceU == null ? val.price : priceU,
                           }
                         : val;
                     })
@@ -216,6 +231,7 @@ function CreateFlight() {
                   setArrivalAirportU(null);
                   setBaggageU(null);
                   setTripDurationU(null);
+                  setPrice(null);
                 }
               });
           }
@@ -348,6 +364,10 @@ function CreateFlight() {
                     Baggage Allowance: <br />
                     {val.baggage + " Bags"}
                   </h3>
+                  <h3>
+                    Price: <br />
+                    {val.price + " L.E"}
+                  </h3>
                 </div>
               </div>
               <button
@@ -387,6 +407,14 @@ function CreateFlight() {
                   placeholder="Flight Number"
                   onChange={(event) => {
                     setFlightNumber(event.target.value);
+                  }}
+                />
+                Trip Duration
+                <input
+                  type="number"
+                  placeholder="Trip Duration"
+                  onChange={(event) => {
+                    setTripDuration(event.target.value);
                   }}
                 />
               </div>
@@ -467,12 +495,12 @@ function CreateFlight() {
                     setBaggage(event.target.value);
                   }}
                 />
-                Trip Duration
+                Price
                 <input
                   type="number"
-                  placeholder="Trip Duration"
+                  placeholder="Price"
                   onChange={(event) => {
-                    setTripDuration(event.target.value);
+                    setPrice(event.target.value);
                   }}
                 />
               </div>
@@ -498,6 +526,14 @@ function CreateFlight() {
                   placeholder="Flight Number"
                   onChange={(event) => {
                     setFlightNumberU(event.target.value);
+                  }}
+                />
+                Trip Duration
+                <input
+                  type="number"
+                  placeholder="Trip Duration"
+                  onChange={(event) => {
+                    setTripDurationU(event.target.value);
                   }}
                 />
               </div>
@@ -578,12 +614,12 @@ function CreateFlight() {
                     setBaggageU(event.target.value);
                   }}
                 />
-                Trip Duration
+                Price
                 <input
                   type="number"
-                  placeholder="Trip Duration"
+                  placeholder="Price"
                   onChange={(event) => {
-                    setTripDurationU(event.target.value);
+                    setPriceU(event.target.value);
                   }}
                 />
               </div>
