@@ -34,6 +34,10 @@ function Login() {
     navigate("/register");
   };
 
+  const guest = () => {
+    navigate("/guest/home");
+  };
+
   useEffect(() => {
     const listener = (event) => {
       if (event.code === "Enter") {
@@ -77,6 +81,7 @@ function Login() {
           <div>
             <button onClick={login}>Login</button>
             <button onClick={register}>Register</button>
+            <button onClick={guest}>Guest</button>
           </div>
         </div>
       </div>
