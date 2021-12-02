@@ -19,8 +19,10 @@ function Login() {
           password: password,
         })
         .then((result) => {
-          if (result.data == "Success") {
+          if (result.data == "Success Admin") {
             navigate("/admin");
+          } else if (result.data == "Success User") {
+            navigate("/user/home");
           } else {
             alert(result.data);
           }

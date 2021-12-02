@@ -13,6 +13,7 @@ const createFlight = async (req, res) => {
     arrivalAirport: req.body.arrivalAirport,
     baggage: req.body.baggage,
     tripDuration: req.body.tripDuration,
+    price: req.body.price,
   });
   await flight
     .save()
@@ -70,11 +71,31 @@ const deleteFlight = async (req, res) => {
   res.send("item deleted");
 };
 
-const searchForFlights = (req, res) => {
+const departureFlights = (req, res) => {
   Flight.find(
     {
+      departureAirport: req.body.departureAirport,
+      arrivalAirport: req.body.arrivalAirport,
       departureDate: req.body.departureDate,
-      arrivalDate: req.body.arrivalDate,
+    },
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    }
+  )
+    .where(req.body.cabin)
+    .gt(Number(req.body.children) + Number(req.body.adults) - 1);
+};
+
+const returnFlights = (req, res) => {
+  Flight.find(
+    {
+      departureAirport: req.body.arrivalAirport,
+      arrivalAirport: req.body.departureAirport,
+      departureDate: req.body.returnDate,
     },
     (err, result) => {
       if (err) {
@@ -95,5 +116,6 @@ module.exports = {
   deleteFlight,
   showFlight,
   searchFlightOne,
-  searchForFlights,
+  departureFlights,
+  returnFlights,
 };

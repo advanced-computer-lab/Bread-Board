@@ -46,9 +46,9 @@ app.post("/login", (req, res) => {
       } else {
         if (result.password == password) {
           if (result.admin == true) {
-            res.send("Success");
+            res.send("Success Admin");
           } else {
-            res.send("You are not an admin");
+            res.send("Success User");
           }
         } else {
           return res.send("Invalid Password");

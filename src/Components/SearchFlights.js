@@ -226,6 +226,10 @@ function SearchFlights() {
                   Baggage Allowance: <br />
                   {val.baggage + " Bags"}
                 </h3>
+                <h3>
+                  Price: <br />
+                  {val.price + " L.E"}
+                </h3>
               </div>
             </div>
           );
