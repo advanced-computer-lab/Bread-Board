@@ -7,6 +7,7 @@ import SearchFlights from "./Components/SearchFlights";
 import ReserveFlights from "./Components/ReserveFlights";
 import UserHome from "./Components/UserHome";
 import UserReserves from "./Components/UserReserves";
+import GuestHome from "./Components/GuestHome";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/user/home" element={<UserHome />} />
         <Route path="/user/home/reserveFlights" element={<ReserveFlights />} />
         <Route path="/user/home/flights" element={<UserReserves />} />
+        <Route path="/guest/home" element={<GuestHome />} />
       </Routes>
     </Router>
   );
