@@ -20,7 +20,7 @@ const UserReserves = () => {
   if (!flights) return <div>Loading...</div>;
   return (
     <div style={{ padding: "10vh 10vw" }}>
-      <Button variant="outlined" onClick={() => navigate("/user/home")}>
+      <Button variant="outlined" onClick={() => navigate(-1)}>
         Back
       </Button>
       {flights.map(
