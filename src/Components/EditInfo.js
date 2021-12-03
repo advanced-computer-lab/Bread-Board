@@ -18,7 +18,25 @@ function UpdateInfo() {
     navigate(-1);
   };
 
-  const updateInfo = () => {};
+  const updateInfo = () => {
+    if (window.confirm("Are you sure to update your information?")) {
+      var val = {
+        emailOld: window.localStorage.getItem("user"),
+        firstName: firstName,
+        lastName: lastName,
+        passportNumber: passportNumber,
+        email: email,
+      };
+      Object.keys(val).forEach(
+        (k) => !val[k] && val[k] !== undefined && delete val[k]
+      );
+      axios
+        .put("http://localhost:8000/admin/updateInfo", val)
+        .then((result) => {
+          alert("update succesful");
+        });
+    }
+  };
 
   useEffect(() => {
     const listener = (event) => {

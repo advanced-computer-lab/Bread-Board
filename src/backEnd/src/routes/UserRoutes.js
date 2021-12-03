@@ -30,6 +30,8 @@ userRouter.post("/reserve", reservedController.createReserve);
 
 userRouter.get("/userReserve/:user", reservedController.getUserFlights);
 
+userRouter.put("/updateInfo", userController.updateInfo);
+
 userRouter.put(
   "/cancelUserReserve/:reserve",
   reservedController.cancelUserFlight
