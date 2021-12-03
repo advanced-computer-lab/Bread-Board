@@ -3,7 +3,11 @@ const Schema = mongoose.Schema;
 const uniqueValidator = require("mongoose-unique-validator");
 const userSchema = new Schema({
   //string & types
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
     type: String,
     required: true,
   },
@@ -18,6 +22,10 @@ const userSchema = new Schema({
   },
   admin: {
     type: Boolean,
+    required: false,
+  },
+  passportNumber: {
+    type: String,
     required: false,
   },
 });
