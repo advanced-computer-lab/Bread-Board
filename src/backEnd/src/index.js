@@ -19,6 +19,9 @@ app.use(express.json());
 
 // configurations
 // Mongo DB
+const Flight = require("./models/reserveModel");
+const { sendEmail } = require("./Controller/ReserveController");
+
 app.listen(port, () => {
   mongoose
     .connect(
@@ -28,6 +31,8 @@ app.listen(port, () => {
     .then((result) => console.log("MongoDB is now connected"))
     .catch((err) => console.log(err));
   console.log(`server is running on port ${port}`);
+  Flight.find().then(r=>console.log(r))
+  // Flight.updateMany({status:'Active'}).exec()
 });
 
 /*

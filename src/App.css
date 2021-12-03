@@ -612,3 +612,46 @@ body {
 button:hover {
   cursor: pointer;
 }
+
+.seats {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.seat {
+  box-sizing: border-box;
+  width: 20%;
+  margin: 2vh 1vh;
+  height: 100px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 25px;
+}
+
+.seat:hover {
+  background-color: blue!important;
+}
+
+.reserve {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  background-color: grey;
+  border-radius: 20px;
+  padding: 2vh 2vw;
+  margin: 2vh auto;
+  align-items: center;
+}
+
+.reserve div {
+  color: white;
+}
+
+.reserve button {
+  margin: 0 2vh;
+}

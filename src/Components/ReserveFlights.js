@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import "../App.css";
-import { Dialog } from "@material-ui/core";
+import { Button, Dialog } from "@material-ui/core";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
+import Seats from "./Seats";
 
 function ReserveFlights() {
   const navigate = useNavigate();
@@ -51,6 +52,13 @@ function ReserveFlights() {
   const [arrBaggage, setArrBaggage] = useState(null);
   const [arrTripDuration, setArrTripDuration] = useState(null);
   const [arrPrice, setArrPrice] = useState(null);
+
+  const [confirmed, setConfirmed] = useState(false)
+  const [step, setStep] = useState(0)
+  const [depSeats, setDepSeats] = useState([])
+  const [retSeats, setRetSeats] = useState([])
+  const [reservePopup, setReservePopup] = useState(false);
+  const [reserveId, setReserveId] = useState(null)
 
   const home = () => {
     navigate(-1);
@@ -485,6 +493,60 @@ function ReserveFlights() {
               </h3>
             </div>
           </div>
+          <div style={{width:'100%',textAlign:'center'}}>
+          <Button style={{margin:'5vh 0'}} variant="outlined" onClick={()=>setConfirmed(window.confirm(`Are you sure you will reserve this flight?`))}>
+            Reserve Flight
+          </Button>
+          </div>
+          {(confirmed && !reservePopup) && <>
+            <div style={{textAlign:'center'}}>Please Reserve {step === 0 ? 'Departure' : 'Return'} Flight Seats </div>
+          <Seats 
+          flight={{ 
+            id: step === 0 ? depFlightNumber : arrFlightNumber, 
+            seats: step === 0 ? (cabin === 'numberofEconomySeats' ? depEconomySeats : depBusinessSeats) : (cabin === 'numberofEconomySeats' ? arrEconomySeats : arrBusinessSeats), 
+            people: Number(adults) + Number(children) 
+          }}
+          done={(reservedSeats)=> {
+            
+            if (step === 1) {
+              axios.post('http://localhost:8000/admin/reserve', {
+                user: window.localStorage.getItem('user'),
+                departureFlight: depFlightNumber,
+                returnFlight: arrFlightNumber,
+                cabin: cabin === 'numberofEconomySeats' ? 'Economy' : 'Business',
+                departureSeats: depSeats,
+                returnSeats: reservedSeats,
+                price: (Number(adults) + Number(children))  * (depPrice + arrPrice)
+              }).then(res=>setReserveId(res.data._id))
+              setRetSeats(reservedSeats)
+              setOpenPopupSum(false)
+              setReservePopup(true)
+              setStep(0)
+            }
+            else {
+              setDepSeats(reservedSeats)
+              setStep(1)
+            }
+          }}/></>}
+        </DialogContent>
+      </Dialog>
+      <Dialog open={reservePopup} maxWidth="lg">
+        <DialogTitle>
+          <div className="PopupHeaderRes">
+            Reservation Summary
+            <button onClick={() => setReservePopup(false)}>Close</button>
+          </div>
+        </DialogTitle>
+        <DialogContent dividers>
+          <div>Booking number: <span style={{fontWeight:'800'}}>{reserveId}</span></div>
+          <div>Cabin: <span style={{fontWeight:'800'}}>{cabin === 'numberofEconomySeats' ? 'Economy' : 'Business'} Class</span></div>
+          <div>Price: <span style={{fontWeight:'800'}}>{(Number(adults) + Number(children)) * (depPrice + arrPrice)}</span></div>
+          <div>Departure Seats: <span style={{fontWeight:'800'}}>{depSeats.join(' - ')}</span></div>
+          <div>Return Seats: <span style={{fontWeight:'800'}}>{retSeats.join(' - ')}</span></div>
+          <div>Departure Date: <span style={{fontWeight:'800'}}>{depDepartureDate}</span></div>
+          <div>Departure Time: <span style={{fontWeight:'800'}}>{depDepartureTime}</span></div>
+          <div>Return Date: <span style={{fontWeight:'800'}}>{arrArrivalDate}</span></div>
+          <div>Return Time: <span style={{fontWeight:'800'}}>{arrArrivalTime}</span></div>
         </DialogContent>
       </Dialog>
     </div>

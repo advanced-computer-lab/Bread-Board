@@ -6,6 +6,7 @@ import ManageFlights from "./Components/ManageFlights";
 import SearchFlights from "./Components/SearchFlights";
 import ReserveFlights from "./Components/ReserveFlights";
 import UserHome from "./Components/UserHome";
+import UserReserves from "./Components/UserReserves";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/admin/search" element={<SearchFlights />} />
         <Route path="/user/home" element={<UserHome />} />
         <Route path="/user/home/reserveFlights" element={<ReserveFlights />} />
+        <Route path="/user/home/flights" element={<UserReserves />} />
       </Routes>
     </Router>
   );

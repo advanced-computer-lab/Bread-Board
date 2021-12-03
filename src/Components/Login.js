@@ -23,6 +23,7 @@ function Login() {
             navigate("/admin");
           } else if (result.data == "Success User") {
             navigate("/user/home");
+            window.localStorage.setItem('user', email)
           } else {
             alert(result.data);
           }
