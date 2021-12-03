@@ -5,11 +5,7 @@ function UserHome() {
   const navigate = useNavigate();
 
   const reserveFlight = () => {
-    navigate("/user/home/reserveFlights");
-  };
-
-  const editInfo = () => {
-    navigate("/user/home/editInfo");
+    navigate("/guest/home/reserveFlights");
   };
 
   const logout = () => {
@@ -24,13 +20,12 @@ function UserHome() {
         </div>
         <div className="Home">
           <h1>Home</h1>
-          <h2>Welcome User</h2>
+          <h2>Welcome Guest</h2>
         </div>
       </div>
       <div className="App">
         <div className="UserHomeButtons">
           <button onClick={reserveFlight}>Reserve Flights</button>
-          <button onClick={editInfo}>Edit Personal Information</button>
         </div>
       </div>
     </div>

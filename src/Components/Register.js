@@ -6,24 +6,33 @@ import "../App.css";
 function Register() {
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [admin, setAdmin] = useState(false);
+  const [passportNumber, setPassportNumber] = useState("");
 
   const login = () => {
     navigate(-1);
   };
 
   const register = () => {
-    if (name == "" || email == "" || password == "") {
+    if (
+      firstName == "" ||
+      lastName == "" ||
+      email == "" ||
+      password == "" ||
+      passportNumber == ""
+    ) {
       alert("Please fill all fields!!!");
     } else {
       axios
         .post("http://localhost:8000/register", {
-          name: name,
+          firstName: firstName,
+          lastName: lastName,
           email: email,
           password: password,
+          passportNumber: passportNumber,
           admin: false,
         })
         .then((result) => {
@@ -63,12 +72,20 @@ function Register() {
       <div className="App">
         <div className="RegisterInputs">
           <div>
-            Name:
+            First Name:
             <input
               type="text"
-              placeholder="Name..."
+              placeholder="First Name..."
               onChange={(event) => {
-                setName(event.target.value);
+                setFirstName(event.target.value);
+              }}
+            />
+            Last Name:
+            <input
+              type="text"
+              placeholder="Last Name..."
+              onChange={(event) => {
+                setLastName(event.target.value);
               }}
             />
             Email:
@@ -77,6 +94,16 @@ function Register() {
               placeholder="Email..."
               onChange={(event) => {
                 setEmail(event.target.value);
+              }}
+            />
+          </div>
+          <div>
+            Passport Number:
+            <input
+              type="text"
+              placeholder="Passport Number..."
+              onChange={(event) => {
+                setPassportNumber(event.target.value);
               }}
             />
             Password:

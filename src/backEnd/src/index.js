@@ -61,12 +61,15 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-  var { name, email, password, admin } = req.body;
+  var { firstName, lastName, email, password, passportNumber, admin } =
+    req.body;
   const user = new User({
-    name: name,
+    firstName: firstName,
+    lastName: lastName,
     email: email,
     password: password,
     admin: admin,
+    passportNumber: passportNumber,
   });
   user
     .save()

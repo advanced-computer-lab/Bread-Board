@@ -4,8 +4,11 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import ManageFlights from "./Components/ManageFlights";
 import SearchFlights from "./Components/SearchFlights";
-import ReserveFlights from "./Components/ReserveFlights";
 import UserHome from "./Components/UserHome";
+import ReserveFlights from "./Components/ReserveFlights";
+import EditInfo from "./Components/EditInfo";
+import GuestHome from "./Components/GuestHome";
+import ReserveFlightsForGuests from "./Components/ReserveFlightsForGuests";
 
 function App() {
   return (
@@ -17,6 +20,12 @@ function App() {
         <Route path="/admin/search" element={<SearchFlights />} />
         <Route path="/user/home" element={<UserHome />} />
         <Route path="/user/home/reserveFlights" element={<ReserveFlights />} />
+        <Route path="/user/home/editInfo" element={<EditInfo />} />
+        <Route path="/guest/home" element={<GuestHome />} />
+        <Route
+          path="/guest/home/reserveFlights"
+          element={<ReserveFlightsForGuests />}
+        />
       </Routes>
     </Router>
   );
