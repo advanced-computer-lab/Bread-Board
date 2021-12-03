@@ -415,14 +415,6 @@ function ReserveFlights() {
               </h3>
             </div>
             <div className="flightPopup">
-              <h3 id="fliNumber">
-                Economy Seats: <br />
-                {depEconomySeats}
-              </h3>
-              <h3>
-                Business Seats: <br />
-                {depBusinessSeats}
-              </h3>
               <h3>
                 Departure Airport: <br />
                 {depDepartureAirport}
@@ -430,10 +422,6 @@ function ReserveFlights() {
               <h3>
                 Arrival Airport: <br />
                 {depArrivalAirport}
-              </h3>
-              <h3>
-                Baggage Allowance: <br />
-                {depBaggage + " Bags"}
               </h3>
               <h3>
                 Price: <br />
@@ -470,14 +458,6 @@ function ReserveFlights() {
               </h3>
             </div>
             <div className="flightPopup">
-              <h3 id="fliNumber">
-                Economy Seats: <br />
-                {arrEconomySeats}
-              </h3>
-              <h3>
-                Business Seats: <br />
-                {arrBusinessSeats}
-              </h3>
               <h3>
                 Departure Airport: <br />
                 {arrDepartureAirport}
@@ -487,15 +467,13 @@ function ReserveFlights() {
                 {arrArrivalAirport}
               </h3>
               <h3>
-                Baggage Allowance: <br />
-                {arrBaggage + " Bags"}
-              </h3>
-              <h3>
                 Price: <br />
                 {arrPrice + " L.E"}
               </h3>
             </div>
+            <div>Total Price: {depPrice + arrPrice}</div>
           </div>
+          1{" "}
         </DialogContent>
       </Dialog>
     </div>

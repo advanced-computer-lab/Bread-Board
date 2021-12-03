@@ -23,7 +23,7 @@ function Login() {
             navigate("/admin");
           } else if (result.data == "Success User") {
             navigate("/user/home");
-            window.localStorage.setItem('user', email)
+            window.localStorage.setItem("user", email);
           } else {
             alert(result.data);
           }
@@ -36,7 +36,7 @@ function Login() {
   };
 
   const guest = () => {
-    navigate("/guest/home");
+    navigate("/guest/home/reserveFlights");
   };
 
   useEffect(() => {

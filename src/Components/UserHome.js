@@ -13,7 +13,7 @@ function UserHome() {
   };
 
   const logout = () => {
-    navigate(-1);
+    navigate("/");
   };
 
   return (
