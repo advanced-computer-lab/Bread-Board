@@ -30,7 +30,7 @@ exports.cancelUserFlight = async (req, res) => {
   const reserve = await Reserve.findByIdAndUpdate(req.params.reserve);
   reserve.status = "Canceled";
   await reserve.save();
-  this.sendEmail(reserve.user, reserve.price)
+  this.sendEmail(reserve.user, reserve.price);
   res.send(reserve);
 };
 const nodemailer = require("nodemailer");
@@ -42,17 +42,27 @@ exports.sendEmail = async (email, refund) => {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'dinahatem2011@hotmail.com', // generated ethereal user
-      pass: '1h2e3a4d5a', // generated ethereal password
+      user: "dinahatem2011@hotmail.com", // generated ethereal user
+      pass: "1h2e3a4d5a", // generated ethereal password
     },
   });
   // console.log(testAccount.email)
   let info = await transporter.sendMail({
-    from: '"Dina 👻" dinahatem2011@hotmail.com',  // sender address
+    from: '"Dina 👻" dinahatem2011@hotmail.com', // sender address
     to: email, // list of receivers
     subject: "Flight Canceled", // Subject line
     text: "Your flight has been canceled with refund amount of " + refund, // plain text body
   });
   console.log("Message sent: %s", info.messageId);
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+};
+
+exports.updateReservations = async (req, res) => {
+  Reserve.updateMany({ user: req.body.emailOld }, { user: req.body.email })
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 };

@@ -14,6 +14,8 @@ function UpdateInfo() {
   const [passportNumber, setPassportNumber] = useState(null);
   const [email, setEmail] = useState(null);
 
+  const [user, setUser] = useState([]);
+
   const home = () => {
     navigate(-1);
   };
@@ -33,7 +35,23 @@ function UpdateInfo() {
       axios
         .put("http://localhost:8000/admin/updateInfo", val)
         .then((result) => {
-          alert("update succesful");
+          if (result.data == "Error") {
+            alert("Email already exists!!!");
+          } else {
+            if (email != null) {
+              axios.put("http://localhost:8000/admin/updateReservations", {
+                emailOld: window.localStorage.getItem("user"),
+                email: email,
+              });
+              window.localStorage.setItem("user", email);
+            }
+            user.firstName = firstName != null ? firstName : user.firstName;
+            user.lastName = lastName != null ? lastName : user.lastName;
+            user.passportNumber =
+              passportNumber != null ? passportNumber : user.passportNumber;
+            user.email = email != null ? email : user.email;
+            alert("Updated Succesfully");
+          }
         });
     }
   };
@@ -42,6 +60,7 @@ function UpdateInfo() {
     const listener = (event) => {
       if (event.code === "Enter") {
         event.preventDefault();
+        updateInfo();
       }
       if (event.code === "Escape") {
         event.preventDefault();
@@ -52,6 +71,19 @@ function UpdateInfo() {
     return () => {
       document.removeEventListener("keydown", listener);
     };
+  });
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:8000/admin/getUser", {
+        email: window.localStorage.getItem("user"),
+      })
+      .then((result) => {
+        setUser(result.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 
   return (
@@ -107,7 +139,30 @@ function UpdateInfo() {
           <button onClick={updateInfo}>Update</button>
         </div>
       </div>
-      <div className="listOfFlights"></div>
+      <div className="listOfFlights">
+        <div className="flightSearch">
+          <div className="flight">
+            <h3>
+              First Name:
+              {" " + user.firstName}
+            </h3>
+            <h3>
+              Last Name:
+              {" " + user.lastName}
+            </h3>
+          </div>
+          <div className="flight">
+            <h3>
+              Passport Number:
+              {" " + user.passportNumber}
+            </h3>
+            <h3>
+              Email:
+              {" " + user.email}
+            </h3>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
