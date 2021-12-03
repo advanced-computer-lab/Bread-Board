@@ -8,6 +8,10 @@ function UserHome() {
     navigate("/user/home/reserveFlights");
   };
 
+  const editInfo = () => {
+    navigate("/user/home/editInfo");
+  };
+
   const logout = () => {
     navigate(-1);
   };
@@ -26,6 +30,7 @@ function UserHome() {
       <div className="App">
         <div className="UserHomeButtons">
           <button onClick={reserveFlight}>Reserve Flights</button>
+          <button onClick={editInfo}>Edit Personal Information</button>
         </div>
       </div>
     </div>
