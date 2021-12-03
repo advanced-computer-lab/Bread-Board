@@ -31,9 +31,9 @@ function UserHome() {
         <div className="UserHomeButtons">
           <button onClick={reserveFlight}>Reserve Flights</button>
           <button onClick={editInfo}>Edit Personal Information</button>
-        </div>
-        <div className="UserHomeButtons">
-          <button onClick={()=>navigate('/user/home/flights')}>My Flights</button>
+          <button onClick={() => navigate("/user/home/flights")}>
+            My Flights
+          </button>
         </div>
       </div>
     </div>
