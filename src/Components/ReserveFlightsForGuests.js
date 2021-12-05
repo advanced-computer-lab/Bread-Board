@@ -9,8 +9,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 function ReserveFlights() {
   const navigate = useNavigate();
 
-  const [adults, setAdults] = useState(null);
-  const [children, setChildren] = useState(null);
+  const [adults, setAdults] = useState(0);
+  const [children, setChildren] = useState(0);
   const [departureAirport, setDepartureAirport] = useState(null);
   const [arrivalAirport, setArrivalAirport] = useState(null);
   const [departureDate, setDepartureDate] = useState(null);
@@ -471,7 +471,11 @@ function ReserveFlights() {
                 {arrPrice + " L.E"}
               </h3>
             </div>
-            <div>Total Price: {depPrice + arrPrice}</div>
+            <div>
+              Total Price:{" "}
+              {(Number(children) + Number(adults)) *
+                Number(depPrice + arrPrice)}
+            </div>
           </div>
           1{" "}
         </DialogContent>
