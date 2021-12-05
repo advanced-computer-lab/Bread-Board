@@ -395,7 +395,14 @@ function ReserveFlights() {
         <DialogTitle>
           <div className="PopupHeaderRes">
             Ticket Summary
-            <button onClick={() => setOpenPopupSum(false)}>Close</button>
+            <button
+              onClick={() => {
+                setOpenPopupSum(false);
+                setConfirmed(false);
+              }}
+            >
+              Close
+            </button>
           </div>
         </DialogTitle>
         <DialogContent dividers>
