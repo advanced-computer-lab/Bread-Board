@@ -143,9 +143,9 @@ function CreateFlight() {
             alert("Flight number must be positive!!!");
           } else if (priceU != null && priceU <= 0) {
             alert("Price number must be positive!!!");
-          } else if (economySeatsU <= 0) {
+          } else if (economySeatsU != null && economySeatsU <= 0) {
             alert("Ecnonomy seats must be more than 0 !!!");
-          } else if (businessSeatsU <= 0) {
+          } else if (businessSeatsU != null && businessSeatsU <= 0) {
             alert("Business seats number cannot be more than 0 !!!");
           } else if (baggageU != null && baggageU <= 0) {
             alert("Baggage number must be positive!!!");
