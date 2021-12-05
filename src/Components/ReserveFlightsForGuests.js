@@ -477,7 +477,6 @@ function ReserveFlights() {
                 Number(depPrice + arrPrice)}
             </div>
           </div>
-          1{" "}
         </DialogContent>
       </Dialog>
     </div>
