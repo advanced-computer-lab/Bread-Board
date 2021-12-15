@@ -7,6 +7,8 @@ const app = express();
 const port = 8000;
 const User = require("./models/userModel");
 
+const jwt = require("jsonwebtoken");
+
 app.use(cors());
 app.use(express.json());
 
@@ -25,6 +27,19 @@ app.listen(port, () => {
   Flight.find().then((r) => console.log(r));
 });
 
+app.get("/login2/:email/:password", (req, res) => {
+  const user = { email: req.params.email, pass: req.params.password };
+
+  const token = jwt.sign(user, "mohamed", { expiresIn: "15s" });
+  res.send(token);
+});
+
+app.get("/who/:token", (req, res) => {
+  const token = req.params.token;
+
+  const userEmail = jwt.verify(token, "mohamed");
+  res.send(userEmail);
+});
 app.get("/Home", (req, res) => {
   res.status(200).send("Welcome to BreadBoard!");
 });
