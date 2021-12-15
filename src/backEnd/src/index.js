@@ -1,13 +1,8 @@
-// External variables
 const express = require("express");
 const mongoose = require("mongoose");
-//const { getMaxListeners } = require("./models/User");
-// THIS IS WRONG NEVER DO THAT !! Only for the task we put the DB Link here!! NEVER DO THAAAT AGAIN !!
-//const MongoURI = 'mongodb+srv://alaa:1234@cluster0.6ulyk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' ;
 const userRouter = require("./routes/UserRoutes");
 const cors = require("cors");
 
-//App variables
 const app = express();
 const port = 8000;
 const User = require("./models/userModel");
@@ -15,10 +10,6 @@ const User = require("./models/userModel");
 app.use(cors());
 app.use(express.json());
 
-// #Importing the userController
-
-// configurations
-// Mongo DB
 const Flight = require("./models/reserveModel");
 const { sendEmail } = require("./Controller/ReserveController");
 
@@ -31,13 +22,9 @@ app.listen(port, () => {
     .then((result) => console.log("MongoDB is now connected"))
     .catch((err) => console.log(err));
   console.log(`server is running on port ${port}`);
-  Flight.find().then(r=>console.log(r))
-  // Flight.updateMany({status:'Active'}).exec()
+  Flight.find().then((r) => console.log(r));
 });
 
-/*
-                                                    Start of your code
-*/
 app.get("/Home", (req, res) => {
   res.status(200).send("Welcome to BreadBoard!");
 });
