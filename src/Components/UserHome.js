@@ -14,6 +14,7 @@ function UserHome() {
 
   const logout = () => {
     navigate(-1);
+    window.localStorage.removeItem("user");
   };
 
   return (
