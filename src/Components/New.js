@@ -20,6 +20,11 @@ import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+
 const useStyles = makeStyles({
   root: {
     background: "linear-gradient(45deg, #FE6888, #FF8E53)",
@@ -38,19 +43,26 @@ const theme = createMuiTheme({
       marginTop: 15,
     },
   },
-  palette: {
-    primary: {
-      main: orange[400],
-    },
-    secondary: {
-      main: green[400],
-    },
-  },
+  // palette: {
+  //   primary: {
+  //     main: orange[400],
+  //   },
+  //   secondary: {
+  //     main: green[400],
+  //   },
+  // },
 });
 
 function ButtonStyled() {
   const classes = useStyles();
-  return <Button className={classes.root}>Test Styled Button</Button>;
+  return (
+    <Button
+      className={classes.root}
+      style={{ marginLeft: 1100, marginBottom: 15 }}
+    >
+      Login
+    </Button>
+  );
 }
 
 function Register() {
@@ -112,7 +124,16 @@ function Register() {
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="sm">
-        <div>
+        <AppBar color="secondary">
+          <Toolbar>
+            <IconButton>
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6">MUI Themeing</Typography>
+            <ButtonStyled />
+          </Toolbar>
+        </AppBar>
+        <div style={{ marginTop: 55 }}>
           <div className="HeaderContainer">
             <div className="HeaderButton">
               <button onClick={login}>Login</button>
@@ -179,15 +200,15 @@ function Register() {
                 Register
               </Button>
               {/* <button onClick={register}>Register</button> */}
-              <ButtonStyled />
+              {/* <ButtonStyled /> */}
               <Grid container spacing={2} justify="center">
-                <Grid item xs={2} md={6}>
+                <Grid item xs={2} md={3}>
                   <Paper style={{ height: 75, width: "100%", marginTop: 15 }} />
                 </Grid>
-                <Grid item xs={2} md={6}>
+                <Grid item xs={2} md={3}>
                   <Paper style={{ height: 75, width: "100%", marginTop: 15 }} />
                 </Grid>
-                <Grid item xs={2} md={6}>
+                <Grid item xs={2} md={3}>
                   <Paper style={{ height: 75, width: "100%", marginTop: 15 }} />
                 </Grid>
               </Grid>
