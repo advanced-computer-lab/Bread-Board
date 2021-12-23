@@ -1,7 +1,5 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./Components/Login";
-import Register from "./Components/Register";
 import ManageFlights from "./Components/ManageFlights";
 import SearchFlights from "./Components/SearchFlights";
 import ReserveFlights from "./Components/ReserveFlights";
@@ -11,15 +9,15 @@ import ReserveFlightsForGuests from "./Components/ReserveFlightsForGuests";
 import EditInfo from "./Components/EditInfo";
 import EditPassword from "./Components/EditPassword";
 import New from "./Components/New";
-import Sign from "./Components/Sign";
-import Signuppp from "./Components/signuppp";
+import SignIn from "./Components/SignIn";
+import SignUp from "./Components/SignUp";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Sign />} />
-        <Route path="/register" element={<Signuppp />} />
+        <Route path="/" element={<SignIn />} />
+        <Route path="/register" element={<SignUp />} />
         <Route path="/admin" element={<ManageFlights />} />
         <Route path="/admin/search" element={<SearchFlights />} />
         <Route path="/user/home" element={<UserHome />} />
