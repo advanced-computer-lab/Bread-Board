@@ -68,8 +68,19 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-  var { firstName, lastName, email, password, passportNumber, admin } =
-    req.body;
+  var {
+    firstName,
+    lastName,
+    email,
+    password,
+    passportNumber,
+    admin,
+    homeAddress,
+    countryCode,
+    telephoneNumber,
+    secondTelephoneNumber,
+    userName,
+  } = req.body;
   const user = new User({
     firstName: firstName,
     lastName: lastName,
@@ -77,6 +88,11 @@ app.post("/register", (req, res) => {
     password: password,
     admin: admin,
     passportNumber: passportNumber,
+    homeAddress: homeAddress,
+    countryCode: countryCode,
+    telephoneNumber: telephoneNumber,
+    secondTelephoneNumber: secondTelephoneNumber,
+    userName: userName,
   });
   user
     .save()

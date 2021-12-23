@@ -32,6 +32,8 @@ userRouter.get("/userReserve/:user", reservedController.getUserFlights);
 
 userRouter.put("/updateInfo", userController.updateInfo);
 
+userRouter.put("/updatePassword", userController.updatePassword);
+
 userRouter.post("/getUser", userController.getUser);
 
 userRouter.put("/updateReservations", reservedController.updateReservations);

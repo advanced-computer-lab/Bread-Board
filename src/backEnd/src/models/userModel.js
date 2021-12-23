@@ -26,7 +26,27 @@ const userSchema = new Schema({
   },
   passportNumber: {
     type: String,
-    required: false,
+    required: true,
+  },
+  homeAddress: {
+    type: String,
+    required: true,
+  },
+  countryCode: {
+    type: Number,
+    required: true,
+  },
+  telephoneNumber: {
+    type: Number,
+    required: true,
+  },
+  secondTelephoneNumber: {
+    type: Number,
+    required: true,
+  },
+  userName: {
+    type: String,
+    required: true,
   },
 });
 userSchema.plugin(uniqueValidator, { message: "Email already exists" });

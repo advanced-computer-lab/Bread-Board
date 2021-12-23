@@ -344,6 +344,7 @@ body {
 }
 
 .HeaderContainer {
+  width: 100%;
   display: flex;
   flex-direction: row;
 }
@@ -364,6 +365,28 @@ body {
   border-radius: 10px;
   font-size: 20px;
   border: 1px solid black;
+}
+
+.HeaderButtonInfo {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.HeaderButtonInfo button {
+  border: none;
+  width: 150px;
+  height: 70px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+}
+
+#passwordB {
+  margin-left: 314px;
 }
 
 .DelHeaderButton {
@@ -625,8 +648,17 @@ body {
   color: white;
 }
 
+.EditPassword {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 420px;
+  margin-bottom: 30px;
+  color: white;
+}
+
 .Infoinputs {
-  height: 250px;
+  height: 300px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -660,6 +692,36 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.Passwordinputs {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(207, 207, 207);
+}
+
+.Passwordinputs input {
+  width: 200px;
+  height: 25px;
+  font-size: 15px;
+  margin: 20px;
+  padding-left: 10px;
+}
+
+.Passwordinputs button {
+  border: none;
+  width: 150px;
+  height: 70px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin-top: 15px;
 }
 
 #chooseB {

@@ -273,33 +273,31 @@ function ReserveFlights() {
         {listOfFlights.map((val) => {
           return (
             <div className="flightContainerRes">
-              <div>
-                <div className="flightRes">
-                  <h3 id="fliNumber">
-                    Flight Number: <br />
-                    {val.flightNumber}
-                  </h3>
-                  <h3>
-                    Departure Time: <br />
-                    {val.departureTime}
-                  </h3>
-                  <h3>
-                    Arrival Time: <br />
-                    {val.arrivalTime}
-                  </h3>
-                  <h3>
-                    Trip Duration: <br />
-                    {val.tripDuration + " Hours"}
-                  </h3>
-                  <h3>
-                    Baggage Allowance: <br />
-                    {val.baggage + " Bags"}
-                  </h3>
-                  <h3>
-                    Price: <br />
-                    {val.price + " L.E"}
-                  </h3>
-                </div>
+              <div className="flightRes">
+                <h3 id="fliNumber">
+                  Flight Number: <br />
+                  {val.flightNumber}
+                </h3>
+                <h3>
+                  Departure Time: <br />
+                  {val.departureTime}
+                </h3>
+                <h3>
+                  Arrival Time: <br />
+                  {val.arrivalTime}
+                </h3>
+                <h3>
+                  Trip Duration: <br />
+                  {val.tripDuration + " Hours"}
+                </h3>
+                <h3>
+                  Baggage Allowance: <br />
+                  {val.baggage + " Bags"}
+                </h3>
+                <h3>
+                  Price: <br />
+                  {val.price + " L.E"}
+                </h3>
               </div>
               <button
                 onClick={() => {

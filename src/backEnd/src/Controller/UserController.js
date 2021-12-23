@@ -15,6 +15,19 @@ const updateInfo = (req, res) => {
     });
 };
 
+const updatePassword = (req, res) => {
+  User.updateOne(
+    { email: req.body.email, password: req.body.oldPassword },
+    req.body
+  )
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send("Error");
+    });
+};
+
 const getUser = (req, res) => {
   User.findOne(req.body, (err, result) => {
     if (err) {
@@ -29,4 +42,5 @@ module.exports = {
   home,
   updateInfo,
   getUser,
+  updatePassword,
 };
