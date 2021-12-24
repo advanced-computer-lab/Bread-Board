@@ -37,6 +37,17 @@ function UserReserves() {
     }
   };
 
+  const emailme = (id) => {
+    if (window.confirm("Are you sure you want to receive an email about this reservation?")) {
+      axios
+        .post(API_URL + "/emailmeUserReserve/" + id)
+        .then((res) => {
+          fetch(user);
+        })
+        .catch((err) => alert(err));
+    }
+  };
+
   useEffect(() => {
     fetch(user);
   }, [user]);
@@ -88,6 +99,13 @@ function UserReserves() {
               }}
             >
               Cancel
+            </button>
+            <button
+              onClick={() => {
+                emailme(val._id);
+              }}
+            >
+              Email Me
             </button>
             <button
               id="chooseB"

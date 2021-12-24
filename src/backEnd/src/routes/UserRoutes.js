@@ -42,6 +42,10 @@ userRouter.put(
   "/cancelUserReserve/:reserve",
   reservedController.cancelUserFlight
 );
+userRouter.post(
+  "/emailmeUserReserve/:reserve",
+  reservedController.emailmeUserFlight
+);
 
 userRouter.post("/forgotPassword", userController.forgotPassword);
 
