@@ -8,9 +8,11 @@ import UserReserves from "./Components/UserReserves";
 import ReserveFlightsForGuests from "./Components/ReserveFlightsForGuests";
 import EditInfo from "./Components/EditInfo";
 import EditPassword from "./Components/EditPassword";
+import ForgotPassword from "./Components/ForgotPassword";
 import New from "./Components/New";
 import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
         <Route path="/user/home/flights" element={<UserReserves />} />
         <Route path="/user/home/editInfo" element={<EditInfo />} />
         <Route path="/user/home/editPassword" element={<EditPassword />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route
           path="/guest/home/reserveFlights"
           element={<ReserveFlightsForGuests />}
