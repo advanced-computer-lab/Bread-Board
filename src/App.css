@@ -6,6 +6,7 @@
 body {
   margin: 0;
   padding: 0;
+  background-image: url("img/airplane.jpg");
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -365,6 +366,12 @@ body {
   border-radius: 10px;
   font-size: 20px;
   border: 1px solid black;
+  transition-duration: 0.4s;
+}
+
+.HeaderButton button:hover{
+    background-color: #6da7c2; 
+    color: white;
 }
 
 .HeaderButtonInfo {
@@ -551,6 +558,10 @@ body {
   margin: 10px;
 }
 
+.UserHomeButtons button:hover{
+  background-color: #6da7c2; 
+  color: white;
+}
 .cabinButtons {
   margin-left: -300px;
   height: 60px;
