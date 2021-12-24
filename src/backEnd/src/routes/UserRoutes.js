@@ -43,4 +43,8 @@ userRouter.put(
   reservedController.cancelUserFlight
 );
 
+userRouter.post("/forgotPassword", userController.forgotPassword);
+
+userRouter.post("/sendEmail", userController.sendEmail);
+
 module.exports = userRouter;
