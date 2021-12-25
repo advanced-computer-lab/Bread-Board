@@ -2,25 +2,28 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRouter = require("./routes/UserRoutes");
 const cors = require("cors");
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
+const bodyParser = require("body-parser");
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT;
 const User = require("./models/userModel");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 const jwt = require("jsonwebtoken");
 
 app.use(cors());
 app.use(express.json());
 
-const Flight = require("./models/reserveModel");
-const { sendEmail } = require("./Controller/ReserveController");
-
 app.listen(port, () => {
   mongoose
-    .connect(
-      "mongodb+srv://admin:admin123@cluster0.ghf1n.mongodb.net/Project?retryWrites=true&w=majority",
-      { useNewUrlParser: true, useUnifiedTopology: true }
-    )
+    .connect(process.env.MONGODB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
     .then((result) => console.log("MongoDB is now connected"))
     .catch((err) => console.log(err));
   console.log(`server is running on port ${port}`);
@@ -41,6 +44,30 @@ app.get("/who/:token", (req, res) => {
 });
 app.get("/Home", (req, res) => {
   res.status(200).send("Welcome to BreadBoard!");
+});
+
+app.post("/payment", cors(), async (req, res) => {
+  let { amount, id } = req.body;
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount,
+      currency: "USD",
+      description: "Jets R Us",
+      payment_method: id,
+      confirm: true,
+    });
+    console.log("Payment", payment);
+    res.json({
+      message: "Payment successful",
+      success: true,
+    });
+  } catch (error) {
+    console.log("Error", error);
+    res.json({
+      message: "Payment failed",
+      success: false,
+    });
+  }
 });
 
 app.post("/login", (req, res) => {

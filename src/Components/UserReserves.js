@@ -7,6 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import Seats from "./Seats";
 
+import StripeContainer from "./StripeContainer";
+
 function UserReserves() {
   const navigate = useNavigate();
 
@@ -53,6 +55,7 @@ function UserReserves() {
   const [openPopupSeats, setOpenPopupSeats] = useState(false);
   const [openPopupFlight, setOpenPopupFlight] = useState(false);
   const [openPopupMore, setOpenPopupMore] = useState(false);
+  const [openPopupPay, setOpenPopupPay] = useState(false);
 
   const [seatNo, setSeatNo] = useState(null);
   const [cabin, setCabin] = useState(null);
@@ -208,7 +211,7 @@ function UserReserves() {
                 (priceDifference - priceTotal)
             )
           ) {
-            setConfirmed(true);
+            setOpenPopupPay(true);
           }
         });
 
@@ -842,6 +845,24 @@ function UserReserves() {
               );
             }
           })}
+        </DialogContent>
+      </Dialog>
+      <Dialog open={openPopupPay} maxWidth="lg">
+        <DialogTitle>
+          <div className="PopupHeaderRes">
+            Pay
+            <button
+              onClick={() => {
+                setOpenPopupPay(false);
+                setConfirmed(true);
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </DialogTitle>
+        <DialogContent dividers>
+          <StripeContainer amount={1000} />
         </DialogContent>
       </Dialog>
     </div>

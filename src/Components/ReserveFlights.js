@@ -7,6 +7,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import Seats from "./Seats";
 
+import StripeContainer from "./StripeContainer";
+
 function ReserveFlights() {
   const navigate = useNavigate();
 
@@ -24,6 +26,7 @@ function ReserveFlights() {
 
   const [openPopupMore, setOpenPopupMore] = useState(false);
   const [openPopupSum, setOpenPopupSum] = useState(false);
+  const [openPopupPay, setOpenPopupPay] = useState(false);
 
   const [flightID, setFlightID] = useState(null);
 
@@ -499,11 +502,9 @@ function ReserveFlights() {
             <Button
               style={{ margin: "5vh 0" }}
               variant="outlined"
-              onClick={() =>
-                setConfirmed(
-                  window.confirm(`Are you sure you will reserve this flight?`)
-                )
-              }
+              onClick={() => {
+                setOpenPopupPay(true);
+              }}
             >
               Reserve Flight
             </Button>
@@ -611,6 +612,24 @@ function ReserveFlights() {
             Return Time:{" "}
             <span style={{ fontWeight: "800" }}>{arrArrivalTime}</span>
           </div>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={openPopupPay} maxWidth="lg">
+        <DialogTitle>
+          <div className="PopupHeaderRes">
+            Pay
+            <button
+              onClick={() => {
+                setOpenPopupPay(false);
+                setConfirmed(true);
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </DialogTitle>
+        <DialogContent dividers>
+          <StripeContainer amount={1000} />
         </DialogContent>
       </Dialog>
     </div>
