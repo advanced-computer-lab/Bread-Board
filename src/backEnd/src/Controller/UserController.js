@@ -28,8 +28,6 @@ const updatePassword = (req, res) => {
     });
 };
 
-
-
 const getUser = (req, res) => {
   User.findOne(req.body, (err, result) => {
     if (err) {
@@ -39,8 +37,6 @@ const getUser = (req, res) => {
     }
   });
 };
-
-
 
 const forgotPassword = async (req, res) => {
   User.findOne(req.body, (err, result) => {
@@ -72,13 +68,12 @@ const sendEmail = async (req, res) => {
     from: '"Dina 👻" dinahatem2011@hotmail.com', // sender address
     to: email, // list of receivers
     subject: "Change Your Password", // Subject line
-    text: "Your password is "+ password, 
+    text: "Your password is " + password,
   });
   console.log("Message sent: %s", info.messageId);
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  res.send("Email sent Successfully!!!");
 };
-
-
 
 module.exports = {
   home,
