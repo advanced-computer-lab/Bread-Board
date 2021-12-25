@@ -147,6 +147,26 @@ const updateReserveSeats = async (req, res) => {
     });
 };
 
+const priceOfReservation = async (req, res) => {
+  Reserve.findOne({ _id: req.body._id })
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
+const updateReserveFlights = async (req, res) => {
+  Reserve.updateOne({ _id: req.body._id }, req.body)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
 module.exports = {
   updateReserveSeats,
   updateReservations,
@@ -155,4 +175,6 @@ module.exports = {
   getFlightReserved,
   createReserve,
   emailmeUserFlight,
+  priceOfReservation,
+  updateReserveFlights,
 };

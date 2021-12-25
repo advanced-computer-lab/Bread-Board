@@ -90,6 +90,25 @@ const departureFlights = (req, res) => {
     .gt(Number(req.body.children) + Number(req.body.adults) - 1);
 };
 
+const flightsChange = (req, res) => {
+  Flight.find(
+    {
+      departureAirport: req.body.departureAirport,
+      arrivalAirport: req.body.arrivalAirport,
+      departureDate: req.body.departureDate,
+    },
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    }
+  )
+    .where(req.body.cabin)
+    .gt(Number(req.body.number) - 1);
+};
+
 const returnFlights = (req, res) => {
   Flight.find(
     {
@@ -118,4 +137,5 @@ module.exports = {
   searchFlightOne,
   departureFlights,
   returnFlights,
+  flightsChange,
 };

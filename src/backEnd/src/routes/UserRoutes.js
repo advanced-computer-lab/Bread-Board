@@ -22,6 +22,8 @@ userRouter.get("/showFlight", flightController.showFlight);
 
 userRouter.post("/departureFlights", flightController.departureFlights);
 
+userRouter.post("/flightsChange", flightController.flightsChange);
+
 userRouter.post("/returnFlights", flightController.returnFlights);
 
 userRouter.get("/reserve/:flight/:cabin", reservedController.getFlightReserved);
@@ -29,6 +31,11 @@ userRouter.get("/reserve/:flight/:cabin", reservedController.getFlightReserved);
 userRouter.post("/reserve", reservedController.createReserve);
 
 userRouter.put("/reserveUpdateSeats", reservedController.updateReserveSeats);
+
+userRouter.put(
+  "/updateReserveFlights",
+  reservedController.updateReserveFlights
+);
 
 userRouter.get("/userReserve/:user", reservedController.getUserFlights);
 
@@ -53,5 +60,7 @@ userRouter.post(
 userRouter.post("/forgotPassword", userController.forgotPassword);
 
 userRouter.post("/sendEmail", userController.sendEmail);
+
+userRouter.post("/priceOfReservation", reservedController.priceOfReservation);
 
 module.exports = userRouter;

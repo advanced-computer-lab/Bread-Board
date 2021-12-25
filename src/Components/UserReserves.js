@@ -15,6 +15,9 @@ function UserReserves() {
   const [openPopupRet, setOpenPopupRet] = useState(false);
   const [resID, setResID] = useState(null);
 
+  const [listOfFlights, setListOfFlights] = useState([]);
+  const [flightID, setFlightID] = useState(null);
+
   const [depFlightNumber, setDepFlightNumber] = useState(null);
   const [depDepartureTime, setDepDepartureTime] = useState(null);
   const [depArrivalTime, setDepArrivalTime] = useState(null);
@@ -41,12 +44,20 @@ function UserReserves() {
   const [arrPrice, setArrPrice] = useState(null);
   const [arrBusinessSeats, setArrBusinessSeats] = useState(null);
 
+  const [newFlightNumber, setNewFlightNumber] = useState(null);
+  const [newEconomySeats, setNewEconomySeats] = useState(null);
+  const [newBusinessSeats, setNewBusinessSeats] = useState(null);
+  const [newPrice, setNewPrice] = useState(null);
+  const [newTotalPrice, setNewTotalPrice] = useState(null);
+
   const [openPopupSeats, setOpenPopupSeats] = useState(false);
   const [openPopupFlight, setOpenPopupFlight] = useState(false);
+  const [openPopupMore, setOpenPopupMore] = useState(false);
 
   const [seatNo, setSeatNo] = useState(null);
   const [cabin, setCabin] = useState(null);
   const [confirmed, setConfirmed] = useState(false);
+  const [confirmedPrice, setConfirmedPrice] = useState(false);
   const [step, setStep] = useState(0);
   const [depSeats, setDepSeats] = useState([]);
   const [retSeats, setRetSeats] = useState([]);
@@ -141,6 +152,67 @@ function UserReserves() {
           fetch(user);
         })
         .catch((err) => alert(err));
+    }
+  };
+
+  const searchFlight = () => {
+    var val = {
+      departureAirport: step === 0 ? depDepartureAirport : arrDepartureAirport,
+      arrivalAirport: step === 0 ? depArrivalAirport : arrArrivalAirport,
+      departureDate: step === 0 ? depDepartureDate : arrDepartureDate,
+      cabin:
+        cabin === "Economy" ? "numberofEconomySeats" : "numberofBusinessSeats",
+      number: seatNo.length,
+    };
+    axios
+      .post("http://localhost:8000/admin/flightsChange", val)
+      .then((result) => {
+        if (result.data.length == 1) {
+          alert("There are no other flights in the same date!!");
+        } else {
+          setListOfFlights(
+            result.data.filter((val) => {
+              return (
+                val.flightNumber !=
+                (step === 0 ? depFlightNumber : arrFlightNumber)
+              );
+            })
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const chooseFlight = (val) => {
+    if (window.confirm("Are you sure you want to change flights?")) {
+      setNewFlightNumber(val.flightNumber);
+      setNewEconomySeats(val.numberofEconomySeats);
+      setNewBusinessSeats(val.numberofBusinessSeats);
+      setNewPrice(val.price);
+
+      axios
+        .post("http://localhost:8000/admin/priceOfReservation", { _id: resID })
+        .then((result) => {
+          var priceTotal = result.data.price;
+          var priceDifference =
+            priceTotal - (step === 0 ? depPrice : arrPrice) * seatNo.length;
+          priceDifference = priceDifference + val.price * seatNo.length;
+          setNewTotalPrice(priceDifference);
+          if (
+            window.confirm(
+              "The new price would be " +
+                priceDifference +
+                ". Would you like to continue with a difference of " +
+                (priceDifference - priceTotal)
+            )
+          ) {
+            setConfirmed(true);
+          }
+        });
+
+      setConfirmedPrice(true);
     }
   };
 
@@ -340,7 +412,8 @@ function UserReserves() {
               </button>
               <button
                 onClick={() => {
-                  // updFlight(upID);
+                  searchFlight();
+                  setOpenPopupFlight(true);
                 }}
               >
                 Change Flight
@@ -433,7 +506,8 @@ function UserReserves() {
               </button>
               <button
                 onClick={() => {
-                  // updFlight(upID);
+                  searchFlight();
+                  setOpenPopupFlight(true);
                 }}
               >
                 Change Flight
@@ -449,6 +523,7 @@ function UserReserves() {
             <button
               onClick={() => {
                 setOpenPopupSeats(false);
+                setConfirmed(false);
               }}
             >
               Close
@@ -542,10 +617,13 @@ function UserReserves() {
       <Dialog open={openPopupFlight} maxWidth="lg">
         <DialogTitle>
           <div className="PopupHeaderRes">
-            Change Seats
+            Choose {step === 0 ? "Departure" : "Return"} Flight
             <button
               onClick={() => {
                 setOpenPopupFlight(false);
+                setListOfFlights([]);
+                setConfirmedPrice(false);
+                setConfirmed(false);
               }}
             >
               Close
@@ -553,6 +631,56 @@ function UserReserves() {
           </div>
         </DialogTitle>
         <DialogContent dividers>
+          <div className="listOfFlights">
+            {listOfFlights.map((val) => {
+              return (
+                <div className="flightContainerRes">
+                  <div className="flightRes">
+                    <h3 id="fliNumber">
+                      Flight Number: <br />
+                      {val.flightNumber}
+                    </h3>
+                    <h3>
+                      Departure Time: <br />
+                      {val.departureTime}
+                    </h3>
+                    <h3>
+                      Arrival Time: <br />
+                      {val.arrivalTime}
+                    </h3>
+                    <h3>
+                      Trip Duration: <br />
+                      {val.tripDuration + " Hours"}
+                    </h3>
+                    <h3>
+                      Baggage Allowance: <br />
+                      {val.baggage + " Bags"}
+                    </h3>
+                    <h3>
+                      Price: <br />
+                      {val.price + " L.E"}
+                    </h3>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setFlightID(val._id);
+                      setOpenPopupMore(true);
+                    }}
+                  >
+                    More Info
+                  </button>
+                  <button
+                    id="chooseB"
+                    onClick={() => {
+                      chooseFlight(val);
+                    }}
+                  >
+                    Choose
+                  </button>
+                </div>
+              );
+            })}
+          </div>
           {confirmed && (
             <>
               <div style={{ textAlign: "center" }}>
@@ -560,42 +688,44 @@ function UserReserves() {
               </div>
               <Seats
                 flight={{
-                  id: step === 0 ? depFlightNumber : arrFlightNumber,
+                  id: newFlightNumber,
                   seats:
-                    step === 0
-                      ? cabin === "Economy"
-                        ? depEconomySeats
-                        : depBusinessSeats
-                      : cabin === "Economy"
-                      ? arrEconomySeats
-                      : arrBusinessSeats,
+                    cabin === "Economy" ? newEconomySeats : newBusinessSeats,
                   people: seatNo.length,
                   cabin: cabin,
                 }}
                 done={(reservedSeats) => {
                   if (step === 0) {
                     axios
-                      .put("http://localhost:8000/admin/reserveUpdateSeats", {
+                      .put("http://localhost:8000/admin/updateReserveFlights", {
                         _id: resID,
+                        departureFlight: newFlightNumber,
                         departureSeats: reservedSeats,
+                        departurePrice: newPrice,
+                        price: newTotalPrice,
                       })
                       .then((res) => setReserveId(res.data._id));
                     setDepSeats(reservedSeats);
-                    setOpenPopupSeats(false);
+                    setOpenPopupFlight(false);
+                    setListOfFlights([]);
+                    setConfirmedPrice(false);
+                    setConfirmed(false);
+                    setOpenPopupDep(false);
+                    setOpenPopupRet(false);
                     setFlights(
                       flights.map((val) => {
                         return val._id == resID
                           ? {
                               _id: val._id,
                               user: val.user,
-                              departureFlight: val.departureFlight,
+                              departureFlight: newFlightNumber,
                               returnFlight: val.returnFlight,
                               cabin: val.cabin,
                               departureSeats: reservedSeats,
                               returnSeats: val.returnSeats,
-                              price: val.price,
+                              price: newTotalPrice,
                               status: val.status,
-                              departurePrice: val.departurePrice,
+                              departurePrice: newPrice,
                               returnPrice: val.returnPrice,
                             }
                           : val;
@@ -603,13 +733,21 @@ function UserReserves() {
                     );
                   } else {
                     axios
-                      .put("http://localhost:8000/admin/reserveUpdateSeats", {
+                      .put("http://localhost:8000/admin/updateReserveFlights", {
                         _id: resID,
+                        returnFlight: newFlightNumber,
                         returnSeats: reservedSeats,
+                        returnPrice: newPrice,
+                        price: newTotalPrice,
                       })
                       .then((res) => setReserveId(res.data._id));
-                    setRetSeats(reservedSeats);
-                    setOpenPopupSeats(false);
+                    setDepSeats(reservedSeats);
+                    setOpenPopupFlight(false);
+                    setListOfFlights([]);
+                    setConfirmedPrice(false);
+                    setConfirmed(false);
+                    setOpenPopupDep(false);
+                    setOpenPopupRet(false);
                     setFlights(
                       flights.map((val) => {
                         return val._id == resID
@@ -617,14 +755,14 @@ function UserReserves() {
                               _id: val._id,
                               user: val.user,
                               departureFlight: val.departureFlight,
-                              returnFlight: val.returnFlight,
+                              returnFlight: newFlightNumber,
                               cabin: val.cabin,
                               departureSeats: val.departureSeats,
                               returnSeats: reservedSeats,
-                              price: val.price,
+                              price: newTotalPrice,
                               status: val.status,
                               departurePrice: val.departurePrice,
-                              returnPrice: val.returnPrice,
+                              returnPrice: newPrice,
                             }
                           : val;
                       })
@@ -634,6 +772,76 @@ function UserReserves() {
               />
             </>
           )}
+        </DialogContent>
+      </Dialog>
+      <Dialog open={openPopupMore} maxWidth="lg">
+        <DialogTitle>
+          <div className="PopupHeaderRes">
+            Flight Info
+            <button onClick={() => setOpenPopupMore(false)}>Close</button>
+          </div>
+        </DialogTitle>
+        <DialogContent dividers>
+          {listOfFlights.map((val) => {
+            if (val._id == flightID) {
+              return (
+                <div>
+                  <div className="flightPopup">
+                    <h3 id="fliNumber">
+                      Flight Number: <br />
+                      {val.flightNumber}
+                    </h3>
+                    <h3>
+                      Departure Time: <br />
+                      {val.departureTime}
+                    </h3>
+                    <h3>
+                      Departure Date: <br />
+                      {val.departureDate}
+                    </h3>
+                    <h3>
+                      Arrival Time: <br />
+                      {val.arrivalTime}
+                    </h3>
+                    <h3>
+                      Arrival Date: <br />
+                      {val.arrivalDate}
+                    </h3>
+                    <h3>
+                      Trip Duration: <br />
+                      {val.tripDuration + " Hours"}
+                    </h3>
+                  </div>
+                  <div className="flightPopup">
+                    <h3 id="fliNumber">
+                      Economy Seats: <br />
+                      {val.numberofEconomySeats}
+                    </h3>
+                    <h3>
+                      Business Seats: <br />
+                      {val.numberofBusinessSeats}
+                    </h3>
+                    <h3>
+                      Departure Airport: <br />
+                      {val.departureAirport}
+                    </h3>
+                    <h3>
+                      Arrival Airport: <br />
+                      {val.arrivalAirport}
+                    </h3>
+                    <h3>
+                      Baggage Allowance: <br />
+                      {val.baggage + " Bags"}
+                    </h3>
+                    <h3>
+                      Price: <br />
+                      {val.price + " L.E"}
+                    </h3>
+                  </div>
+                </div>
+              );
+            }
+          })}
         </DialogContent>
       </Dialog>
     </div>
