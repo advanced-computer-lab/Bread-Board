@@ -569,8 +569,8 @@ body {
 }
 
 .flightRes {
-  width: 1230px;
-  height: 60px;
+  width: 900px;
+  height: 70px;
   background-color: rgb(158, 151, 151);
   font-size: small;
   font-family: "Courier New", Courier, monospace;
@@ -582,6 +582,53 @@ body {
 
 .flightRes h3 {
   margin-left: 40px;
+  color: white;
+}
+
+.flightRess {
+  width: 900px;
+  height: 70px;
+  background-color: rgb(158, 151, 151);
+  font-size: small;
+  font-family: "Courier New", Courier, monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flightRess h3 {
+  margin-left: 40px;
+  color: white;
+}
+
+.flightResPrice {
+  width: 200px;
+  height: 140px;
+  background-color: rgb(158, 151, 151);
+  font-size: small;
+  font-family: "Courier New", Courier, monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flightResPrice h3 {
+  color: white;
+}
+
+.flightResEmpty {
+  width: 100px;
+  height: 70px;
+  background-color: rgb(158, 151, 151);
+  font-size: small;
+  font-family: "Courier New", Courier, monospace;
+  display: flex;
+  margin-right: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.flightResEmpty h3 {
   color: white;
 }
 
@@ -781,4 +828,48 @@ button:hover {
 
 .reserve button {
   margin: 0 2vh;
+}
+
+.Res {
+  display: flex;
+}
+
+.Res button {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.PopupResinputs {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(207, 207, 207);
+}
+
+.PopupResinputs input {
+  width: 200px;
+  height: 25px;
+  font-size: 15px;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+.PopupResinputs button {
+  border: none;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(158, 151, 151);
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin-top: 15px;
+  margin-right: 10px;
+}
+
+.reservesButtons button {
+  margin-bottom: 10px;
 }

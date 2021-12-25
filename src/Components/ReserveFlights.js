@@ -397,6 +397,7 @@ function ReserveFlights() {
               onClick={() => {
                 setOpenPopupSum(false);
                 setConfirmed(false);
+                setStep(0);
               }}
             >
               Close
@@ -525,6 +526,8 @@ function ReserveFlights() {
                       ? arrEconomySeats
                       : arrBusinessSeats,
                   people: Number(adults) + Number(children),
+                  cabin:
+                    cabin === "numberofEconomySeats" ? "Economy" : "Business",
                 }}
                 done={(reservedSeats) => {
                   if (step === 1) {
@@ -542,6 +545,8 @@ function ReserveFlights() {
                         price:
                           (Number(adults) + Number(children)) *
                           (depPrice + arrPrice),
+                        departurePrice: depPrice,
+                        returnPrice: arrPrice,
                       })
                       .then((res) => setReserveId(res.data._id));
                     setRetSeats(reservedSeats);

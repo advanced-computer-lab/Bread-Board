@@ -24,7 +24,6 @@ app.listen(port, () => {
     .then((result) => console.log("MongoDB is now connected"))
     .catch((err) => console.log(err));
   console.log(`server is running on port ${port}`);
-  Flight.find().then((r) => console.log(r));
 });
 
 app.get("/login2/:email/:password", (req, res) => {

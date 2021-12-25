@@ -28,9 +28,17 @@ const reserveSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  departurePrice: {
+    type: Number,
+    required: true,
+  },
+  returnPrice: {
+    type: Number,
+    required: true,
+  },
   status: {
     type: String,
-    default: 'Active'
-  }
+    default: "Active",
+  },
 });
 module.exports = mongoose.model("reserves", reserveSchema);

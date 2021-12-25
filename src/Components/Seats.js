@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import { API_URL } from "../constants";
 
 const Seats = ({ flight, done }) => {
-  const { id, seats, people } = flight;
+  const { id, seats, people, cabin } = flight;
   const [reserved, setReserved] = useState(false);
   const [reservedSeats, setReservedSeats] = useState([]);
 
   useEffect(() => {
     axios
-      .get(API_URL + "/reserve/" + id)
+      .get(API_URL + "/reserve/" + id + "/" + cabin)
       .then(({ data }) => setReserved(data))
       .catch((err) => alert(err));
   }, [id]);
@@ -25,7 +25,7 @@ const Seats = ({ flight, done }) => {
   if (reserved === false) return <div>Loading ...</div>;
 
   return (
-    <div style={{textAlign:"center"}}>
+    <div style={{ textAlign: "center" }}>
       <div>People: {people}</div>
       <div>Left: {people - reservedSeats.length}</div>
       <div className="seats">

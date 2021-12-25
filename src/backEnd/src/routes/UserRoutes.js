@@ -24,9 +24,11 @@ userRouter.post("/departureFlights", flightController.departureFlights);
 
 userRouter.post("/returnFlights", flightController.returnFlights);
 
-userRouter.get("/reserve/:flight", reservedController.getFlightReserved);
+userRouter.get("/reserve/:flight/:cabin", reservedController.getFlightReserved);
 
 userRouter.post("/reserve", reservedController.createReserve);
+
+userRouter.put("/reserveUpdateSeats", reservedController.updateReserveSeats);
 
 userRouter.get("/userReserve/:user", reservedController.getUserFlights);
 
@@ -42,6 +44,7 @@ userRouter.put(
   "/cancelUserReserve/:reserve",
   reservedController.cancelUserFlight
 );
+
 userRouter.post(
   "/emailmeUserReserve/:reserve",
   reservedController.emailmeUserFlight

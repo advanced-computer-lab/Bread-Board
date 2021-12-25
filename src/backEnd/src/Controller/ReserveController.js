@@ -1,32 +1,34 @@
 const Reserve = require("../models/reserveModel");
 
-exports.createReserve = async (req, res) => {
+const createReserve = async (req, res) => {
   new Reserve({ ...req.body })
     .save()
     .then((result) => res.send(result))
     .catch((err) => res.send(err));
 };
 
-exports.getFlightReserved = async (req, res) => {
-  const { flight } = req.params;
+const getFlightReserved = async (req, res) => {
+  const { flight, cabin } = req.params;
   const departures = await Reserve.find({
     departureFlight: flight,
+    cabin: cabin,
     status: "Active",
   }).exec();
   const returns = await Reserve.find({
     returnFlight: flight,
+    cabin: cabin,
     status: "Active",
   }).exec();
   res.send([...departures, ...returns]);
 };
 
-exports.getUserFlights = async (req, res) => {
+const getUserFlights = async (req, res) => {
   res.send(
     await Reserve.find({ user: req.params.user, status: "Active" }).exec()
   );
 };
 
-exports.cancelUserFlight = async (req, res) => {
+const cancelUserFlight = async (req, res) => {
   const reserve = await Reserve.findByIdAndUpdate(req.params.reserve);
   reserve.status = "Canceled";
   await reserve.save();
@@ -34,17 +36,33 @@ exports.cancelUserFlight = async (req, res) => {
   res.send(reserve);
 };
 
-exports.emailmeUserFlight = async (req, res) => {
+const emailmeUserFlight = async (req, res) => {
   const reserve = await Reserve.findById(req.params.reserve);
-  this.senddEmail(reserve.user, reserve.departureFlight, reserve.returnFlight,reserve.cabin,reserve.departureSeats,reserve.returnSeats,reserve.price);
+  this.senddEmail(
+    reserve.user,
+    reserve.departureFlight,
+    reserve.returnFlight,
+    reserve.cabin,
+    reserve.departureSeats,
+    reserve.returnSeats,
+    reserve.price
+  );
   res.send(reserve);
 };
 
 const nodemailer = require("nodemailer");
 
-exports.senddEmail = async (email, departureFlight,returnFlight,cabin, departureSeats,returnSeats,price) => {
+exports.senddEmail = async (
+  email,
+  departureFlight,
+  returnFlight,
+  cabin,
+  departureSeats,
+  returnSeats,
+  price
+) => {
   // let testAccount = await nodemailer.createTestAccount();
- let transporter = nodemailer.createTransport({
+  let transporter = nodemailer.createTransport({
     host: "smtp.outlook.com",
     port: 587,
     secure: false, // true for 465, false for other ports
@@ -57,21 +75,35 @@ exports.senddEmail = async (email, departureFlight,returnFlight,cabin, departure
     from: '"Dina 👻" dinahatem2011@hotmail.com', // sender address
     to: email, // list of receivers
     subject: "Your Reservation", // Subject line
-    text: "Your itinerary details"+'\n'+
-     "Your departure flight Number is: " + departureFlight+'\n'+
-     "Your return flight Number is: "+ returnFlight+ '\n'+
-     "Your cabin is: "+cabin+'\n'+
-     "Your depature seat numbers :"+ departureSeats+ '\n'+
-     "Your return seat numbers :"+ returnSeats+'\n'+
-     "Your flight priceis :"+price+'\n'+
-     "Yours,"+ '\n'+
-     " Jets R Us",
-      // plain text body
+    text:
+      "Your itinerary details:-" +
+      "\n" +
+      "Your departure flight Number is: " +
+      departureFlight +
+      "\n" +
+      "Your return flight Number is: " +
+      returnFlight +
+      "\n" +
+      "Your cabin is: " +
+      cabin +
+      " Class\n" +
+      "Your depature seat numbers: " +
+      departureSeats.join(" - ") +
+      "\n" +
+      "Your return seat numbers: " +
+      returnSeats.join(" - ") +
+      "\n" +
+      "Your flight price is: " +
+      price +
+      " EGP\n" +
+      "Yours," +
+      "\n" +
+      " Jets R Us",
+    // plain text body
   });
   console.log("Message sent: %s", info.messageId);
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 };
-
 
 exports.sendEmail = async (email, refund) => {
   // let testAccount = await nodemailer.createTestAccount();
@@ -95,7 +127,7 @@ exports.sendEmail = async (email, refund) => {
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 };
 
-exports.updateReservations = async (req, res) => {
+const updateReservations = async (req, res) => {
   Reserve.updateMany({ user: req.body.emailOld }, { user: req.body.email })
     .then((result) => {
       res.send(result);
@@ -103,4 +135,24 @@ exports.updateReservations = async (req, res) => {
     .catch((err) => {
       res.send(err);
     });
+};
+
+const updateReserveSeats = async (req, res) => {
+  Reserve.updateOne({ _id: req.body._id }, req.body)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
+module.exports = {
+  updateReserveSeats,
+  updateReservations,
+  cancelUserFlight,
+  getUserFlights,
+  getFlightReserved,
+  createReserve,
+  emailmeUserFlight,
 };
