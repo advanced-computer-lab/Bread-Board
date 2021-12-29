@@ -7,7 +7,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
 const bodyParser = require("body-parser");
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT;
 const User = require("./models/userModel");
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,13 +18,16 @@ const jwt = require("jsonwebtoken");
 app.use(cors());
 app.use(express.json());
 
-const dbURI = "mongodb+srv://admin:admin123@cluster0.ghf1n.mongodb.net/Project?retryWrites=true&w=majority"
+const dbURI = process.env.MONGODB;
 
-
-mongoose.connect(dbURI,{ useNewUrlParser: true, useUnifiedTopology: true })
-    .then((res) => {
-    app.listen(port, () => console.log("MongoDB is now connected"))
-})
+mongoose
+  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((res) => {
+    app.listen(port, () => {
+      console.log("Listening to port " + port + "...");
+      console.log("MongoDB is now connected");
+    });
+  });
 
 app.get("/login2/:email/:password", (req, res) => {
   const user = { email: req.params.email, pass: req.params.password };

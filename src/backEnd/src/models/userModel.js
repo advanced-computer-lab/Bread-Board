@@ -42,7 +42,7 @@ const userSchema = new Schema({
   },
   secondTelephoneNumber: {
     type: Number,
-    required: true,
+    required: false,
   },
   userName: {
     type: String,

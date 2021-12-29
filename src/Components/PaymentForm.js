@@ -59,12 +59,14 @@ function PaymentForm({ amount, setConfirmed, setOpenPopupPay }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <fieldset className="FormGroup">
-          <div className="FormRow">
-            <CardElement options={CARD_OPTIONS} />
-          </div>
-        </fieldset>
-        <Button type="submit">Pay</Button>
+        <div className="payment">
+          <fieldset className="FormGroup">
+            <div className="FormRow">
+              <CardElement options={CARD_OPTIONS} />
+            </div>
+          </fieldset>
+          <Button type="submit">Pay</Button>
+        </div>
       </form>
     </>
   );

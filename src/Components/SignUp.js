@@ -46,38 +46,40 @@ function SignUp() {
       alert("Country code can't be negative");
     } else if (telephoneNumber <= 0) {
       alert("Telephone number can't be negative");
-    } else if (secondTelephoneNumber <= 0) {
+    } else if (secondTelephoneNumber < 0) {
       alert("Second telephone number can't be negative");
     } else if (telephoneNumber.length < 11 || telephoneNumber.length > 11) {
       alert("Telephone number must be 11 digits");
     } else if (
-      secondTelephoneNumber.length < 11 ||
-      secondTelephoneNumber.length > 11
+      secondTelephoneNumber != 0 &&
+      (secondTelephoneNumber.length < 11 || secondTelephoneNumber.length > 11)
     ) {
       alert("Second telephone number must be 11 digits");
     } else {
-      axios
-        .post("http://localhost:8000/register", {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-          passportNumber: passportNumber,
-          homeAddress: homeAddress,
-          countryCode: countryCode,
-          telephoneNumber: telephoneNumber,
-          secondTelephoneNumber: secondTelephoneNumber,
-          userName: userName,
-          admin: false,
-        })
-        .then((result) => {
-          if (result.data.name == "ValidationError") {
-            alert("Email already exists!!!");
-          } else {
-            alert("Registered Succefully");
-            navigate(-1);
-          }
-        });
+      var val = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+        passportNumber: passportNumber,
+        homeAddress: homeAddress,
+        countryCode: countryCode,
+        telephoneNumber: telephoneNumber,
+        secondTelephoneNumber: secondTelephoneNumber,
+        userName: userName,
+        admin: false,
+      };
+      Object.keys(val).forEach(
+        (k) => !val[k] && val[k] !== undefined && delete val[k]
+      );
+      axios.post("http://localhost:8000/register", val).then((result) => {
+        if (result.data.name == "ValidationError") {
+          alert("Email already exists!!!");
+        } else {
+          alert("Registered Succefully");
+          navigate(-1);
+        }
+      });
     }
   };
 

@@ -334,7 +334,7 @@ body {
   width: 80px;
   height: 100px;
   border: 2px solid black;
-  background-color: #1E2328;
+  background-color: #1e2328;
   color: white;
   font-family: "Courier New", Courier, monospace;
   border-radius: 10px;
@@ -362,7 +362,7 @@ body {
   border: none;
   width: 150px;
   height: 50px;
-  background-color: #3B3F46;
+  background-color: #3b3f46;
   color: white;
   border-radius: 10px;
   font-size: 20px;
@@ -371,7 +371,7 @@ body {
 }
 
 .HeaderButton button:hover {
-  background-color: #1E2328; /* Green */
+  background-color: #1e2328; /* Green */
   color: white;
 }
 
@@ -386,15 +386,15 @@ body {
   border: none;
   width: 150px;
   height: 70px;
-  background-color: #3B3F46;
+  background-color: #3b3f46;
   color: white;
   border-radius: 10px;
   font-size: 20px;
   border: 1px solid black;
 }
 
-.HeaderButtonInfo button:hover{
-  background-color: #1E2328; /* Green */
+.HeaderButtonInfo button:hover {
+  background-color: #1e2328; /* Green */
   color: white;
 }
 
@@ -497,7 +497,7 @@ body {
   border: none;
   width: 150px;
   height: 50px;
-  background-color: #3B3F46;
+  background-color: #3b3f46;
   color: white;
   border-radius: 10px;
   font-size: 20px;
@@ -506,7 +506,7 @@ body {
 }
 
 .flightCRUD button:hover {
-  background-color: #1E2328; /* Green */
+  background-color: #1e2328; /* Green */
   color: white;
 }
 
@@ -532,7 +532,7 @@ body {
   border: none;
   width: 150px;
   height: 50px;
-  background-color: #3B3F46;
+  background-color: #3b3f46;
   color: white;
   border-radius: 10px;
   font-size: 20px;
@@ -541,7 +541,7 @@ body {
 }
 
 .Reserveinputs button:hover {
-  background-color: #1E2328; /* Green */
+  background-color: #1e2328; /* Green */
   color: white;
 }
 
@@ -566,7 +566,7 @@ body {
   border: none;
   width: 150px;
   height: 70px;
-  background-color: #3B3F46;
+  background-color: #3b3f46;
   color: white;
   border-radius: 10px;
   font-size: 20px;
@@ -575,7 +575,7 @@ body {
 }
 
 .UserHomeButtons button:hover {
-  background-color: #1E2328; /* Green */
+  background-color: #1e2328; /* Green */
   color: white;
 }
 
@@ -754,7 +754,7 @@ body {
   border: none;
   width: 150px;
   height: 50px;
-  background-color: #3B3F46;
+  background-color: #3b3f46;
   color: white;
   border-radius: 10px;
   font-size: 20px;
@@ -763,7 +763,7 @@ body {
 }
 
 .Infoinputs button:hover {
-  background-color: #1E2328; /* Green */
+  background-color: #1e2328; /* Green */
   color: white;
 }
 
@@ -796,7 +796,7 @@ body {
   border: none;
   width: 150px;
   height: 70px;
-  background-color: #3B3F46;
+  background-color: #3b3f46;
   color: white;
   border-radius: 10px;
   font-size: 20px;
@@ -805,7 +805,7 @@ body {
 }
 
 .Passwordinputs button:hover {
-  background-color: #1E2328; /* Green */
+  background-color: #1e2328; /* Green */
   color: white;
 }
 
@@ -910,4 +910,44 @@ button:hover {
 
 .reservesButtons button {
   margin-bottom: 10px;
+}
+
+.FormGroup {
+  padding: 0;
+  border-style: none;
+  background-color: #7795f8;
+  will-change: opacity, transform;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 #829fff;
+  border-radius: 4px;
+  width: 500px;
+}
+
+.FormRow {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 15px;
+  border-top: 1px solid #819efc;
+}
+
+.StripeElement--webkit-autofill {
+  background: transparent !important;
+}
+
+.StripeElement {
+  width: 500px;
+  padding: 11px 15px 11px 0;
+}
+
+.payment {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-left: 80px;
+}
+
+.payment button {
+  margin-left: 150px;
 }
