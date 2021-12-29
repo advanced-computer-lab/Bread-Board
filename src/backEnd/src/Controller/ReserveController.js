@@ -61,20 +61,19 @@ exports.senddEmail = async (
   returnSeats,
   price
 ) => {
-  // let testAccount = await nodemailer.createTestAccount();
   let transporter = nodemailer.createTransport({
     host: "smtp.outlook.com",
     port: 587,
-    secure: false, // true for 465, false for other ports
+    secure: false,
     auth: {
-      user: "dinahatem2011@hotmail.com", // generated ethereal user
-      pass: "1h2e3a4d5a", // generated ethereal password
+      user: "dinahatem2011@hotmail.com",
+      pass: "1h2e3a4d5a",
     },
   });
   let info = await transporter.sendMail({
-    from: '"Dina 👻" dinahatem2011@hotmail.com', // sender address
-    to: email, // list of receivers
-    subject: "Your Reservation", // Subject line
+    from: '"Dina 👻" dinahatem2011@hotmail.com',
+    to: email,
+    subject: "Your Reservation",
     text:
       "Your itinerary details:-" +
       "\n" +
@@ -99,30 +98,27 @@ exports.senddEmail = async (
       "Yours," +
       "\n" +
       " Jets R Us",
-    // plain text body
   });
   console.log("Message sent: %s", info.messageId);
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 };
 
 exports.sendEmail = async (email, refund) => {
-  // let testAccount = await nodemailer.createTestAccount();
   let transporter = nodemailer.createTransport({
     host: "smtp.outlook.com",
     port: 587,
-    secure: false, // true for 465, false for other ports
+    secure: false,
     auth: {
-      user: "dinahatem2011@hotmail.com", // generated ethereal user
-      pass: "1h2e3a4d5a", // generated ethereal password
+      user: "dinahatem2011@hotmail.com",
+      pass: "1h2e3a4d5a",
     },
   });
-  // console.log(testAccount.email)
   let info = await transporter.sendMail({
-    from: '"Dina 👻" dinahatem2011@hotmail.com', // sender address
-    to: email, // list of receivers
-    subject: "Flight Canceled", // Subject line
+    from: '"Dina 👻" dinahatem2011@hotmail.com',
+    to: email,
+    subject: "Flight Canceled",
     text:
-      "Your flight has been canceled with refund amount of " + refund + " EGP", // plain text body
+      "Your flight has been canceled with refund amount of " + refund + " EGP",
   });
   console.log("Message sent: %s", info.messageId);
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));

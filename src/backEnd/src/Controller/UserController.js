@@ -53,21 +53,19 @@ const nodemailer = require("nodemailer");
 const sendEmail = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  // let testAccount = await nodemailer.createTestAccount();
   let transporter = nodemailer.createTransport({
     host: "smtp.outlook.com",
     port: 587,
-    secure: false, // true for 465, false for other ports
+    secure: false,
     auth: {
-      user: "dinahatem2011@hotmail.com", // generated ethereal user
-      pass: "1h2e3a4d5a", // generated ethereal password
+      user: "dinahatem2011@hotmail.com",
+      pass: "1h2e3a4d5a",
     },
   });
-  // console.log(testAccount.email)
   let info = await transporter.sendMail({
-    from: '"Dina 👻" dinahatem2011@hotmail.com', // sender address
-    to: email, // list of receivers
-    subject: "Change Your Password", // Subject line
+    from: '"Dina 👻" dinahatem2011@hotmail.com',
+    to: email,
+    subject: "Change Your Password",
     text: "Your password is " + password,
   });
   console.log("Message sent: %s", info.messageId);
@@ -78,21 +76,19 @@ const sendEmail = async (req, res) => {
 const sendEmailRefund = async (req, res) => {
   const email = req.body.email;
   const amount = req.body.amount;
-  // let testAccount = await nodemailer.createTestAccount();
   let transporter = nodemailer.createTransport({
     host: "smtp.outlook.com",
     port: 587,
-    secure: false, // true for 465, false for other ports
+    secure: false,
     auth: {
-      user: "dinahatem2011@hotmail.com", // generated ethereal user
-      pass: "1h2e3a4d5a", // generated ethereal password
+      user: "dinahatem2011@hotmail.com",
+      pass: "1h2e3a4d5a",
     },
   });
-  // console.log(testAccount.email)
   let info = await transporter.sendMail({
-    from: '"Dina 👻" dinahatem2011@hotmail.com', // sender address
-    to: email, // list of receivers
-    subject: "Refund", // Subject line
+    from: '"Dina 👻" dinahatem2011@hotmail.com',
+    to: email,
+    subject: "Refund",
     text: "The amount: " + amount + " EGP was refunded to your account.",
   });
   console.log("Message sent: %s", info.messageId);
