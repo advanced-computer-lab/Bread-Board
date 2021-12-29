@@ -121,7 +121,8 @@ exports.sendEmail = async (email, refund) => {
     from: '"Dina 👻" dinahatem2011@hotmail.com', // sender address
     to: email, // list of receivers
     subject: "Flight Canceled", // Subject line
-    text: "Your flight has been canceled with refund amount of " + refund, // plain text body
+    text:
+      "Your flight has been canceled with refund amount of " + refund + " EGP", // plain text body
   });
   console.log("Message sent: %s", info.messageId);
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));

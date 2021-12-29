@@ -63,4 +63,6 @@ userRouter.post("/sendEmail", userController.sendEmail);
 
 userRouter.post("/priceOfReservation", reservedController.priceOfReservation);
 
+userRouter.post("/sendEmailRefund", userController.sendEmailRefund);
+
 module.exports = userRouter;

@@ -8,10 +8,14 @@ const PUBLIC_KEY =
 
 const stripeTestPromise = loadStripe(PUBLIC_KEY);
 
-function StripeContainer({ amount }) {
+function StripeContainer({ amount, setConfirmed, setOpenPopupPay }) {
   return (
     <Elements stripe={stripeTestPromise}>
-      <PaymentForm amount={amount} />
+      <PaymentForm
+        amount={amount}
+        setConfirmed={setConfirmed}
+        setOpenPopupPay={setOpenPopupPay}
+      />
     </Elements>
   );
 }

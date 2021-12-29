@@ -23,7 +23,7 @@ const CARD_OPTIONS = {
   },
 };
 
-function PaymentForm({ amount }) {
+function PaymentForm({ amount, setConfirmed, setOpenPopupPay }) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -45,12 +45,14 @@ function PaymentForm({ amount }) {
         if (response.data.success) {
           console.log("Successful payment");
           alert("Successful payment");
+          setConfirmed(true);
+          setOpenPopupPay(false);
         }
       } catch (error) {
-        console.log("Error", error);
+        alert("Failed payment");
       }
     } else {
-      console.log(error.message);
+      alert("Failed payment");
     }
   };
 

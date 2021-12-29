@@ -51,6 +51,7 @@ function UserReserves() {
   const [newBusinessSeats, setNewBusinessSeats] = useState(null);
   const [newPrice, setNewPrice] = useState(null);
   const [newTotalPrice, setNewTotalPrice] = useState(null);
+  const [priceDifference, setPriceDifference] = useState(null);
 
   const [openPopupSeats, setOpenPopupSeats] = useState(false);
   const [openPopupFlight, setOpenPopupFlight] = useState(false);
@@ -60,11 +61,7 @@ function UserReserves() {
   const [seatNo, setSeatNo] = useState(null);
   const [cabin, setCabin] = useState(null);
   const [confirmed, setConfirmed] = useState(false);
-  const [confirmedPrice, setConfirmedPrice] = useState(false);
   const [step, setStep] = useState(0);
-  const [depSeats, setDepSeats] = useState([]);
-  const [retSeats, setRetSeats] = useState([]);
-  const [reserveId, setReserveId] = useState(null);
 
   const user = window.localStorage.getItem("user");
 
@@ -199,23 +196,55 @@ function UserReserves() {
         .post("http://localhost:8000/admin/priceOfReservation", { _id: resID })
         .then((result) => {
           var priceTotal = result.data.price;
-          var priceDifference =
+          var newPriceTotal =
             priceTotal - (step === 0 ? depPrice : arrPrice) * seatNo.length;
-          priceDifference = priceDifference + val.price * seatNo.length;
-          setNewTotalPrice(priceDifference);
-          if (
-            window.confirm(
-              "The new price would be " +
-                priceDifference +
-                ". Would you like to continue with a difference of " +
-                (priceDifference - priceTotal)
-            )
-          ) {
-            setOpenPopupPay(true);
+          newPriceTotal = newPriceTotal + val.price * seatNo.length;
+          setNewTotalPrice(newPriceTotal);
+          setPriceDifference(newPriceTotal - priceTotal);
+          if (newPriceTotal - priceTotal > 0) {
+            if (
+              window.confirm(
+                "The new price would be " +
+                  newPriceTotal +
+                  ". Would you like to continue with a difference of " +
+                  (newPriceTotal - priceTotal) +
+                  "?"
+              )
+            ) {
+              setOpenPopupPay(true);
+            }
+          } else if (newPriceTotal - priceTotal < 0) {
+            if (
+              window.confirm(
+                "The new price would be " +
+                  newPriceTotal +
+                  ". Would you like to continue and " +
+                  (priceTotal - newPriceTotal) +
+                  " will be refunded to your account?"
+              )
+            ) {
+              axios
+                .post("http://localhost:8000/admin/sendEmailRefund", {
+                  amount: priceTotal - newPriceTotal,
+                  email: window.localStorage.getItem("user"),
+                })
+                .then((res) => {
+                  if (res.data === "Email sent Successfully!!!")
+                    alert("Amount refunded successfully");
+                })
+                .catch((err) => alert(err));
+              setConfirmed(true);
+            }
+          } else {
+            if (
+              window.confirm(
+                "The new price is the same as the old price there will be no more charges. please choose your seats."
+              )
+            ) {
+              setConfirmed(true);
+            }
           }
         });
-
-      setConfirmedPrice(true);
     }
   };
 
@@ -555,13 +584,13 @@ function UserReserves() {
                 }}
                 done={(reservedSeats) => {
                   if (step === 0) {
-                    axios
-                      .put("http://localhost:8000/admin/reserveUpdateSeats", {
+                    axios.put(
+                      "http://localhost:8000/admin/reserveUpdateSeats",
+                      {
                         _id: resID,
                         departureSeats: reservedSeats,
-                      })
-                      .then((res) => setReserveId(res.data._id));
-                    setDepSeats(reservedSeats);
+                      }
+                    );
                     setOpenPopupSeats(false);
                     setFlights(
                       flights.map((val) => {
@@ -583,13 +612,13 @@ function UserReserves() {
                       })
                     );
                   } else {
-                    axios
-                      .put("http://localhost:8000/admin/reserveUpdateSeats", {
+                    axios.put(
+                      "http://localhost:8000/admin/reserveUpdateSeats",
+                      {
                         _id: resID,
                         returnSeats: reservedSeats,
-                      })
-                      .then((res) => setReserveId(res.data._id));
-                    setRetSeats(reservedSeats);
+                      }
+                    );
                     setOpenPopupSeats(false);
                     setFlights(
                       flights.map((val) => {
@@ -625,7 +654,6 @@ function UserReserves() {
               onClick={() => {
                 setOpenPopupFlight(false);
                 setListOfFlights([]);
-                setConfirmedPrice(false);
                 setConfirmed(false);
               }}
             >
@@ -699,19 +727,18 @@ function UserReserves() {
                 }}
                 done={(reservedSeats) => {
                   if (step === 0) {
-                    axios
-                      .put("http://localhost:8000/admin/updateReserveFlights", {
+                    axios.put(
+                      "http://localhost:8000/admin/updateReserveFlights",
+                      {
                         _id: resID,
                         departureFlight: newFlightNumber,
                         departureSeats: reservedSeats,
                         departurePrice: newPrice,
                         price: newTotalPrice,
-                      })
-                      .then((res) => setReserveId(res.data._id));
-                    setDepSeats(reservedSeats);
+                      }
+                    );
                     setOpenPopupFlight(false);
                     setListOfFlights([]);
-                    setConfirmedPrice(false);
                     setConfirmed(false);
                     setOpenPopupDep(false);
                     setOpenPopupRet(false);
@@ -735,19 +762,18 @@ function UserReserves() {
                       })
                     );
                   } else {
-                    axios
-                      .put("http://localhost:8000/admin/updateReserveFlights", {
+                    axios.put(
+                      "http://localhost:8000/admin/updateReserveFlights",
+                      {
                         _id: resID,
                         returnFlight: newFlightNumber,
                         returnSeats: reservedSeats,
                         returnPrice: newPrice,
                         price: newTotalPrice,
-                      })
-                      .then((res) => setReserveId(res.data._id));
-                    setDepSeats(reservedSeats);
+                      }
+                    );
                     setOpenPopupFlight(false);
                     setListOfFlights([]);
-                    setConfirmedPrice(false);
                     setConfirmed(false);
                     setOpenPopupDep(false);
                     setOpenPopupRet(false);
@@ -854,7 +880,6 @@ function UserReserves() {
             <button
               onClick={() => {
                 setOpenPopupPay(false);
-                setConfirmed(true);
               }}
             >
               Close
@@ -862,7 +887,11 @@ function UserReserves() {
           </div>
         </DialogTitle>
         <DialogContent dividers>
-          <StripeContainer amount={1000} />
+          <StripeContainer
+            amount={priceDifference * 100}
+            setConfirmed={setConfirmed}
+            setOpenPopupPay={setOpenPopupPay}
+          />
         </DialogContent>
       </Dialog>
     </div>

@@ -64,6 +64,7 @@ function ReserveFlights() {
   const [retSeats, setRetSeats] = useState([]);
   const [reservePopup, setReservePopup] = useState(false);
   const [reserveId, setReserveId] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(null);
 
   const home = () => {
     navigate(-1);
@@ -162,6 +163,21 @@ function ReserveFlights() {
       setArrTripDuration(fli.tripDuration);
       setArrPrice(fli.price);
       setOpenPopupSum(true);
+    }
+  };
+
+  const reserve = () => {
+    setTotalPrice(
+      (Number(children) + Number(adults)) * Number(depPrice + arrPrice)
+    );
+    if (
+      window.confirm(
+        "The price would be " +
+          (Number(children) + Number(adults)) * Number(depPrice + arrPrice) +
+          ". Would you like to continue with the payment?"
+      )
+    ) {
+      setOpenPopupPay(true);
     }
   };
 
@@ -503,7 +519,7 @@ function ReserveFlights() {
               style={{ margin: "5vh 0" }}
               variant="outlined"
               onClick={() => {
-                setOpenPopupPay(true);
+                reserve();
               }}
             >
               Reserve Flight
@@ -621,7 +637,6 @@ function ReserveFlights() {
             <button
               onClick={() => {
                 setOpenPopupPay(false);
-                setConfirmed(true);
               }}
             >
               Close
@@ -629,7 +644,11 @@ function ReserveFlights() {
           </div>
         </DialogTitle>
         <DialogContent dividers>
-          <StripeContainer amount={1000} />
+          <StripeContainer
+            amount={totalPrice * 100}
+            setConfirmed={setConfirmed}
+            setOpenPopupPay={setOpenPopupPay}
+          />
         </DialogContent>
       </Dialog>
     </div>
