@@ -35,20 +35,24 @@ function UpdateInfo() {
       alert("Country code can't be negative");
     } else if (telephoneNumber < 0) {
       alert("Telephone number can't be negative");
-    } else if (telephoneNumber > 0) {
-      if (telephoneNumber.length < 11 || telephoneNumber.length > 11) {
-        alert("Telephone number must be 11 digits");
-      }
     } else if (secondTelephoneNumber < 0) {
       alert("Second telephone number can't be negative");
-    } else if (secondTelephoneNumber > 0) {
-      if (
-        secondTelephoneNumber.length < 11 ||
-        secondTelephoneNumber.length > 11
-      ) {
-        alert("Second telephone must be 11 digits");
-      }
     } else {
+      if (telephoneNumber > 0) {
+        if (telephoneNumber.length < 11 || telephoneNumber.length > 11) {
+          alert("Telephone number must be 11 digits");
+          return;
+        }
+      }
+      if (secondTelephoneNumber > 0) {
+        if (
+          secondTelephoneNumber.length < 11 ||
+          secondTelephoneNumber.length > 11
+        ) {
+          alert("Second telephone must be 11 digits");
+          return;
+        }
+      }
       if (window.confirm("Are you sure to update your information?")) {
         var val = {
           emailOld: window.localStorage.getItem("user"),
