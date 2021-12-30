@@ -1,10 +1,28 @@
 const Reserve = require("../models/reserveModel");
+const jwt = require("jsonwebtoken");
 
 const createReserve = async (req, res) => {
-  new Reserve({ ...req.body })
-    .save()
-    .then((result) => res.send(result))
-    .catch((err) => res.send(err));
+  const tokenEmail = req.body.user;
+  try {
+    const userEmail = jwt.verify(tokenEmail, "dahrawy");
+    const reserve = new Reserve({
+      user: userEmail.email,
+      departureFlight: req.body.departureFlight,
+      returnFlight: req.body.returnFlight,
+      cabin: req.body.cabin,
+      departureSeats: req.body.departureSeats,
+      returnSeats: req.body.returnSeats,
+      price: req.body.price,
+      departurePrice: req.body.departurePrice,
+      returnPrice: req.body.returnPrice,
+    });
+    await reserve
+      .save()
+      .then((result) => res.send({ message: "Success", reserve: result }))
+      .catch((err) => res.send({ message: "Error" }));
+  } catch (error) {
+    res.send({ message: "Your Session Expired" });
+  }
 };
 
 const getFlightReserved = async (req, res) => {
@@ -23,9 +41,19 @@ const getFlightReserved = async (req, res) => {
 };
 
 const getUserFlights = async (req, res) => {
-  res.send(
-    await Reserve.find({ user: req.params.user, status: "Active" }).exec()
-  );
+  const tokenEmail = req.body.user;
+  try {
+    const userEmail = jwt.verify(tokenEmail, "dahrawy");
+    Reserve.find({ user: userEmail.email, status: "Active" })
+      .then((result) => {
+        res.send({ message: "Success", reserve: result });
+      })
+      .catch((err) => {
+        res.send({ message: "Error" });
+      });
+  } catch (error) {
+    res.send({ message: "Your Session Expired" });
+  }
 };
 
 const cancelUserFlight = async (req, res) => {
@@ -125,13 +153,19 @@ exports.sendEmail = async (email, refund) => {
 };
 
 const updateReservations = async (req, res) => {
-  Reserve.updateMany({ user: req.body.emailOld }, { user: req.body.email })
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      res.send(err);
-    });
+  const tokenEmail = req.body.emailOld;
+  try {
+    const userEmail = jwt.verify(tokenEmail, "dahrawy");
+    Reserve.updateMany({ user: userEmail.email }, { user: req.body.email })
+      .then((result) => {
+        res.send({ message: "Success" });
+      })
+      .catch((err) => {
+        res.send({ message: "Error" });
+      });
+  } catch (error) {
+    res.send({ message: "Your Session Expired" });
+  }
 };
 
 const updateReserveSeats = async (req, res) => {

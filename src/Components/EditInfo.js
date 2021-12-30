@@ -69,34 +69,57 @@ function UpdateInfo() {
         axios
           .put("http://localhost:8000/admin/updateInfo", val)
           .then((result) => {
-            if (result.data == "Error") {
+            if (result.data.message == "Your Session Expired") {
+              alert(result.data.message);
+              navigate("/");
+            } else if (result.data.message == "Error") {
               alert("Email already exists!!!");
             } else {
+              const token = result.data.token;
               if (email != null) {
-                axios.put("http://localhost:8000/admin/updateReservations", {
-                  emailOld: window.localStorage.getItem("user"),
-                  email: email,
-                });
-                window.localStorage.setItem("user", email);
+                axios
+                  .put("http://localhost:8000/admin/updateReservations", {
+                    emailOld: window.localStorage.getItem("user"),
+                    email: email,
+                  })
+                  .then((result) => {
+                    if (result.data.message == "Your Session Expired") {
+                      alert(result.data.message);
+                      navigate("/");
+                    } else if (result.data.message == "Success") {
+                      console.log(token);
+                      window.localStorage.setItem("user", token);
+                    } else {
+                      alert(result.data.message);
+                    }
+                  });
               }
-              user.firstName = firstName != null ? firstName : user.firstName;
-              user.lastName = lastName != null ? lastName : user.lastName;
-              user.passportNumber =
-                passportNumber != null ? passportNumber : user.passportNumber;
-              user.email = email != null ? email : user.email;
-              user.homeAddress =
-                homeAddress != null ? homeAddress : user.homeAddress;
-              user.countryCode =
-                countryCode != null ? countryCode : user.countryCode;
-              user.telephoneNumber =
-                telephoneNumber != null
-                  ? telephoneNumber
-                  : user.telephoneNumber;
-              user.secondTelephoneNumber =
-                secondTelephoneNumber != null
-                  ? secondTelephoneNumber
-                  : user.secondTelephoneNumber;
-              user.userName = userName != null ? userName : user.userName;
+              setUser(
+                user.map((val) => {
+                  return {
+                    firstName: firstName != null ? firstName : val.firstName,
+                    lastName: lastName != null ? lastName : val.lastName,
+                    passportNumber:
+                      passportNumber != null
+                        ? passportNumber
+                        : val.passportNumber,
+                    email: email != null ? email : val.email,
+                    homeAddress:
+                      homeAddress != null ? homeAddress : val.homeAddress,
+                    countryCode:
+                      countryCode != null ? countryCode : val.countryCode,
+                    telephoneNumber:
+                      telephoneNumber != null
+                        ? telephoneNumber
+                        : val.telephoneNumber,
+                    secondTelephoneNumber:
+                      secondTelephoneNumber != null
+                        ? secondTelephoneNumber
+                        : val.secondTelephoneNumber,
+                    userName: userName != null ? userName : val.userName,
+                  };
+                })
+              );
               alert("Updated Succesfully");
             }
           });
@@ -122,17 +145,25 @@ function UpdateInfo() {
   });
 
   useEffect(() => {
+    console.log(window.localStorage.getItem("user"));
     axios
       .post("http://localhost:8000/admin/getUser", {
         email: window.localStorage.getItem("user"),
       })
       .then((result) => {
-        setUser(result.data);
+        if (result.data.message == "Your Session Expired") {
+          alert(result.data.message);
+          navigate("/");
+        } else if (result.data.message == "Error") {
+          alert(result.data.message);
+        } else {
+          setUser([result.data.user]);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   return (
     <div>
@@ -233,48 +264,52 @@ function UpdateInfo() {
         </div>
       </div>
       <div className="listOfFlights">
-        <div className="flightSearch">
-          <div className="flight">
-            <h3>
-              First Name:
-              {" " + user.firstName}
-            </h3>
-            <h3>
-              Last Name:
-              {" " + user.lastName}
-            </h3>
-            <h3>
-              UserName:
-              {" " + user.userName}
-            </h3>
-            <h3>
-              Home Address:
-              {" " + user.homeAddress}
-            </h3>
-            <h3>
-              Country Code:
-              {" +" + user.countryCode}
-            </h3>
-          </div>
-          <div className="flight">
-            <h3>
-              Passport Number:
-              {" " + user.passportNumber}
-            </h3>
-            <h3>
-              Email:
-              {" " + user.email}
-            </h3>
-            <h3>
-              Telephone Number:
-              {" " + user.telephoneNumber}
-            </h3>
-            <h3>
-              Second Telephone Number:
-              {" " + user.secondTelephoneNumber}
-            </h3>
-          </div>
-        </div>
+        {user.map((val) => {
+          return (
+            <div className="flightSearch">
+              <div className="flight">
+                <h3>
+                  First Name:
+                  {" " + val.firstName}
+                </h3>
+                <h3>
+                  Last Name:
+                  {" " + val.lastName}
+                </h3>
+                <h3>
+                  UserName:
+                  {" " + val.userName}
+                </h3>
+                <h3>
+                  Home Address:
+                  {" " + val.homeAddress}
+                </h3>
+                <h3>
+                  Country Code:
+                  {" +" + val.countryCode}
+                </h3>
+              </div>
+              <div className="flight">
+                <h3>
+                  Passport Number:
+                  {" " + val.passportNumber}
+                </h3>
+                <h3>
+                  Email:
+                  {" " + val.email}
+                </h3>
+                <h3>
+                  Telephone Number:
+                  {" " + val.telephoneNumber}
+                </h3>
+                <h3>
+                  Second Telephone Number:
+                  {" " + val.secondTelephoneNumber}
+                </h3>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

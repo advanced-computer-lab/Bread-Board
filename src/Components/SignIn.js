@@ -31,13 +31,13 @@ function SignIn() {
           password: password,
         })
         .then((result) => {
-          if (result.data == "Success Admin") {
+          if (result.data.message == "Success Admin") {
             navigate("/admin");
-          } else if (result.data == "Success User") {
+          } else if (result.data.message == "Success User") {
             navigate("/user/home");
-            window.localStorage.setItem("user", email);
+            window.localStorage.setItem("user", result.data.token);
           } else {
-            alert(result.data);
+            alert(result.data.message);
           }
         });
     }

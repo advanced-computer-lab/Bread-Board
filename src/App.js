@@ -9,7 +9,6 @@ import ReserveFlightsForGuests from "./Components/ReserveFlightsForGuests";
 import EditInfo from "./Components/EditInfo";
 import EditPassword from "./Components/EditPassword";
 import ForgotPassword from "./Components/ForgotPassword";
-import New from "./Components/New";
 import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
 

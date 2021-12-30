@@ -32,12 +32,14 @@ function UpdatePasswword() {
         axios
           .put("http://localhost:8000/admin/updatePassword", val)
           .then((result) => {
-            console.log(result.data);
-            if (result.data == "Wrong Password") {
-              alert(result.data);
-            } else {
+            if (result.data.message == "Your Session Expired") {
+              alert(result.data.message);
+              navigate("/");
+            } else if (result.data.message == "Success") {
               alert("Updated Succesfully");
               navigate(-1);
+            } else {
+              alert(result.data.message);
             }
           });
       }

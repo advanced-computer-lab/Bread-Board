@@ -30,17 +30,20 @@ mongoose
     });
   });
 
-app.get("/login2/:email/:password", (req, res) => {
-  const user = { email: req.params.email, pass: req.params.password };
-
-  const token = jwt.sign(user, "mohamed", { expiresIn: "15s" });
+app.get("/login2/:email", (req, res) => {
+  const email = req.params.email;
+  const token = jwt.sign({ email }, "dahrawy", { expiresIn: "5m" });
   res.send(token);
 });
 
 app.get("/who/:token", (req, res) => {
   const token = req.params.token;
-  const userEmail = jwt.verify(token, "mohamed");
-  res.send(userEmail);
+  try {
+    const userEmail = jwt.verify(token, "dahrawy");
+    res.send(userEmail.email);
+  } catch (error) {
+    res.send("expired");
+  }
 });
 
 app.get("/Home", (req, res) => {
@@ -76,18 +79,19 @@ app.post("/login", (req, res) => {
   User.findOne({ email: email })
     .then((result) => {
       if (result == null) {
-        return res.send("Invalid Email");
+        return res.send({ message: "Invalid Email" });
       } else if (result.admin == true) {
         if (result.password == password) {
-          res.send("Success Admin");
+          res.send({ message: "Success Admin" });
         } else {
-          res.send("Invalid Password");
+          res.send({ message: "Invalid Password" });
         }
       } else {
         if (bcrypt.compareSync(password, result.password)) {
-          res.send("Success User");
+          const token = jwt.sign({ email }, "dahrawy", { expiresIn: "5m" });
+          res.send({ message: "Success User", token: token });
         } else {
-          res.send("Invalid Password");
+          res.send({ message: "Invalid Password" });
         }
       }
     })

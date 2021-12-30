@@ -113,6 +113,7 @@ function ReserveFlights() {
     setDepFli("departure");
     setDepFlightNumber(null);
     setArrFlightNumber(null);
+    setConfirmed(false);
   };
 
   const chooseDep = (fli) => {
@@ -565,7 +566,16 @@ function ReserveFlights() {
                         departurePrice: depPrice,
                         returnPrice: arrPrice,
                       })
-                      .then((res) => setReserveId(res.data._id));
+                      .then((result) => {
+                        if (result.data.message == "Your Session Expired") {
+                          alert(result.data.message);
+                          navigate("/");
+                        } else if (result.data.message == "Error") {
+                          alert(result.data.message);
+                        } else {
+                          setReserveId(result.data.reserve._id);
+                        }
+                      });
                     setRetSeats(reservedSeats);
                     setOpenPopupSum(false);
                     setReservePopup(true);

@@ -115,8 +115,17 @@ function UserReserves() {
 
   const fetch = (user) => {
     axios
-      .get(API_URL + "/userReserve/" + user)
-      .then(({ data }) => setFlights(data))
+      .post(API_URL + "/userReserve", { user })
+      .then((result) => {
+        if (result.data.message == "Your Session Expired") {
+          alert(result.data.message);
+          navigate("/");
+        } else if (result.data.message == "Error") {
+          alert(result.data.message);
+        } else {
+          setFlights(result.data.reserve);
+        }
+      })
       .catch((err) => alert(err));
   };
 
@@ -125,6 +134,7 @@ function UserReserves() {
   };
 
   const cancel = (id) => {
+    console.log(id);
     if (window.confirm("Are you sure you will cancel this flight?")) {
       axios
         .put(API_URL + "/cancelUserReserve/" + id)
@@ -149,6 +159,7 @@ function UserReserves() {
       axios
         .post(API_URL + "/emailmeUserReserve/" + id)
         .then((res) => {
+          alert("Email sent successfully");
           fetch(user);
         })
         .catch((err) => alert(err));
@@ -228,9 +239,15 @@ function UserReserves() {
                   amount: priceTotal - newPriceTotal,
                   email: window.localStorage.getItem("user"),
                 })
-                .then((res) => {
-                  if (res.data === "Email sent Successfully!!!")
+                .then((result) => {
+                  if (result.data.message == "Your Session Expired") {
+                    alert(result.data.message);
+                    navigate("/");
+                  } else if (
+                    result.data.message === "Email sent Successfully!!!"
+                  ) {
                     alert("Amount refunded successfully");
+                  }
                 })
                 .catch((err) => alert(err));
               setConfirmed(true);
