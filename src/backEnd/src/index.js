@@ -30,22 +30,6 @@ mongoose
     });
   });
 
-app.get("/login2/:email", (req, res) => {
-  const email = req.params.email;
-  const token = jwt.sign({ email }, "dahrawy", { expiresIn: "5m" });
-  res.send(token);
-});
-
-app.get("/who/:token", (req, res) => {
-  const token = req.params.token;
-  try {
-    const userEmail = jwt.verify(token, "dahrawy");
-    res.send(userEmail.email);
-  } catch (error) {
-    res.send("expired");
-  }
-});
-
 app.get("/Home", (req, res) => {
   res.status(200).send("Welcome to BreadBoard!");
 });
