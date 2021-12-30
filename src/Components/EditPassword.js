@@ -32,8 +32,9 @@ function UpdatePasswword() {
         axios
           .put("http://localhost:8000/admin/updatePassword", val)
           .then((result) => {
-            if (result.data.matchedCount == 0) {
-              alert("Wrong Password");
+            console.log(result.data);
+            if (result.data == "Wrong Password") {
+              alert(result.data);
             } else {
               alert("Updated Succesfully");
               navigate(-1);

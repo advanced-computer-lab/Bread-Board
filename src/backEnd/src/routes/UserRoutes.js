@@ -57,7 +57,7 @@ userRouter.post(
   reservedController.emailmeUserFlight
 );
 
-userRouter.post("/forgotPassword", userController.forgotPassword);
+userRouter.put("/forgotPassword", userController.forgotPassword);
 
 userRouter.post("/sendEmail", userController.sendEmail);
 

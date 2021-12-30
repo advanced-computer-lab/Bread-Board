@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const bcrypt = require("bcrypt");
 
 const home = (req, res) => {
   res.send("Hello world");
@@ -16,15 +17,26 @@ const updateInfo = (req, res) => {
 };
 
 const updatePassword = (req, res) => {
-  User.updateOne(
-    { email: req.body.email, password: req.body.oldPassword },
-    req.body
-  )
+  User.findOne({ email: req.body.email })
     .then((result) => {
-      res.send(result);
+      if (bcrypt.compareSync(req.body.oldPassword, result.password)) {
+        var encryptedPassword = bcrypt.hashSync(req.body.password, 10);
+        User.updateOne(
+          { email: req.body.email },
+          { password: encryptedPassword }
+        )
+          .then((result) => {
+            res.send(result);
+          })
+          .catch((err) => {
+            res.send("Error");
+          });
+      } else {
+        res.send("Wrong Password");
+      }
     })
     .catch((err) => {
-      res.send("Error");
+      res.send(err);
     });
 };
 
@@ -39,13 +51,28 @@ const getUser = (req, res) => {
 };
 
 const forgotPassword = async (req, res) => {
-  User.findOne(req.body, (err, result) => {
-    if (err) {
+  User.findOne(req.body)
+    .then((result) => {
+      if (result != null) {
+        var password = "password123";
+        var encryptedPassword = bcrypt.hashSync(password, 10);
+        User.updateOne(
+          { email: req.body.email, userName: req.body.userName },
+          { password: encryptedPassword }
+        )
+          .then((result) => {
+            res.send("Password Changed");
+          })
+          .catch((err) => {
+            res.send("Error");
+          });
+      } else {
+        res.send("Email or Username are incorrect");
+      }
+    })
+    .catch((err) => {
       res.send(err);
-    } else {
-      res.send(result);
-    }
-  });
+    });
 };
 
 const nodemailer = require("nodemailer");
@@ -65,8 +92,11 @@ const sendEmail = async (req, res) => {
   let info = await transporter.sendMail({
     from: '"Dina 👻" dinahatem2011@hotmail.com',
     to: email,
-    subject: "Change Your Password",
-    text: "Your password is " + password,
+    subject: "Forgot password",
+    text:
+      "Your password has been changed. Your new password is " +
+      password +
+      ", you can change it from your profile.",
   });
   console.log("Message sent: %s", info.messageId);
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));

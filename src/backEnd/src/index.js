@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 app.use(cors());
 app.use(express.json());
@@ -38,10 +39,10 @@ app.get("/login2/:email/:password", (req, res) => {
 
 app.get("/who/:token", (req, res) => {
   const token = req.params.token;
-
   const userEmail = jwt.verify(token, "mohamed");
   res.send(userEmail);
 });
+
 app.get("/Home", (req, res) => {
   res.status(200).send("Welcome to BreadBoard!");
 });
@@ -76,15 +77,17 @@ app.post("/login", (req, res) => {
     .then((result) => {
       if (result == null) {
         return res.send("Invalid Email");
-      } else {
+      } else if (result.admin == true) {
         if (result.password == password) {
-          if (result.admin == true) {
-            res.send("Success Admin");
-          } else {
-            res.send("Success User");
-          }
+          res.send("Success Admin");
         } else {
-          return res.send("Invalid Password");
+          res.send("Invalid Password");
+        }
+      } else {
+        if (bcrypt.compareSync(password, result.password)) {
+          res.send("Success User");
+        } else {
+          res.send("Invalid Password");
         }
       }
     })
@@ -93,7 +96,7 @@ app.post("/login", (req, res) => {
     });
 });
 
-app.post("/register", (req, res) => {
+app.post("/register", async (req, res) => {
   var {
     firstName,
     lastName,
@@ -107,11 +110,12 @@ app.post("/register", (req, res) => {
     secondTelephoneNumber,
     userName,
   } = req.body;
+  var encryptedPassword = await bcrypt.hash(password, 10);
   const user = new User({
     firstName: firstName,
     lastName: lastName,
     email: email,
-    password: password,
+    password: encryptedPassword,
     admin: admin,
     passportNumber: passportNumber,
     homeAddress: homeAddress,

@@ -5,29 +5,35 @@ import axios from "axios";
 function ForgotPasswword() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
 
   const back = () => {
     navigate(-1);
   };
 
   const forgotPasswword = () => {
-    if (email == "") {
-      alert("Please enter your email....");
+    if (email == "" || userName == "") {
+      alert("Please enter your email and username");
     } else {
       axios
-        .post("http://localhost:8000/admin/forgotPassword", {
+        .put("http://localhost:8000/admin/forgotPassword", {
           email: email,
+          userName: userName,
         })
         .then((result) => {
-          axios
-            .post("http://localhost:8000/admin/sendEmail", {
-              email: result.data.email,
-              password: result.data.password,
-            })
-            .then((result) => {
-              alert(result.data);
-              navigate(-1);
-            });
+          if (result.data == "Password Changed") {
+            axios
+              .post("http://localhost:8000/admin/sendEmail", {
+                email: email,
+                password: "password123",
+              })
+              .then((result) => {
+                alert(result.data);
+                navigate(-1);
+              });
+          } else {
+            alert(result.data);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -58,17 +64,30 @@ function ForgotPasswword() {
         <div className="HeaderButton">
           <button onClick={back}>Back</button>
         </div>
-        <div className="email">
-          Your Registered Email
-          <input
-            type="text"
-            placeholder="Enter Your Email"
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-          />
+        <div className="EditPassword">
+          <h1>Forgot Password</h1>
         </div>
-        <div>
+      </div>
+      <div className="App">
+        <div className="Passwordinputs">
+          <div>
+            Your Email:
+            <input
+              type="text"
+              placeholder="Enter Your Email"
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+            />
+            Your Username:
+            <input
+              type="text"
+              placeholder="Enter Your Username"
+              onChange={(event) => {
+                setUserName(event.target.value);
+              }}
+            />
+          </div>
           <button onClick={forgotPasswword}>Send Mail</button>
         </div>
       </div>
