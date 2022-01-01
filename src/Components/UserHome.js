@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import "../App.css";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 
 function UserHome() {
   const navigate = useNavigate();
@@ -21,7 +24,9 @@ function UserHome() {
     <div>
       <div className="HeaderContainer">
         <div className="HeaderButton">
-          <button onClick={logout}>Logout</button>
+          <Button type="button" variant="contained" onClick={logout}>
+            Logout
+          </Button>
         </div>
         <div className="Home">
           <h1>Home</h1>
@@ -30,11 +35,33 @@ function UserHome() {
       </div>
       <div className="App">
         <div className="UserHomeButtons">
-          <button onClick={reserveFlight}>Reserve Flights</button>
-          <button onClick={editInfo}>Edit Personal Information</button>
-          <button onClick={() => navigate("/user/home/flights")}>
-            My Flights
-          </button>
+          <Grid
+            item
+            component={Paper}
+            elevation={6}
+            sx={{
+              height: "149px",
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Button type="button" variant="contained" onClick={reserveFlight}>
+              Reserve Flights
+            </Button>
+            <Button type="button" variant="contained" onClick={editInfo}>
+              Edit Personal Information
+            </Button>
+            <Button
+              type="button"
+              variant="contained"
+              onClick={() => navigate("/user/home/flights")}
+            >
+              My Flights
+            </Button>
+          </Grid>
         </div>
       </div>
     </div>

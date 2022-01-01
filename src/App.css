@@ -7,7 +7,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url("img/airport_1-wallpaper-1280x720.jpg");
+  background-image: url("img/airplane.jpg");
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -365,7 +365,7 @@ body {
   background-color: #3b3f46;
   color: white;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 18px;
   border: 1px solid black;
   transition-duration: 0.4s;
 }
@@ -517,7 +517,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: rgb(207, 207, 207);
 }
 
 .Reserveinputs input {
@@ -559,17 +558,14 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  background-color: rgb(207, 207, 207);
 }
 
 .UserHomeButtons button {
-  border: none;
   width: 150px;
   height: 70px;
   background-color: #3b3f46;
-  color: white;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 13px;
   border: 1px solid black;
   margin: 10px;
 }
@@ -739,7 +735,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: rgb(207, 207, 207);
 }
 
 .Infoinputs input {
@@ -781,7 +776,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: rgb(207, 207, 207);
 }
 
 .Passwordinputs input {

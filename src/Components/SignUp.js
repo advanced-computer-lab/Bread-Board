@@ -9,6 +9,7 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -98,16 +99,22 @@ function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        component={Paper}
+        elevation={6}
+        sx={{ height: "820px" }}
+      >
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 1,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
+          <br></br>
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>

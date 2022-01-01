@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import "../App.css";
-import { Dialog } from "@material-ui/core";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
 function UpdatePasswword() {
   const navigate = useNavigate();
@@ -75,33 +74,47 @@ function UpdatePasswword() {
       </div>
       <div className="App">
         <div className="Passwordinputs">
-          <div>
-            Old Password
-            <input
-              type="password"
-              placeholder="Old Password"
-              onChange={(event) => {
-                setOldPassword(event.target.value);
-              }}
-            />
-            New Password
-            <input
-              type="password"
-              placeholder="New Password"
-              onChange={(event) => {
-                setNewPassword(event.target.value);
-              }}
-            />
-            Confirm new Password
-            <input
-              type="password"
-              placeholder="New Password"
-              onChange={(event) => {
-                setConfirmNewPassword(event.target.value);
-              }}
-            />
-          </div>
-          <button onClick={updateInfo}>Change Password</button>
+          <Grid
+            item
+            component={Paper}
+            elevation={6}
+            sx={{
+              height: "200px",
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div>
+              Old Password
+              <input
+                type="password"
+                placeholder="Old Password"
+                onChange={(event) => {
+                  setOldPassword(event.target.value);
+                }}
+              />
+              New Password
+              <input
+                type="password"
+                placeholder="New Password"
+                onChange={(event) => {
+                  setNewPassword(event.target.value);
+                }}
+              />
+              Confirm new Password
+              <input
+                type="password"
+                placeholder="New Password"
+                onChange={(event) => {
+                  setConfirmNewPassword(event.target.value);
+                }}
+              />
+            </div>
+            <button onClick={updateInfo}>Change Password</button>
+          </Grid>
         </div>
       </div>
     </div>

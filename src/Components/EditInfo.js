@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import "../App.css";
-import { Dialog } from "@material-ui/core";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
 function UpdateInfo() {
   const navigate = useNavigate();
@@ -13,7 +12,6 @@ function UpdateInfo() {
   const [lastName, setLastName] = useState(null);
   const [passportNumber, setPassportNumber] = useState(null);
   const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
   const [homeAddress, setHomeAddress] = useState(null);
   const [countryCode, setCountryCode] = useState(null);
   const [telephoneNumber, setTelephoneNumber] = useState(null);
@@ -184,87 +182,101 @@ function UpdateInfo() {
       </div>
       <div className="App">
         <div className="Infoinputs">
-          <div className="InfoinputsSub">
-            <div>
-              First Name
-              <input
-                type="text"
-                placeholder="First Name"
-                onChange={(event) => {
-                  setFirstName(event.target.value);
-                }}
-              />
-              Last Name
-              <input
-                type="text"
-                placeholder="Last Name"
-                onChange={(event) => {
-                  setLastName(event.target.value);
-                }}
-              />
-              UserName
-              <input
-                type="text"
-                placeholder="UserName"
-                onChange={(event) => {
-                  setUserName(event.target.value);
-                }}
-              />
+          <Grid
+            item
+            component={Paper}
+            elevation={6}
+            sx={{
+              height: "300px",
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div className="InfoinputsSub">
+              <div>
+                First Name
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  onChange={(event) => {
+                    setFirstName(event.target.value);
+                  }}
+                />
+                Last Name
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  onChange={(event) => {
+                    setLastName(event.target.value);
+                  }}
+                />
+                UserName
+                <input
+                  type="text"
+                  placeholder="UserName"
+                  onChange={(event) => {
+                    setUserName(event.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                Home Address
+                <input
+                  type="text"
+                  placeholder="Address"
+                  onChange={(event) => {
+                    setHomeAddress(event.target.value);
+                  }}
+                />
+                Country Code
+                <input
+                  type="number"
+                  placeholder="Country Code"
+                  onChange={(event) => {
+                    setCountryCode(event.target.value);
+                  }}
+                />
+                Passport Number
+                <input
+                  type="text"
+                  placeholder="Passport Number"
+                  onChange={(event) => {
+                    setPassportNumber(event.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                Email
+                <input
+                  type="text"
+                  placeholder="Email"
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                  }}
+                />
+                Telephone Number
+                <input
+                  type="number"
+                  placeholder="Telephone Number"
+                  onChange={(event) => {
+                    setTelephoneNumber(event.target.value);
+                  }}
+                />
+                Second Telephone Number
+                <input
+                  type="number"
+                  placeholder="Second Telephone Number"
+                  onChange={(event) => {
+                    setSecondTelephoneNumber(event.target.value);
+                  }}
+                />
+              </div>
             </div>
-            <div>
-              Home Address
-              <input
-                type="text"
-                placeholder="Address"
-                onChange={(event) => {
-                  setHomeAddress(event.target.value);
-                }}
-              />
-              Country Code
-              <input
-                type="number"
-                placeholder="Country Code"
-                onChange={(event) => {
-                  setCountryCode(event.target.value);
-                }}
-              />
-              Passport Number
-              <input
-                type="text"
-                placeholder="Passport Number"
-                onChange={(event) => {
-                  setPassportNumber(event.target.value);
-                }}
-              />
-            </div>
-            <div>
-              Email
-              <input
-                type="text"
-                placeholder="Email"
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
-              />
-              Telephone Number
-              <input
-                type="number"
-                placeholder="Telephone Number"
-                onChange={(event) => {
-                  setTelephoneNumber(event.target.value);
-                }}
-              />
-              Second Telephone Number
-              <input
-                type="number"
-                placeholder="Second Telephone Number"
-                onChange={(event) => {
-                  setSecondTelephoneNumber(event.target.value);
-                }}
-              />
-            </div>
-          </div>
-          <button onClick={updateInfo}>Update</button>
+            <button onClick={updateInfo}>Update</button>
+          </Grid>
         </div>
       </div>
       <div className="listOfFlights">

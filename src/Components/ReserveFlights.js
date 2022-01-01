@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import "../App.css";
-import { Button, Dialog } from "@material-ui/core";
+import { Dialog } from "@material-ui/core";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import Seats from "./Seats";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 
 import StripeContainer from "./StripeContainer";
 
@@ -211,81 +214,95 @@ function ReserveFlights() {
       </div>
       <div className="App">
         <div className="Reserveinputs">
-          <div className="ReserveinputsSub">
-            <div>
-              Number Of Children
-              <input
-                type="number"
-                placeholder="Number Of Children"
-                onChange={(event) => {
-                  setChildren(event.target.value);
-                }}
-              />
-              Number Of Adults
-              <input
-                type="number"
-                placeholder="Number Of Adults"
-                onChange={(event) => {
-                  setAdults(event.target.value);
-                }}
-              />
-              Departure Airport
-              <input
-                type="text"
-                placeholder="Departure Airport"
-                onChange={(event) => {
-                  setDepartureAirport(event.target.value);
-                }}
-              />
-            </div>
-            <div>
-              Arrival Airport
-              <input
-                type="text"
-                placeholder="Arrival Airport"
-                onChange={(event) => {
-                  setArrivalAirport(event.target.value);
-                }}
-              />
-              Departure Date
-              <input
-                type="date"
-                onChange={(event) => {
-                  setDepartureDate(event.target.value);
-                }}
-              />
-              Return Date
-              <input
-                type="date"
-                onChange={(event) => {
-                  setReturnDate(event.target.value);
-                }}
-              />
-            </div>
-            <div className="cabinButtons">
-              <label className="cabinButtons1">
-                Economy Seats :
+          <Grid
+            item
+            component={Paper}
+            elevation={6}
+            sx={{
+              height: "300px",
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div className="ReserveinputsSub">
+              <div>
+                Number Of Children
                 <input
-                  type="radio"
-                  name="cabinClass"
-                  value="numberofEconomySeats"
-                  checked={cabin === "numberofEconomySeats"}
-                  onChange={() => setCabin("numberofEconomySeats")}
+                  type="number"
+                  placeholder="Number Of Children"
+                  onChange={(event) => {
+                    setChildren(event.target.value);
+                  }}
                 />
-              </label>
-              <label className="cabinButtons2">
-                Business Seats :
+                Number Of Adults
                 <input
-                  type="radio"
-                  name="cabinClass"
-                  value="numberofBusinessSeats"
-                  checked={cabin === "numberofBusinessSeats"}
-                  onChange={() => setCabin("numberofBusinessSeats")}
+                  type="number"
+                  placeholder="Number Of Adults"
+                  onChange={(event) => {
+                    setAdults(event.target.value);
+                  }}
                 />
-              </label>
+                Departure Airport
+                <input
+                  type="text"
+                  placeholder="Departure Airport"
+                  onChange={(event) => {
+                    setDepartureAirport(event.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                Arrival Airport
+                <input
+                  type="text"
+                  placeholder="Arrival Airport"
+                  onChange={(event) => {
+                    setArrivalAirport(event.target.value);
+                  }}
+                />
+                Departure Date
+                <input
+                  type="date"
+                  onChange={(event) => {
+                    setDepartureDate(event.target.value);
+                  }}
+                />
+                Return Date
+                <input
+                  type="date"
+                  onChange={(event) => {
+                    setReturnDate(event.target.value);
+                  }}
+                />
+              </div>
+              <div className="cabinButtons">
+                <label className="cabinButtons1">
+                  Economy Seats :
+                  <input
+                    type="radio"
+                    name="cabinClass"
+                    value="numberofEconomySeats"
+                    checked={cabin === "numberofEconomySeats"}
+                    onChange={() => setCabin("numberofEconomySeats")}
+                  />
+                </label>
+                <label className="cabinButtons2">
+                  Business Seats :
+                  <input
+                    type="radio"
+                    name="cabinClass"
+                    value="numberofBusinessSeats"
+                    checked={cabin === "numberofBusinessSeats"}
+                    onChange={() => setCabin("numberofBusinessSeats")}
+                  />
+                </label>
+              </div>
             </div>
-          </div>
-          <button onClick={searchFlight}>Submit</button>
+            <button onClick={searchFlight}>Submit</button>
+          </Grid>
         </div>
       </div>
       <div className="listOfFlights">

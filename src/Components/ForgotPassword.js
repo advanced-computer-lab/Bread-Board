@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
 function ForgotPasswword() {
   const navigate = useNavigate();
@@ -70,25 +72,39 @@ function ForgotPasswword() {
       </div>
       <div className="App">
         <div className="Passwordinputs">
-          <div>
-            Your Email:
-            <input
-              type="text"
-              placeholder="Enter Your Email"
-              onChange={(event) => {
-                setEmail(event.target.value);
-              }}
-            />
-            Your Username:
-            <input
-              type="text"
-              placeholder="Enter Your Username"
-              onChange={(event) => {
-                setUserName(event.target.value);
-              }}
-            />
-          </div>
-          <button onClick={forgotPasswword}>Send Mail</button>
+          <Grid
+            item
+            component={Paper}
+            elevation={6}
+            sx={{
+              height: "200px",
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div>
+              Your Email:
+              <input
+                type="text"
+                placeholder="Enter Your Email"
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+              />
+              Your Username:
+              <input
+                type="text"
+                placeholder="Enter Your Username"
+                onChange={(event) => {
+                  setUserName(event.target.value);
+                }}
+              />
+            </div>
+            <button onClick={forgotPasswword}>Send Mail</button>
+          </Grid>
         </div>
       </div>
     </div>
