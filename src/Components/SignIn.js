@@ -139,7 +139,7 @@ function SignIn() {
               <Grid container>
                 <Grid item xs>
                   <Link href="/guest/home/reserveFlights" variant="body2">
-                    Sign in as a Guest
+                    Continue as Guest
                   </Link>
                 </Grid>
                 <Grid item xs>
